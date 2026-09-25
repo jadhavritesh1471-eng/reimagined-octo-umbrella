@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#09090f">
-<title>StyleAI — Premium Look Analyzer</title>
+<meta name="theme-color" content="#07070c">
+
+<title>StyleAI — Discover Your Style</title>
 
 <style>
 *{
@@ -29,52 +30,52 @@ html{
 }
 
 body{
-  min-height:100vh;
-  min-height:100svh;
   font-family:Arial,Helvetica,sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 10%,rgba(139,92,246,.20),transparent 28%),
-    radial-gradient(circle at 90% 20%,rgba(236,72,153,.14),transparent 25%),
-    radial-gradient(circle at 50% 100%,rgba(59,130,246,.10),transparent 30%),
+    radial-gradient(circle at 15% 5%,rgba(139,92,246,.18),transparent 28%),
+    radial-gradient(circle at 90% 20%,rgba(236,72,153,.12),transparent 25%),
     var(--bg);
+  min-height:100vh;
   overflow-x:hidden;
 }
 
-button,
-input{
-  font:inherit;
-}
-
 button{
+  font:inherit;
   -webkit-tap-highlight-color:transparent;
 }
 
 .app{
   width:100%;
   max-width:520px;
-  min-height:100svh;
   margin:auto;
+  min-height:100vh;
   padding:
-    max(14px,env(safe-area-inset-top))
-    14px
-    max(22px,env(safe-area-inset-bottom));
+    max(12px,env(safe-area-inset-top))
+    15px
+    90px;
 }
 
+/* HEADER */
+
 .header{
+  height:62px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:10px 2px 18px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(7,7,12,.72);
+  backdrop-filter:blur(18px);
 }
 
 .logo{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
   font-size:20px;
-  font-weight:800;
-  letter-spacing:-.5px;
+  font-weight:900;
 }
 
 .logo-icon{
@@ -84,32 +85,33 @@ button{
   display:grid;
   place-items:center;
   background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 8px 30px rgba(139,92,246,.25);
-  font-size:18px;
+  box-shadow:0 10px 30px rgba(139,92,246,.25);
 }
 
-.demo-badge{
-  font-size:10px;
-  color:#cfcfe0;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.04);
+.demo{
+  font-size:9px;
   padding:7px 10px;
+  border:1px solid var(--border);
   border-radius:20px;
+  color:#c7c7d3;
+  background:rgba(255,255,255,.035);
 }
 
-.screen{
+/* SECTIONS */
+
+.page{
   display:none;
-  animation:screenIn .45s ease;
+  animation:fadeUp .45s ease;
 }
 
-.screen.active{
+.page.active{
   display:block;
 }
 
-@keyframes screenIn{
+@keyframes fadeUp{
   from{
     opacity:0;
-    transform:translateY(12px);
+    transform:translateY(15px);
   }
   to{
     opacity:1;
@@ -117,66 +119,227 @@ button{
   }
 }
 
+/* HOME */
+
 .hero{
-  padding:34px 8px 25px;
   text-align:center;
+  padding:65px 8px 35px;
+}
+
+.hero-badge{
+  display:inline-flex;
+  padding:8px 13px;
+  border-radius:30px;
+  background:rgba(139,92,246,.10);
+  border:1px solid rgba(139,92,246,.20);
+  color:#cfc4ff;
+  font-size:10px;
+  margin-bottom:20px;
 }
 
 .hero h1{
-  font-size:clamp(34px,10vw,48px);
-  line-height:1.02;
-  letter-spacing:-2px;
-  margin-bottom:14px;
+  font-size:clamp(40px,11vw,54px);
+  line-height:1;
+  letter-spacing:-2.8px;
 }
 
-.gradient-text{
+.gradient{
   background:linear-gradient(90deg,#fff,#c4b5fd,#f9a8d4);
   -webkit-background-clip:text;
   color:transparent;
 }
 
 .hero p{
-  max-width:390px;
-  margin:auto;
   color:var(--muted);
-  line-height:1.6;
   font-size:14px;
+  line-height:1.65;
+  margin:18px auto 25px;
+  max-width:390px;
 }
 
-.section-title{
-  font-size:14px;
-  color:#d8d8e2;
-  margin-bottom:12px;
-  font-weight:700;
+.primary-btn{
+  width:100%;
+  min-height:55px;
+  border:0;
+  border-radius:18px;
+  color:#fff;
+  font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 15px 35px rgba(139,92,246,.25);
+  cursor:pointer;
+  transition:.2s;
 }
 
-.option-grid{
+.primary-btn:active{
+  transform:scale(.98);
+}
+
+.feature-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:18px;
+}
+
+.feature{
+  padding:19px;
+  border-radius:21px;
+  background:var(--card);
+  border:1px solid var(--border);
+}
+
+.feature-icon{
+  font-size:24px;
+  margin-bottom:12px;
+}
+
+.feature h3{
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.feature p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* ABOUT */
+
+.section{
+  padding:35px 4px;
+}
+
+.section-label{
+  color:#b8a9ff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.section h2{
+  font-size:30px;
+  letter-spacing:-1px;
+  margin-bottom:13px;
+}
+
+.section > p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+
+.info-card{
+  margin-top:18px;
+  padding:20px;
+  border-radius:23px;
+  border:1px solid var(--border);
+  background:linear-gradient(
+    135deg,
+    rgba(139,92,246,.10),
+    rgba(255,255,255,.035)
+  );
+}
+
+.info-row{
+  display:flex;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.info-row:last-child{
+  margin-bottom:0;
+}
+
+.info-icon{
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:rgba(255,255,255,.06);
+}
+
+.info-row h3{
+  font-size:13px;
+  margin-bottom:5px;
+}
+
+.info-row p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* ANALYZER */
+
+.analyzer-head{
+  text-align:center;
+  padding:38px 5px 24px;
+}
+
+.analyzer-head h1{
+  font-size:34px;
+  letter-spacing:-1.5px;
+}
+
+.analyzer-head p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+  margin-top:9px;
+}
+
+.progress{
+  display:flex;
+  gap:5px;
+  margin-bottom:15px;
+}
+
+.progress span{
+  height:3px;
+  flex:1;
+  border-radius:10px;
+  background:rgba(255,255,255,.08);
+}
+
+.progress span.active{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+
+.back{
+  background:none;
+  border:0;
+  color:#a7a7b8;
+  padding:8px 0 15px;
+  cursor:pointer;
+}
+
+.title{
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
 .option{
-  min-height:92px;
+  min-height:88px;
   border:1px solid var(--border);
   border-radius:20px;
   background:var(--card);
-  color:white;
-  padding:15px;
+  color:#fff;
+  padding:14px;
   text-align:left;
   cursor:pointer;
-  transition:.25s ease;
-  position:relative;
-  overflow:hidden;
-}
-
-.option::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(139,92,246,.15),transparent);
-  opacity:0;
-  transition:.25s;
+  transition:.22s;
 }
 
 .option:active{
@@ -186,77 +349,53 @@ button{
 .option.selected{
   border-color:rgba(167,139,250,.8);
   background:rgba(139,92,246,.14);
-  box-shadow:0 0 0 1px rgba(139,92,246,.15),
-             0 12px 35px rgba(139,92,246,.12);
-}
-
-.option.selected::before{
-  opacity:1;
+  box-shadow:0 10px 30px rgba(139,92,246,.12);
 }
 
 .option-icon{
-  font-size:24px;
-  margin-bottom:9px;
-  position:relative;
+  font-size:22px;
+  margin-bottom:8px;
 }
 
 .option-name{
-  font-weight:700;
-  font-size:14px;
-  position:relative;
+  font-size:13px;
+  font-weight:800;
 }
 
 .option-sub{
-  font-size:11px;
   color:var(--muted);
+  font-size:10px;
   margin-top:4px;
-  position:relative;
 }
 
 .continue{
   width:100%;
-  min-height:54px;
-  margin-top:20px;
+  min-height:53px;
+  margin-top:18px;
   border:0;
-  border-radius:18px;
+  border-radius:17px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
   color:white;
   font-weight:800;
   cursor:pointer;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 14px 35px rgba(139,92,246,.25);
-  transition:.2s;
 }
 
 .continue:disabled{
   opacity:.35;
-  cursor:not-allowed;
-  box-shadow:none;
 }
 
-.continue:not(:disabled):active{
-  transform:scale(.98);
-}
+/* UPLOAD */
 
-.back{
-  background:transparent;
-  border:0;
-  color:#aaaabd;
-  padding:10px 0;
-  margin-bottom:10px;
-  cursor:pointer;
-}
-
-.upload-card{
-  border:1px dashed rgba(255,255,255,.18);
-  border-radius:24px;
+.upload{
   min-height:310px;
+  border:1px dashed rgba(255,255,255,.18);
+  border-radius:25px;
+  background:rgba(255,255,255,.035);
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  background:rgba(255,255,255,.035);
   overflow:hidden;
-  position:relative;
+  text-align:center;
 }
 
 .upload-content{
@@ -264,39 +403,38 @@ button{
 }
 
 .upload-icon{
-  width:70px;
-  height:70px;
-  margin:0 auto 18px;
-  border-radius:22px;
+  width:68px;
+  height:68px;
+  margin:auto auto 17px;
+  border-radius:21px;
   display:grid;
   place-items:center;
   background:rgba(139,92,246,.13);
-  font-size:30px;
+  font-size:29px;
 }
 
-.upload-title{
-  font-size:18px;
-  font-weight:800;
+.upload h3{
+  font-size:17px;
   margin-bottom:8px;
 }
 
-.upload-sub{
+.upload p{
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
   line-height:1.5;
 }
 
-.file-button{
+.file-btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   min-height:48px;
-  padding:0 20px;
-  margin-top:18px;
+  margin-top:17px;
+  padding:0 19px;
   border-radius:15px;
   background:#fff;
-  color:#08080d;
-  font-size:13px;
+  color:#08080c;
+  font-size:12px;
   font-weight:800;
   cursor:pointer;
 }
@@ -306,32 +444,34 @@ button{
 }
 
 .preview{
-  width:100%;
-  height:100%;
-  min-height:310px;
-  object-fit:cover;
   display:none;
+  width:100%;
+  height:310px;
+  object-fit:cover;
 }
 
-.scan-wrap{
+/* SCAN */
+
+.scan{
   text-align:center;
-  padding:80px 20px 40px;
+  padding:80px 20px;
 }
 
 .scan-circle{
   width:125px;
   height:125px;
-  margin:0 auto 30px;
+  margin:auto auto 28px;
   border-radius:50%;
-  background:
-    conic-gradient(var(--accent) 0deg,transparent 0deg);
+  background:conic-gradient(
+    var(--accent) 0deg,
+    rgba(255,255,255,.08) 0deg
+  );
   display:grid;
   place-items:center;
   position:relative;
-  transition:.2s;
 }
 
-.scan-circle::before{
+.scan-circle:before{
   content:"";
   position:absolute;
   width:103px;
@@ -342,66 +482,67 @@ button{
 
 .scan-number{
   position:relative;
-  font-size:25px;
+  font-size:24px;
   font-weight:900;
 }
 
-.scan-wrap h2{
+.scan h2{
   font-size:22px;
-  margin-bottom:10px;
+  margin-bottom:9px;
 }
 
-.scan-message{
+.scan p{
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
 }
 
-.result-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:15px;
-}
+/* RESULT */
 
 .result-title{
-  font-size:25px;
+  font-size:27px;
   font-weight:900;
   letter-spacing:-1px;
+  padding:25px 0 15px;
 }
 
 .result-image{
   width:100%;
   height:310px;
   object-fit:cover;
-  border-radius:25px;
-  display:block;
-  margin-bottom:15px;
+  border-radius:24px;
   border:1px solid var(--border);
 }
 
-.score-card{
-  padding:20px;
-  border:1px solid var(--border);
-  border-radius:24px;
-  background:linear-gradient(135deg,rgba(139,92,246,.13),rgba(255,255,255,.035));
+.score{
   display:flex;
   align-items:center;
   gap:18px;
-  margin-bottom:12px;
+  margin-top:12px;
+  padding:19px;
+  border-radius:23px;
+  background:linear-gradient(
+    135deg,
+    rgba(139,92,246,.13),
+    rgba(255,255,255,.035)
+  );
+  border:1px solid var(--border);
 }
 
-.score-ring{
+.ring{
   width:82px;
   height:82px;
   flex:0 0 82px;
   border-radius:50%;
-  background:conic-gradient(var(--accent) 0deg,rgba(255,255,255,.08) 0deg);
   display:grid;
   place-items:center;
   position:relative;
+  background:conic-gradient(
+    var(--accent) 0deg,
+    rgba(255,255,255,.08) 0deg
+  );
 }
 
-.score-ring::before{
+.ring:before{
   content:"";
   position:absolute;
   width:66px;
@@ -410,24 +551,24 @@ button{
   background:#101017;
 }
 
-.score-value{
+.ring-value{
   position:relative;
-  font-size:20px;
+  font-size:19px;
   font-weight:900;
 }
 
-.score-info h3{
-  font-size:17px;
+.score h3{
+  font-size:16px;
   margin-bottom:5px;
 }
 
-.score-info p{
+.score p{
   color:var(--muted);
-  font-size:12px;
-  line-height:1.45;
+  font-size:11px;
+  line-height:1.5;
 }
 
-.tag-row{
+.tags{
   display:flex;
   flex-wrap:wrap;
   gap:7px;
@@ -437,64 +578,62 @@ button{
 .tag{
   padding:7px 10px;
   border-radius:20px;
-  font-size:10px;
-  color:#ddd5ff;
   background:rgba(139,92,246,.10);
   border:1px solid rgba(139,92,246,.18);
+  color:#d6ceff;
+  font-size:10px;
 }
 
-.detail-grid{
+.details{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
-  margin-top:12px;
 }
 
-.detail-card{
-  padding:17px;
+.detail{
+  padding:16px;
   border-radius:19px;
   background:rgba(255,255,255,.045);
   border:1px solid var(--border);
 }
 
 .detail-label{
-  color:#8e8e9e;
-  font-size:10px;
+  color:#858594;
+  font-size:9px;
   text-transform:uppercase;
   letter-spacing:.7px;
   margin-bottom:7px;
 }
 
 .detail-value{
-  font-size:13px;
-  line-height:1.45;
+  font-size:12px;
+  line-height:1.5;
   font-weight:700;
 }
 
 .tips{
   margin-top:12px;
-  padding:19px;
+  padding:18px;
   border-radius:22px;
-  background:rgba(34,197,94,.06);
-  border:1px solid rgba(34,197,94,.14);
+  background:rgba(34,197,94,.055);
+  border:1px solid rgba(34,197,94,.13);
 }
 
-.tips-title{
+.tips h3{
   font-size:14px;
-  font-weight:800;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .tip{
   display:flex;
-  gap:9px;
-  color:#c7c7d1;
-  font-size:12px;
+  gap:8px;
+  color:#c5c5d0;
+  font-size:11px;
   line-height:1.5;
-  margin-top:9px;
+  margin-top:8px;
 }
 
-.tip span{
+.tip b{
   color:#4ade80;
 }
 
@@ -502,77 +641,89 @@ button{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
-  margin-top:15px;
+  margin-top:13px;
 }
 
 .action{
   min-height:50px;
   border-radius:16px;
   border:1px solid var(--border);
-  background:rgba(255,255,255,.055);
+  background:rgba(255,255,255,.05);
   color:white;
-  font-weight:700;
+  font-size:12px;
+  font-weight:800;
   cursor:pointer;
 }
 
 .action.primary{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
   border:0;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:max(10px,env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:min(490px,calc(100% - 24px));
+  height:64px;
+  padding:6px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:22px;
+  background:rgba(15,15,23,.86);
+  backdrop-filter:blur(20px);
+  z-index:100;
+  box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:#777788;
+  border-radius:17px;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.nav-icon{
+  display:block;
+  font-size:18px;
+  margin-bottom:3px;
+}
+
+.nav-btn.active{
+  color:#fff;
+  background:rgba(139,92,246,.14);
 }
 
 .footer{
   text-align:center;
-  padding:25px 5px 10px;
-  color:#666675;
-  font-size:10px;
-}
-
-.progress{
-  display:flex;
-  gap:5px;
-  margin:0 2px 10px;
-}
-
-.progress span{
-  height:3px;
-  flex:1;
-  border-radius:10px;
-  background:rgba(255,255,255,.08);
-  transition:.3s;
-}
-
-.progress span.active{
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#626271;
+  font-size:9px;
+  padding:25px 0 5px;
 }
 
 @media(max-width:380px){
-  .option-grid{
-    gap:8px;
+
+  .hero h1{
+    font-size:37px;
   }
 
-  .option{
-    min-height:85px;
-    padding:13px;
-  }
-
-  .result-image{
+  .result-image,
+  .preview{
     height:270px;
   }
 
-  .detail-card{
+  .detail{
     padding:14px;
   }
-}
 
-@media(min-width:700px){
-  .app{
-    padding-top:30px;
-    padding-bottom:30px;
-  }
-
-  .hero{
-    padding-top:55px;
-  }
 }
 </style>
 </head>
@@ -581,178 +732,142 @@ button{
 
 <div class="app">
 
+  <!-- HEADER -->
+
   <header class="header">
+
     <div class="logo">
       <div class="logo-icon">✦</div>
       <span>StyleAI</span>
     </div>
-    <div class="demo-badge">FREE DEMO</div>
+
+    <div class="demo">
+      FREE DEMO
+    </div>
+
   </header>
 
-  <div class="progress">
-    <span id="p1" class="active"></span>
-    <span id="p2"></span>
-    <span id="p3"></span>
-    <span id="p4"></span>
-    <span id="p5"></span>
-  </div>
 
-  <!-- SCREEN 1 -->
-  <section class="screen active" id="screen1">
+  <!-- HOME -->
+
+  <section class="page active" id="home">
 
     <div class="hero">
+
+      <div class="hero-badge">
+        ✦ PERSONAL STYLE EXPERIENCE
+      </div>
+
       <h1>
         Discover Your<br>
-        <span class="gradient-text">Signature Style.</span>
+        <span class="gradient">Signature Style.</span>
       </h1>
+
       <p>
-        Choose your style, upload a photo and get a personalized style breakdown.
+        Explore different style directions, upload your look
+        and get a personalized style breakdown.
       </p>
-    </div>
 
-    <div class="section-title">Choose your style</div>
-
-    <div class="option-grid">
-
-      <button class="option" onclick="selectStyle('Traditional',this)">
-        <div class="option-icon">🪔</div>
-        <div class="option-name">Traditional</div>
-        <div class="option-sub">Classic & cultural</div>
-      </button>
-
-      <button class="option" onclick="selectStyle('Aesthetic',this)">
-        <div class="option-icon">✨</div>
-        <div class="option-name">Aesthetic</div>
-        <div class="option-sub">Clean & trendy</div>
-      </button>
-
-      <button class="option" onclick="selectStyle('South Indian',this)">
-        <div class="option-icon">🌴</div>
-        <div class="option-name">South Indian</div>
-        <div class="option-sub">Elegant & timeless</div>
-      </button>
-
-      <button class="option" onclick="selectStyle('Streetwear',this)">
-        <div class="option-icon">🔥</div>
-        <div class="option-name">Streetwear</div>
-        <div class="option-sub">Bold & modern</div>
-      </button>
-
-      <button class="option" onclick="selectStyle('Casual',this)">
-        <div class="option-icon">👕</div>
-        <div class="option-name">Casual</div>
-        <div class="option-sub">Relaxed & effortless</div>
-      </button>
-
-      <button class="option" onclick="selectStyle('Formal',this)">
-        <div class="option-icon">🕴️</div>
-        <div class="option-name">Formal</div>
-        <div class="option-sub">Sharp & polished</div>
+      <button class="primary-btn" onclick="openAnalyzer()">
+        Analyze Your Look ✦
       </button>
 
     </div>
 
-    <button class="continue" id="styleContinue" disabled onclick="goTo(2)">
-      Continue →
-    </button>
 
-  </section>
+    <div class="feature-grid">
 
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <h3>Style Focus</h3>
+        <p>Choose from multiple fashion directions.</p>
+      </div>
 
-  <!-- SCREEN 2 -->
-  <section class="screen" id="screen2">
+      <div class="feature">
+        <div class="feature-icon">📸</div>
+        <h3>Photo Preview</h3>
+        <p>Upload your look and see your result.</p>
+      </div>
 
-    <button class="back" onclick="goTo(1)">← Back</button>
+      <div class="feature">
+        <div class="feature-icon">✨</div>
+        <h3>Style Score</h3>
+        <p>Get a simple style score and breakdown.</p>
+      </div>
 
-    <div class="hero" style="padding-top:20px">
-      <h1 style="font-size:34px">Select Category</h1>
-      <p>Choose the category for your style experience.</p>
-    </div>
-
-    <div class="option-grid">
-
-      <button class="option" onclick="selectGender('Men',this)">
-        <div class="option-icon">👨</div>
-        <div class="option-name">Men</div>
-        <div class="option-sub">Men's styling</div>
-      </button>
-
-      <button class="option" onclick="selectGender('Women',this)">
-        <div class="option-icon">👩</div>
-        <div class="option-name">Women</div>
-        <div class="option-sub">Women's styling</div>
-      </button>
-
-      <button class="option" onclick="selectGender('Unisex',this)">
-        <div class="option-icon">🧑</div>
-        <div class="option-name">Unisex</div>
-        <div class="option-sub">Universal styles</div>
-      </button>
+      <div class="feature">
+        <div class="feature-icon">💡</div>
+        <h3>Style Tips</h3>
+        <p>Get practical ideas for your selected style.</p>
+      </div>
 
     </div>
 
-    <button class="continue" id="genderContinue" disabled onclick="goTo(3)">
-      Continue →
-    </button>
 
-  </section>
+    <div class="section">
+
+      <div class="section-label">
+        ABOUT STYLEAI
+      </div>
+
+      <h2>
+        Your style.<br>
+        Your expression.
+      </h2>
+
+      <p>
+        StyleAI is a simple fashion exploration experience
+        designed to help you discover different looks,
+        combinations and styling ideas.
+      </p>
 
 
-  <!-- SCREEN 3 -->
-  <section class="screen" id="screen3">
+      <div class="info-card">
 
-    <button class="back" onclick="goTo(2)">← Back</button>
+        <div class="info-row">
 
-    <div class="hero" style="padding-top:15px">
-      <h1 style="font-size:34px">Upload Your Look</h1>
-      <p>Use a clear photo for the best style experience.</p>
-    </div>
+          <div class="info-icon">✦</div>
 
-    <div class="upload-card">
+          <div>
+            <h3>Explore</h3>
+            <p>
+              Try Traditional, Aesthetic, Streetwear,
+              Casual, Formal and other style directions.
+            </p>
+          </div>
 
-      <div class="upload-content" id="uploadContent">
-
-        <div class="upload-icon">📸</div>
-
-        <div class="upload-title">
-          Add your photo
         </div>
 
-        <div class="upload-sub">
-          JPG, PNG or WEBP<br>
-          Your image stays in this demo.
+
+        <div class="info-row">
+
+          <div class="info-icon">📷</div>
+
+          <div>
+            <h3>Visualize</h3>
+            <p>
+              Upload a photo and view your selected
+              style experience.
+            </p>
+          </div>
+
         </div>
 
-        <label class="file-button">
-          Choose Photo
-          <input type="file" id="photoInput" accept="image/*">
-        </label>
 
-      </div>
+        <div class="info-row">
 
-      <img id="preview" class="preview" alt="Preview">
+          <div class="info-icon">💡</div>
 
-    </div>
+          <div>
+            <h3>Improve</h3>
+            <p>
+              Use the styling suggestions as inspiration
+              for your next outfit.
+            </p>
+          </div>
 
-    <button class="continue" id="analyzeButton" disabled onclick="startScanning()">
-      Analyze My Style ✦
-    </button>
+        </div>
 
-  </section>
-
-
-  <!-- SCREEN 4 -->
-  <section class="screen" id="screen4">
-
-    <div class="scan-wrap">
-
-      <div class="scan-circle" id="scanCircle">
-        <div class="scan-number" id="scanNumber">0%</div>
-      </div>
-
-      <h2>Analyzing Your Style</h2>
-      <div class="scan-message" id="scanMessage">
-        Preparing your style experience...
       </div>
 
     </div>
@@ -760,93 +875,391 @@ button{
   </section>
 
 
-  <!-- SCREEN 5 -->
-  <section class="screen" id="screen5">
+  <!-- ANALYZER STYLE -->
 
-    <div class="result-top">
-      <div class="result-title">Your Style Result</div>
+  <section class="page" id="analyzer">
+
+    <div class="analyzer-head">
+
+      <h1>Style Analyzer</h1>
+
+      <p>
+        Select your preferences and upload a photo.
+      </p>
+
     </div>
 
-    <img id="resultImage" class="result-image" alt="Your uploaded look">
+    <div class="progress">
+      <span id="p1" class="active"></span>
+      <span id="p2"></span>
+      <span id="p3"></span>
+      <span id="p4"></span>
+      <span id="p5"></span>
+    </div>
 
-    <div class="score-card">
 
-      <div class="score-ring" id="scoreRing">
-        <div class="score-value" id="scoreValue">0</div>
+    <!-- STEP 1 -->
+
+    <div id="step1">
+
+      <div class="title">
+        Choose your style
       </div>
 
-      <div class="score-info">
-        <h3 id="resultStyle">Your Style</h3>
-        <p>
-          A demo style score based on your selected style category.
+      <div class="options">
+
+        <button class="option" onclick="selectStyle('Traditional',this)">
+          <div class="option-icon">🪔</div>
+          <div class="option-name">Traditional</div>
+          <div class="option-sub">Classic & cultural</div>
+        </button>
+
+        <button class="option" onclick="selectStyle('Aesthetic',this)">
+          <div class="option-icon">✨</div>
+          <div class="option-name">Aesthetic</div>
+          <div class="option-sub">Clean & trendy</div>
+        </button>
+
+        <button class="option" onclick="selectStyle('South Indian',this)">
+          <div class="option-icon">🌴</div>
+          <div class="option-name">South Indian</div>
+          <div class="option-sub">Elegant & timeless</div>
+        </button>
+
+        <button class="option" onclick="selectStyle('Streetwear',this)">
+          <div class="option-icon">🔥</div>
+          <div class="option-name">Streetwear</div>
+          <div class="option-sub">Bold & modern</div>
+        </button>
+
+        <button class="option" onclick="selectStyle('Casual',this)">
+          <div class="option-icon">👕</div>
+          <div class="option-name">Casual</div>
+          <div class="option-sub">Relaxed & effortless</div>
+        </button>
+
+        <button class="option" onclick="selectStyle('Formal',this)">
+          <div class="option-icon">🕴️</div>
+          <div class="option-name">Formal</div>
+          <div class="option-sub">Sharp & polished</div>
+        </button>
+
+      </div>
+
+      <button class="continue" id="styleContinue" disabled onclick="nextStep(2)">
+        Continue →
+      </button>
+
+    </div>
+
+
+    <!-- STEP 2 -->
+
+    <div id="step2" style="display:none">
+
+      <button class="back" onclick="nextStep(1)">
+        ← Back
+      </button>
+
+      <div class="title">
+        Select category
+      </div>
+
+      <div class="options">
+
+        <button class="option" onclick="selectGender('Men',this)">
+          <div class="option-icon">👨</div>
+          <div class="option-name">Men</div>
+          <div class="option-sub">Men's styling</div>
+        </button>
+
+        <button class="option" onclick="selectGender('Women',this)">
+          <div class="option-icon">👩</div>
+          <div class="option-name">Women</div>
+          <div class="option-sub">Women's styling</div>
+        </button>
+
+        <button class="option" onclick="selectGender('Unisex',this)">
+          <div class="option-icon">🧑</div>
+          <div class="option-name">Unisex</div>
+          <div class="option-sub">Universal styles</div>
+        </button>
+
+      </div>
+
+      <button class="continue" id="genderContinue" disabled onclick="nextStep(3)">
+        Continue →
+      </button>
+
+    </div>
+
+
+    <!-- STEP 3 -->
+
+    <div id="step3" style="display:none">
+
+      <button class="back" onclick="nextStep(2)">
+        ← Back
+      </button>
+
+      <div class="title">
+        Upload your look
+      </div>
+
+      <div class="upload">
+
+        <div class="upload-content" id="uploadContent">
+
+          <div class="upload-icon">📸</div>
+
+          <h3>Add your photo</h3>
+
+          <p>
+            JPG, PNG or WEBP<br>
+            Your image stays in this demo.
+          </p>
+
+          <label class="file-btn">
+            Choose Photo
+            <input type="file" id="photoInput" accept="image/*">
+          </label>
+
+        </div>
+
+        <img id="preview" class="preview">
+
+      </div>
+
+      <button
+        class="continue"
+        id="analyzeButton"
+        disabled
+        onclick="startScanning()">
+        Analyze My Style ✦
+      </button>
+
+    </div>
+
+
+    <!-- STEP 4 -->
+
+    <div id="step4" style="display:none">
+
+      <div class="scan">
+
+        <div class="scan-circle" id="scanCircle">
+
+          <div class="scan-number" id="scanNumber">
+            0%
+          </div>
+
+        </div>
+
+        <h2>Preparing Your Result</h2>
+
+        <p id="scanMessage">
+          Reading your selected style...
         </p>
+
       </div>
 
     </div>
 
-    <div class="tag-row" id="tags"></div>
 
-    <div class="detail-grid">
+    <!-- STEP 5 -->
 
-      <div class="detail-card">
-        <div class="detail-label">Style</div>
-        <div class="detail-value" id="detailStyle"></div>
+    <div id="step5" style="display:none">
+
+      <div class="result-title">
+        Your Style Result
       </div>
 
-      <div class="detail-card">
-        <div class="detail-label">Outfit</div>
-        <div class="detail-value" id="detailOutfit"></div>
+      <img id="resultImage" class="result-image">
+
+
+      <div class="score">
+
+        <div class="ring" id="ring">
+
+          <div class="ring-value" id="scoreValue">
+            0
+          </div>
+
+        </div>
+
+        <div>
+
+          <h3 id="resultStyle">
+            Your Style
+          </h3>
+
+          <p>
+            Demo style score based on your selected
+            style direction.
+          </p>
+
+        </div>
+
       </div>
 
-      <div class="detail-card">
-        <div class="detail-label">Colours</div>
-        <div class="detail-value" id="detailColours"></div>
+
+      <div class="tags" id="tags"></div>
+
+
+      <div class="details">
+
+        <div class="detail">
+          <div class="detail-label">Style</div>
+          <div class="detail-value" id="detailStyle"></div>
+        </div>
+
+        <div class="detail">
+          <div class="detail-label">Outfit</div>
+          <div class="detail-value" id="detailOutfit"></div>
+        </div>
+
+        <div class="detail">
+          <div class="detail-label">Colours</div>
+          <div class="detail-value" id="detailColours"></div>
+        </div>
+
+        <div class="detail">
+          <div class="detail-label">Hair</div>
+          <div class="detail-value" id="detailHair"></div>
+        </div>
+
+        <div class="detail">
+          <div class="detail-label">Accessories</div>
+          <div class="detail-value" id="detailAccessories"></div>
+        </div>
+
+        <div class="detail">
+          <div class="detail-label">Presentation</div>
+          <div class="detail-value" id="detailPresentation"></div>
+        </div>
+
       </div>
 
-      <div class="detail-card">
-        <div class="detail-label">Hair</div>
-        <div class="detail-value" id="detailHair"></div>
+
+      <div class="tips">
+
+        <h3>✦ Style Tips</h3>
+
+        <div id="tips"></div>
+
       </div>
 
-      <div class="detail-card">
-        <div class="detail-label">Accessories</div>
-        <div class="detail-value" id="detailAccessories"></div>
-      </div>
 
-      <div class="detail-card">
-        <div class="detail-label">Presentation</div>
-        <div class="detail-value" id="detailPresentation"></div>
+      <div class="actions">
+
+        <button class="action primary" onclick="shareResult()">
+          Share Result
+        </button>
+
+        <button class="action" onclick="resetAnalyzer()">
+          Try Again
+        </button>
+
       </div>
 
     </div>
 
-    <div class="tips">
+  </section>
 
-      <div class="tips-title">✦ Style Tips</div>
 
-      <div id="tips"></div>
+  <!-- CONTACT -->
+
+  <section class="page" id="contact">
+
+    <div class="section" style="padding-top:55px">
+
+      <div class="section-label">
+        GET IN TOUCH
+      </div>
+
+      <h2>
+        Let's build<br>
+        better style tools.
+      </h2>
+
+      <p>
+        StyleAI is an evolving project. More styling
+        features and smarter analysis can be added over time.
+      </p>
+
+
+      <div class="info-card">
+
+        <div class="info-row">
+
+          <div class="info-icon">✦</div>
+
+          <div>
+            <h3>StyleAI Demo</h3>
+            <p>
+              Explore the current free styling experience.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <div class="info-icon">🚀</div>
+
+          <div>
+            <h3>Coming Next</h3>
+            <p>
+              More personalization, richer style insights
+              and additional fashion tools.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 
-    <div class="actions">
-
-      <button class="action primary" onclick="shareResult()">
-        Share Result
-      </button>
-
-      <button class="action" onclick="analyzeAnother()">
-        Try Another
-      </button>
-
-    </div>
 
     <div class="footer">
-      StyleAI • Free Style Demo
+      © 2026 StyleAI • Free Demo
     </div>
 
   </section>
 
 </div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+  <button class="nav-btn active" id="navHome" onclick="showPage('home')">
+
+    <span class="nav-icon">⌂</span>
+    Home
+
+  </button>
+
+
+  <button class="nav-btn" id="navAnalyzer" onclick="openAnalyzer()">
+
+    <span class="nav-icon">✦</span>
+    Analyze
+
+  </button>
+
+
+  <button class="nav-btn" id="navContact" onclick="showPage('contact')">
+
+    <span class="nav-icon">◎</span>
+    About
+
+  </button>
+
+</nav>
 
 
 <script>
@@ -855,36 +1268,49 @@ let selectedStyle = "";
 let selectedGender = "";
 let selectedImageData = "";
 
-const photoInput = document.getElementById("photoInput");
-const preview = document.getElementById("preview");
-const uploadContent = document.getElementById("uploadContent");
-const analyzeButton = document.getElementById("analyzeButton");
+const photoInput =
+  document.getElementById("photoInput");
 
-function updateProgress(number){
+const preview =
+  document.getElementById("preview");
 
-  for(let i=1;i<=5;i++){
+const uploadContent =
+  document.getElementById("uploadContent");
 
-    const item = document.getElementById("p"+i);
+const analyzeButton =
+  document.getElementById("analyzeButton");
 
-    if(i <= number){
-      item.classList.add("active");
-    }else{
-      item.classList.remove("active");
-    }
 
+/* PAGE NAVIGATION */
+
+function showPage(page){
+
+  document.querySelectorAll(".page")
+    .forEach(p => p.classList.remove("active"));
+
+  document.getElementById(page)
+    .classList.add("active");
+
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+
+  if(page === "home"){
+    document.getElementById("navHome")
+      .classList.add("active");
   }
 
-}
+  if(page === "analyzer"){
+    document.getElementById("navAnalyzer")
+      .classList.add("active");
+  }
 
-function goTo(number){
+  if(page === "contact"){
+    document.getElementById("navContact")
+      .classList.add("active");
+  }
 
-  document.querySelectorAll(".screen").forEach(screen=>{
-    screen.classList.remove("active");
-  });
-
-  document.getElementById("screen"+number).classList.add("active");
-
-  updateProgress(number);
 
   window.scrollTo({
     top:0,
@@ -893,33 +1319,98 @@ function goTo(number){
 
 }
 
+
+function openAnalyzer(){
+
+  showPage("analyzer");
+
+  nextStep(1);
+
+}
+
+
+/* ANALYZER STEPS */
+
+function nextStep(step){
+
+  for(let i=1;i<=5;i++){
+
+    const element =
+      document.getElementById("step"+i);
+
+    if(element){
+      element.style.display =
+        i === step ? "block" : "none";
+    }
+
+  }
+
+
+  for(let i=1;i<=5;i++){
+
+    const p =
+      document.getElementById("p"+i);
+
+    if(p){
+
+      if(i <= step){
+        p.classList.add("active");
+      }else{
+        p.classList.remove("active");
+      }
+
+    }
+
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* STYLE */
+
 function selectStyle(style,element){
 
   selectedStyle = style;
 
-  document.querySelectorAll("#screen1 .option").forEach(item=>{
-    item.classList.remove("selected");
-  });
+  document.querySelectorAll("#step1 .option")
+    .forEach(item =>
+      item.classList.remove("selected")
+    );
 
   element.classList.add("selected");
 
-  document.getElementById("styleContinue").disabled = false;
+  document.getElementById("styleContinue")
+    .disabled = false;
 
 }
+
+
+/* CATEGORY */
 
 function selectGender(gender,element){
 
   selectedGender = gender;
 
-  document.querySelectorAll("#screen2 .option").forEach(item=>{
-    item.classList.remove("selected");
-  });
+  document.querySelectorAll("#step2 .option")
+    .forEach(item =>
+      item.classList.remove("selected")
+    );
 
   element.classList.add("selected");
 
-  document.getElementById("genderContinue").disabled = false;
+  document.getElementById("genderContinue")
+    .disabled = false;
 
 }
+
+
+/* PHOTO */
 
 photoInput.addEventListener("change",function(){
 
@@ -927,7 +1418,9 @@ photoInput.addEventListener("change",function(){
 
   if(!file) return;
 
+
   const reader = new FileReader();
+
 
   reader.onload = function(e){
 
@@ -943,20 +1436,29 @@ photoInput.addEventListener("change",function(){
 
   };
 
+
   reader.readAsDataURL(file);
 
 });
 
 
+/* SCANNING */
+
 function startScanning(){
 
-  goTo(4);
+  nextStep(4);
 
   let progress = 0;
 
-  const circle = document.getElementById("scanCircle");
-  const number = document.getElementById("scanNumber");
-  const message = document.getElementById("scanMessage");
+  const circle =
+    document.getElementById("scanCircle");
+
+  const number =
+    document.getElementById("scanNumber");
+
+  const message =
+    document.getElementById("scanMessage");
+
 
   const messages = [
 
@@ -969,28 +1471,44 @@ function startScanning(){
 
   ];
 
+
   let messageIndex = 0;
+
 
   const interval = setInterval(()=>{
 
     progress += 5;
 
-    number.innerText = progress + "%";
+    number.innerText =
+      progress + "%";
+
 
     circle.style.background =
-      `conic-gradient(var(--accent) ${progress * 3.6}deg, rgba(255,255,255,.08) 0deg)`;
+      `conic-gradient(
+        var(--accent) ${progress * 3.6}deg,
+        rgba(255,255,255,.08) 0deg
+      )`;
 
-    if(progress % 15 === 0 && messageIndex < messages.length){
-      message.innerText = messages[messageIndex];
+
+    if(
+      progress % 15 === 0 &&
+      messageIndex < messages.length
+    ){
+
+      message.innerText =
+        messages[messageIndex];
+
       messageIndex++;
+
     }
+
 
     if(progress >= 100){
 
       clearInterval(interval);
 
       setTimeout(()=>{
-        showDemoResult();
+        showResult();
       },500);
 
     }
@@ -1000,40 +1518,56 @@ function startScanning(){
 }
 
 
-function showDemoResult(){
+/* RESULT */
 
-  const data = getStyleData(selectedStyle);
+function showResult(){
 
-  document.getElementById("resultImage").src = selectedImageData;
+  const data =
+    getStyleData(selectedStyle);
 
-  document.getElementById("resultStyle").innerText =
-    data.title;
 
-  document.getElementById("detailStyle").innerText =
-    data.style;
+  document.getElementById("resultImage")
+    .src = selectedImageData;
 
-  document.getElementById("detailOutfit").innerText =
-    data.outfit;
 
-  document.getElementById("detailColours").innerText =
-    data.colours;
+  document.getElementById("resultStyle")
+    .innerText = data.title;
 
-  document.getElementById("detailHair").innerText =
-    data.hair;
 
-  document.getElementById("detailAccessories").innerText =
-    data.accessories;
+  document.getElementById("detailStyle")
+    .innerText = data.style;
 
-  document.getElementById("detailPresentation").innerText =
-    data.presentation;
 
-  const tags = document.getElementById("tags");
+  document.getElementById("detailOutfit")
+    .innerText = data.outfit;
+
+
+  document.getElementById("detailColours")
+    .innerText = data.colours;
+
+
+  document.getElementById("detailHair")
+    .innerText = data.hair;
+
+
+  document.getElementById("detailAccessories")
+    .innerText = data.accessories;
+
+
+  document.getElementById("detailPresentation")
+    .innerText = data.presentation;
+
+
+  const tags =
+    document.getElementById("tags");
 
   tags.innerHTML = "";
 
+
   data.tags.forEach(tag=>{
 
-    const div = document.createElement("div");
+    const div =
+      document.createElement("div");
 
     div.className = "tag";
 
@@ -1044,23 +1578,28 @@ function showDemoResult(){
   });
 
 
-  const tips = document.getElementById("tips");
+  const tips =
+    document.getElementById("tips");
 
   tips.innerHTML = "";
 
+
   data.tips.forEach(tip=>{
 
-    const div = document.createElement("div");
+    const div =
+      document.createElement("div");
 
     div.className = "tip";
 
-    div.innerHTML = `<span>✓</span><div>${tip}</div>`;
+    div.innerHTML =
+      `<b>✓</b><div>${tip}</div>`;
 
     tips.appendChild(div);
 
   });
 
-  goTo(5);
+
+  nextStep(5);
 
   animateScore(data.score);
 
@@ -1071,8 +1610,12 @@ function animateScore(score){
 
   let current = 0;
 
-  const value = document.getElementById("scoreValue");
-  const ring = document.getElementById("scoreRing");
+  const value =
+    document.getElementById("scoreValue");
+
+  const ring =
+    document.getElementById("ring");
+
 
   const interval = setInterval(()=>{
 
@@ -1080,8 +1623,13 @@ function animateScore(score){
 
     value.innerText = current;
 
+
     ring.style.background =
-      `conic-gradient(var(--accent) ${current * 3.6}deg, rgba(255,255,255,.08) 0deg)`;
+      `conic-gradient(
+        var(--accent) ${current * 3.6}deg,
+        rgba(255,255,255,.08) 0deg
+      )`;
+
 
     if(current >= score){
       clearInterval(interval);
@@ -1091,6 +1639,74 @@ function animateScore(score){
 
 }
 
+
+/* SHARE */
+
+function shareResult(){
+
+  const text =
+    `My StyleAI result: ${selectedStyle} — Style Score ${document.getElementById("scoreValue").innerText}/100`;
+
+
+  if(navigator.share){
+
+    navigator.share({
+      title:"My StyleAI Result",
+      text:text
+    }).catch(()=>{});
+
+  }else{
+
+    navigator.clipboard.writeText(text)
+      .then(()=>{
+        alert("Result copied!");
+      })
+      .catch(()=>{
+        alert(text);
+      });
+
+  }
+
+}
+
+
+/* RESET */
+
+function resetAnalyzer(){
+
+  selectedStyle = "";
+  selectedGender = "";
+  selectedImageData = "";
+
+  photoInput.value = "";
+
+  preview.src = "";
+
+  preview.style.display = "none";
+
+  uploadContent.style.display = "block";
+
+  analyzeButton.disabled = true;
+
+  document.getElementById("styleContinue")
+    .disabled = true;
+
+  document.getElementById("genderContinue")
+    .disabled = true;
+
+
+  document.querySelectorAll(".option")
+    .forEach(item =>
+      item.classList.remove("selected")
+    );
+
+
+  nextStep(1);
+
+}
+
+
+/* STYLE DATA */
 
 function getStyleData(style){
 
@@ -1113,6 +1729,7 @@ function getStyleData(style){
       ]
     },
 
+
     "Aesthetic":{
       score:91,
       title:"Aesthetic Style",
@@ -1129,6 +1746,7 @@ function getStyleData(style){
         "Clean textures and simple silhouettes enhance the look."
       ]
     },
+
 
     "South Indian":{
       score:89,
@@ -1147,6 +1765,7 @@ function getStyleData(style){
       ]
     },
 
+
     "Streetwear":{
       score:92,
       title:"Streetwear Style",
@@ -1164,6 +1783,7 @@ function getStyleData(style){
       ]
     },
 
+
     "Casual":{
       score:86,
       title:"Casual Style",
@@ -1180,6 +1800,7 @@ function getStyleData(style){
         "A simple watch can add structure to the look."
       ]
     },
+
 
     "Formal":{
       score:90,
@@ -1200,55 +1821,8 @@ function getStyleData(style){
 
   };
 
+
   return data[style] || data["Casual"];
-
-}
-
-
-function shareResult(){
-
-  const text =
-    `My StyleAI result: ${selectedStyle} — Style Score ${document.getElementById("scoreValue").innerText}/100`;
-
-  if(navigator.share){
-
-    navigator.share({
-      title:"My StyleAI Result",
-      text:text
-    }).catch(()=>{});
-
-  }else{
-
-    navigator.clipboard.writeText(text).then(()=>{
-
-      alert("Result copied!");
-
-    }).catch(()=>{
-
-      alert(text);
-
-    });
-
-  }
-
-}
-
-
-function analyzeAnother(){
-
-  selectedImageData = "";
-
-  photoInput.value = "";
-
-  preview.src = "";
-
-  preview.style.display = "none";
-
-  uploadContent.style.display = "block";
-
-  analyzeButton.disabled = true;
-
-  goTo(3);
 
 }
 
