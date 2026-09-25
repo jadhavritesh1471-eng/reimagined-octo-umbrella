@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Look Analyzer - Beauty Meter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>✨ AI Look Analyzer ✨</h1>
+        
+        <!-- STEP 1: THEME SELECTION -->
+        <div class="step-page" id="step1">
+            <p class="subtitle">Step 1 of 3: Choose your outfit/look theme</p>
+            <div class="input-group">
+                <select id="themeSelect">
+                    <option value="traditional">Traditional</option>
+                    <option value="aesthetic">Aesthetic</option>
+                    <option value="hot">Hot & Bold</option>
+                    <option value="southindian">South Indian</option>
+                    <option value="modern">Modern Style</option>
+                </select>
+            </div>
+            <button class="next-btn" onclick="goToStep(2)">Next ➡️</button>
+        </div>
+
+        <!-- STEP 2: GENDER SELECTION -->
+        <div class="step-page hidden" id="step2">
+            <p class="subtitle">Step 2 of 3: Select your gender</p>
+            <div class="gender-options">
+                <button class="btn-gender active" data-gender="girl">🙋‍♀️ Girl</button>
+                <button class="btn-gender" data-gender="boy">🙋‍♂️ Boy</button>
+            </div>
+            <div class="btn-group">
+                <button class="back-btn" onclick="goToStep(1)">⬅️ Back</button>
+                <button class="next-btn" onclick="goToStep(3)">Next ➡️</button>
+            </div>
+        </div>
+
+        <!-- STEP 3: PHOTO UPLOAD & SCAN -->
+        <div class="step-page hidden" id="step3">
+            <p class="subtitle">Step 3 of 3: Upload your photo</p>
+            <div class="upload-section">
+                <label for="imageUpload" class="upload-btn">📸 Choose Photo / Open Camera</label>
+                <input type="file" id="imageUpload" accept="image/*">
+                <div id="previewContainer" class="hidden">
+                    <img id="imagePreview" src="" alt="Preview">
+                    <div id="scanLine" class="hidden"></div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="back-btn" id="uploadBackBtn" onclick="goToStep(2)">⬅️ Back</button>
+                <button id="analyzeBtn" class="main-btn" disabled>Scan My Look 🚀</button>
+            </div>
+        </div>
+
+        <!-- STEP 4: FINAL RESULT SECTION -->
+        <div id="resultSection" class="step-page hidden">
+            <h2>📊 Your Scan Result</h2>
+            
+            <!-- Locked Beauty Meter -->
+            <div class="meter-container">
+                <span class="meter-title">Beauty Match Score:</span>
+                <div class="meter-bar">
+                    <div id="meterFill" class="meter-fill"></div>
+                </div>
+                <span id="scoreText" class="score-text">0%</span>
+            </div>
+
+            <!-- Fashion Review & Comments -->
+            <div class="review-box">
+                <div class="verdict-tag" id="verdictTag"></div>
+                <p id="mainComment" class="main-comment"></p>
+                
+                <div class="details-box">
+                    <h3>🔍 In-Depth Style Breakdown:</h3>
+                    <p id="detailsText"></p>
+                </div>
+
+                <div class="advice-box" id="adviceBox">
+                    <h3>💡 Personalized Fashion Advice:</h3>
+                    <p id="adviceText"></p>
+                </div>
+            </div>
+
+            <button id="resetBtn" class="reset-btn">🔄 Scan Another Photo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
