@@ -41,11 +41,10 @@ button{
   min-height:700px;
   border:1px solid rgba(255,255,255,.12);
   border-radius:28px;
-  background:rgba(17,17,31,.82);
+  background:rgba(17,17,31,.84);
   backdrop-filter:blur(25px);
   box-shadow:0 30px 80px rgba(0,0,0,.45);
   overflow:hidden;
-  position:relative;
 }
 
 .screen{
@@ -147,7 +146,6 @@ button{
 .card.selected{
   border-color:#9467ff;
   background:rgba(142,91,255,.15);
-  box-shadow:0 0 25px rgba(142,91,255,.12);
 }
 
 .icon{
@@ -176,18 +174,11 @@ button{
   font-weight:700;
   cursor:pointer;
   background:linear-gradient(90deg,#8151ff,#36bdf5);
-  box-shadow:0 12px 30px rgba(77,126,255,.2);
-  transition:.2s;
-}
-
-.next-btn:hover{
-  transform:translateY(-2px);
 }
 
 .next-btn:disabled{
   opacity:.45;
   cursor:not-allowed;
-  transform:none;
 }
 
 .back{
@@ -206,7 +197,6 @@ button{
   padding:35px 20px;
   text-align:center;
   cursor:pointer;
-  transition:.25s;
 }
 
 .upload:hover{
@@ -296,7 +286,7 @@ input[type=file]{
   height:100%;
   border-radius:10px;
   background:linear-gradient(90deg,#9b5cff,#38d5ff);
-  transition:width .2s linear;
+  transition:width .25s linear;
 }
 
 .result-top{
@@ -311,7 +301,7 @@ input[type=file]{
 }
 
 .ai-badge{
-  font-size:11px;
+  font-size:10px;
   padding:7px 10px;
   border-radius:20px;
   background:rgba(74,208,255,.1);
@@ -401,17 +391,6 @@ input[type=file]{
   margin-bottom:10px;
 }
 
-.tip{
-  padding:12px 14px;
-  border-radius:12px;
-  background:rgba(145,91,255,.08);
-  border:1px solid rgba(145,91,255,.15);
-  color:#c7c7d7;
-  font-size:13px;
-  line-height:1.5;
-  margin-top:8px;
-}
-
 .tags{
   display:flex;
   flex-wrap:wrap;
@@ -424,6 +403,17 @@ input[type=file]{
   background:#242437;
   color:#c8c8d6;
   font-size:11px;
+}
+
+.tip{
+  padding:12px 14px;
+  border-radius:12px;
+  background:rgba(145,91,255,.08);
+  border:1px solid rgba(145,91,255,.15);
+  color:#c7c7d7;
+  font-size:13px;
+  line-height:1.5;
+  margin-top:8px;
 }
 
 .actions{
@@ -453,31 +443,6 @@ input[type=file]{
   font-size:11px;
   margin-top:25px;
 }
-
-.error-box{
-  margin-top:20px;
-  padding:15px;
-  border-radius:14px;
-  background:rgba(255,70,90,.08);
-  border:1px solid rgba(255,70,90,.2);
-  color:#ff9da8;
-  font-size:13px;
-  line-height:1.5;
-}
-
-@media(max-width:400px){
-  .screen{
-    padding:22px;
-  }
-
-  .container{
-    border-radius:20px;
-  }
-
-  .title{
-    font-size:24px;
-  }
-}
 </style>
 </head>
 
@@ -486,323 +451,321 @@ input[type=file]{
 <div class="app">
 <div class="container">
 
-<!-- SCREEN 1 -->
+<!-- 1 -->
 <section class="screen active" id="screen1">
 
-  <div class="logo">
-    Style<span>AI</span>
-  </div>
+<div class="logo">
+Style<span>AI</span>
+</div>
 
-  <div class="subtitle">
-    AI-powered personal style analyzer
-  </div>
+<div class="subtitle">
+AI-powered personal style analyzer
+</div>
 
-  <div class="progress">
-    <span class="active"></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div class="progress">
+<span class="active"></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
 
-  <h1 class="title">
-    Choose your style
-  </h1>
+<h1 class="title">
+Choose your style
+</h1>
 
-  <p class="desc">
-    Select the fashion style you want StyleAI to analyze.
-  </p>
+<p class="desc">
+Select the fashion style you want StyleAI to analyze.
+</p>
 
-  <div class="cards">
+<div class="cards">
 
-    <div class="card" onclick="selectStyle('Traditional',this)">
-      <div class="icon">🪷</div>
-      <h3>Traditional</h3>
-      <p>Classic ethnic look</p>
-    </div>
+<div class="card" onclick="selectStyle('Traditional',this)">
+<div class="icon">🪷</div>
+<h3>Traditional</h3>
+<p>Classic ethnic look</p>
+</div>
 
-    <div class="card" onclick="selectStyle('Aesthetic',this)">
-      <div class="icon">✨</div>
-      <h3>Aesthetic</h3>
-      <p>Clean & trendy</p>
-    </div>
+<div class="card" onclick="selectStyle('Aesthetic',this)">
+<div class="icon">✨</div>
+<h3>Aesthetic</h3>
+<p>Clean & trendy</p>
+</div>
 
-    <div class="card" onclick="selectStyle('South Indian',this)">
-      <div class="icon">🌴</div>
-      <h3>South Indian</h3>
-      <p>Regional style</p>
-    </div>
+<div class="card" onclick="selectStyle('South Indian',this)">
+<div class="icon">🌴</div>
+<h3>South Indian</h3>
+<p>Regional style</p>
+</div>
 
-    <div class="card" onclick="selectStyle('Streetwear',this)">
-      <div class="icon">🔥</div>
-      <h3>Streetwear</h3>
-      <p>Urban fashion</p>
-    </div>
+<div class="card" onclick="selectStyle('Streetwear',this)">
+<div class="icon">🔥</div>
+<h3>Streetwear</h3>
+<p>Urban fashion</p>
+</div>
 
-    <div class="card" onclick="selectStyle('Casual',this)">
-      <div class="icon">👕</div>
-      <h3>Casual</h3>
-      <p>Everyday style</p>
-    </div>
+<div class="card" onclick="selectStyle('Casual',this)">
+<div class="icon">👕</div>
+<h3>Casual</h3>
+<p>Everyday style</p>
+</div>
 
-    <div class="card" onclick="selectStyle('Formal',this)">
-      <div class="icon">🕴️</div>
-      <h3>Formal</h3>
-      <p>Professional look</p>
-    </div>
+<div class="card" onclick="selectStyle('Formal',this)">
+<div class="icon">🕴️</div>
+<h3>Formal</h3>
+<p>Professional look</p>
+</div>
 
-  </div>
+</div>
 
-  <button class="next-btn" id="styleNext" disabled onclick="goTo(2)">
-    Continue
-  </button>
+<button class="next-btn" id="styleNext" disabled onclick="goTo(2)">
+Continue
+</button>
 
 </section>
 
 
-<!-- SCREEN 2 -->
+<!-- 2 -->
 <section class="screen" id="screen2">
 
-  <button class="back" onclick="goTo(1)">← Back</button>
+<button class="back" onclick="goTo(1)">← Back</button>
 
-  <div class="progress">
-    <span class="active"></span>
-    <span class="active"></span>
-    <span></span>
-    <span></span>
-  </div>
+<div class="progress">
+<span class="active"></span>
+<span class="active"></span>
+<span></span>
+<span></span>
+</div>
 
-  <h1 class="title">
-    Select category
-  </h1>
+<h1 class="title">
+Select category
+</h1>
 
-  <p class="desc">
-    This helps the AI understand your styling context.
-  </p>
+<p class="desc">
+Choose the category for your style analysis.
+</p>
 
-  <div class="cards">
+<div class="cards">
 
-    <div class="card" onclick="selectGender('Men',this)">
-      <div class="icon">👨</div>
-      <h3>Men</h3>
-      <p>Men's styling</p>
-    </div>
+<div class="card" onclick="selectGender('Men',this)">
+<div class="icon">👨</div>
+<h3>Men</h3>
+<p>Men's styling</p>
+</div>
 
-    <div class="card" onclick="selectGender('Women',this)">
-      <div class="icon">👩</div>
-      <h3>Women</h3>
-      <p>Women's styling</p>
-    </div>
+<div class="card" onclick="selectGender('Women',this)">
+<div class="icon">👩</div>
+<h3>Women</h3>
+<p>Women's styling</p>
+</div>
 
-    <div class="card" onclick="selectGender('Unisex',this)">
-      <div class="icon">🧑</div>
-      <h3>Unisex</h3>
-      <p>Universal styling</p>
-    </div>
+<div class="card" onclick="selectGender('Unisex',this)">
+<div class="icon">🧑</div>
+<h3>Unisex</h3>
+<p>Universal styling</p>
+</div>
 
-  </div>
+</div>
 
-  <button class="next-btn" id="genderNext" disabled onclick="goTo(3)">
-    Continue
-  </button>
+<button class="next-btn" id="genderNext" disabled onclick="goTo(3)">
+Continue
+</button>
 
 </section>
 
 
-<!-- SCREEN 3 -->
+<!-- 3 -->
 <section class="screen" id="screen3">
 
-  <button class="back" onclick="goTo(2)">← Back</button>
+<button class="back" onclick="goTo(2)">← Back</button>
 
-  <div class="progress">
-    <span class="active"></span>
-    <span class="active"></span>
-    <span class="active"></span>
-    <span></span>
-  </div>
+<div class="progress">
+<span class="active"></span>
+<span class="active"></span>
+<span class="active"></span>
+<span></span>
+</div>
 
-  <h1 class="title">
-    Upload your look
-  </h1>
+<h1 class="title">
+Upload your look
+</h1>
 
-  <p class="desc">
-    Upload a clear photo showing your outfit.
-  </p>
+<p class="desc">
+Upload a clear photo showing your outfit.
+</p>
 
-  <label class="upload" for="photoInput">
+<label class="upload" for="photoInput">
 
-    <div class="upload-icon">📸</div>
+<div class="upload-icon">📸</div>
 
-    <h3 id="uploadTitle">
-      Choose a photo
-    </h3>
+<h3 id="uploadTitle">
+Choose a photo
+</h3>
 
-    <p>
-      JPG, PNG or WEBP
-    </p>
+<p>
+JPG, PNG or WEBP
+</p>
 
-  </label>
+</label>
 
-  <input
-    type="file"
-    id="photoInput"
-    accept="image/*"
-  >
+<input
+type="file"
+id="photoInput"
+accept="image/*"
+>
 
-  <img
-    id="preview"
-    class="preview"
-    alt="Uploaded look"
-  >
+<img
+id="preview"
+class="preview"
+alt="Uploaded look"
+>
 
-  <button
-    class="next-btn"
-    id="analyzeBtn"
-    disabled
-    onclick="startScanning()"
-  >
-    Analyze My Look ✨
-  </button>
+<button
+class="next-btn"
+id="analyzeBtn"
+disabled
+onclick="startScanning()"
+>
+Analyze My Look ✨
+</button>
 
 </section>
 
 
-<!-- SCREEN 4 -->
+<!-- 4 -->
 <section class="screen" id="screen4">
 
-  <div class="progress">
-    <span class="active"></span>
-    <span class="active"></span>
-    <span class="active"></span>
-    <span class="active"></span>
-  </div>
+<div class="progress">
+<span class="active"></span>
+<span class="active"></span>
+<span class="active"></span>
+<span class="active"></span>
+</div>
 
-  <div class="scan-box">
+<div class="scan-box">
 
-    <div class="scan-circle">
-      <div class="scan-inner">
-        ✨
-      </div>
-    </div>
+<div class="scan-circle">
+<div class="scan-inner">✨</div>
+</div>
 
-    <h2 class="scan-title">
-      AI is analyzing your look
-    </h2>
+<h2 class="scan-title">
+Analyzing your style
+</h2>
 
-    <p class="scan-text" id="scanText">
-      Preparing image...
-    </p>
+<p class="scan-text" id="scanText">
+Reading your selected style...
+</p>
 
-    <div class="loading-bar">
-      <div class="loading-fill" id="loadingFill"></div>
-    </div>
+<div class="loading-bar">
+<div class="loading-fill" id="loadingFill"></div>
+</div>
 
-  </div>
+</div>
 
 </section>
 
 
-<!-- SCREEN 5 -->
+<!-- 5 -->
 <section class="screen" id="screen5">
 
-  <div class="result-top">
+<div class="result-top">
 
-    <div class="result-title">
-      Your AI Result
-    </div>
+<div class="result-title">
+Your Style Result
+</div>
 
-    <div class="ai-badge">
-      AI ANALYZED
-    </div>
+<div class="ai-badge">
+STYLEAI
+</div>
 
-  </div>
+</div>
 
-  <img
-    id="resultPhoto"
-    class="result-photo"
-    alt="Analyzed look"
-  >
+<img
+id="resultPhoto"
+class="result-photo"
+alt="Your look"
+>
 
-  <div class="score-wrap">
+<div class="score-wrap">
 
-    <div class="score-circle" id="scoreCircle">
+<div class="score-circle" id="scoreCircle">
 
-      <div class="score-number" id="scoreNumber">
-        0
-      </div>
+<div class="score-number" id="scoreNumber">
+0
+</div>
 
-    </div>
+</div>
 
-    <div class="score-label">
-      Style Match Score
-    </div>
+<div class="score-label">
+Style Match Score
+</div>
 
-  </div>
+</div>
 
-  <div class="analysis-grid">
+<div class="analysis-grid">
 
-    <div class="analysis-card">
-      <small>Style</small>
-      <strong id="resultStyle">—</strong>
-    </div>
+<div class="analysis-card">
+<small>Style</small>
+<strong id="resultStyle">—</strong>
+</div>
 
-    <div class="analysis-card">
-      <small>Outfit</small>
-      <strong id="resultOutfit">—</strong>
-    </div>
+<div class="analysis-card">
+<small>Outfit</small>
+<strong id="resultOutfit">—</strong>
+</div>
 
-    <div class="analysis-card">
-      <small>Colours</small>
-      <strong id="resultColours">—</strong>
-    </div>
+<div class="analysis-card">
+<small>Colours</small>
+<strong id="resultColours">—</strong>
+</div>
 
-    <div class="analysis-card">
-      <small>Hair</small>
-      <strong id="resultHair">—</strong>
-    </div>
+<div class="analysis-card">
+<small>Hair</small>
+<strong id="resultHair">—</strong>
+</div>
 
-    <div class="analysis-card">
-      <small>Accessories</small>
-      <strong id="resultAccessories">—</strong>
-    </div>
+<div class="analysis-card">
+<small>Accessories</small>
+<strong id="resultAccessories">—</strong>
+</div>
 
-    <div class="analysis-card">
-      <small>Presentation</small>
-      <strong id="resultPresentation">—</strong>
-    </div>
+<div class="analysis-card">
+<small>Presentation</small>
+<strong id="resultPresentation">—</strong>
+</div>
 
-  </div>
+</div>
 
-  <div class="section">
+<div class="section">
 
-    <h3>Style Details</h3>
+<h3>Style Details</h3>
 
-    <div class="tags" id="resultTags"></div>
+<div class="tags" id="resultTags"></div>
 
-  </div>
+</div>
 
-  <div class="section">
+<div class="section">
 
-    <h3>AI Suggestions</h3>
+<h3>Suggestions</h3>
 
-    <div id="tipsContainer"></div>
+<div id="tipsContainer"></div>
 
-  </div>
+</div>
 
-  <div class="actions">
+<div class="actions">
 
-    <button class="action-btn primary" onclick="shareResult()">
-      Share Result
-    </button>
+<button class="action-btn primary" onclick="shareResult()">
+Share Result
+</button>
 
-    <button class="action-btn" onclick="analyzeAnother()">
-      Analyze Again
-    </button>
+<button class="action-btn" onclick="analyzeAnother()">
+Analyze Again
+</button>
 
-  </div>
+</div>
 
-  <div class="footer">
-    Powered by StyleAI
-  </div>
+<div class="footer">
+Free StyleAI Demo
+</div>
 
 </section>
 
@@ -814,556 +777,438 @@ input[type=file]{
 
 let selectedStyle = "";
 let selectedGender = "";
-let selectedFile = null;
 let selectedImageData = "";
 let currentScore = 0;
 
 
-/* -------------------------
-   NAVIGATION
-------------------------- */
+/* NAVIGATION */
 
 function goTo(number){
 
-  document.querySelectorAll(".screen")
-    .forEach(screen => screen.classList.remove("active"));
+document.querySelectorAll(".screen")
+.forEach(screen=>{
+screen.classList.remove("active");
+});
 
-  document.getElementById("screen" + number)
-    .classList.add("active");
+document.getElementById("screen"+number)
+.classList.add("active");
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-/* -------------------------
-   STYLE SELECTION
-------------------------- */
-
-function selectStyle(style, element){
-
-  selectedStyle = style;
-
-  document.querySelectorAll("#screen1 .card")
-    .forEach(card => card.classList.remove("selected"));
-
-  element.classList.add("selected");
-
-  document.getElementById("styleNext").disabled = false;
-}
-
-
-/* -------------------------
-   GENDER SELECTION
-------------------------- */
-
-function selectGender(gender, element){
-
-  selectedGender = gender;
-
-  document.querySelectorAll("#screen2 .card")
-    .forEach(card => card.classList.remove("selected"));
-
-  element.classList.add("selected");
-
-  document.getElementById("genderNext").disabled = false;
-}
-
-
-/* -------------------------
-   IMAGE COMPRESSION
-------------------------- */
-
-function compressImage(dataUrl, maxSize = 1200, quality = 0.82){
-
-  return new Promise((resolve, reject) => {
-
-    const img = new Image();
-
-    img.onload = function(){
-
-      let width = img.width;
-      let height = img.height;
-
-      const scale =
-        Math.min(
-          1,
-          maxSize / Math.max(width,height)
-        );
-
-      width = Math.round(width * scale);
-      height = Math.round(height * scale);
-
-      const canvas =
-        document.createElement("canvas");
-
-      canvas.width = width;
-      canvas.height = height;
-
-      const ctx = canvas.getContext("2d");
-
-      ctx.drawImage(
-        img,
-        0,
-        0,
-        width,
-        height
-      );
-
-      resolve(
-        canvas.toDataURL(
-          "image/jpeg",
-          quality
-        )
-      );
-
-    };
-
-    img.onerror = reject;
-
-    img.src = dataUrl;
-
-  });
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
 
 
-/* -------------------------
-   PHOTO UPLOAD
-------------------------- */
+/* STYLE */
 
-document
-  .getElementById("photoInput")
-  .addEventListener("change", async function(event){
+function selectStyle(style,element){
 
-    const file = event.target.files[0];
+selectedStyle=style;
 
-    if(!file){
-      return;
-    }
+document.querySelectorAll("#screen1 .card")
+.forEach(card=>{
+card.classList.remove("selected");
+});
 
-    selectedFile = file;
+element.classList.add("selected");
 
-    const reader = new FileReader();
+document.getElementById("styleNext")
+.disabled=false;
 
-    reader.onload = async function(e){
-
-      try{
-
-        selectedImageData =
-          await compressImage(e.target.result);
-
-        const preview =
-          document.getElementById("preview");
-
-        preview.src = selectedImageData;
-        preview.style.display = "block";
-
-        document.getElementById("uploadTitle")
-          .textContent = "Photo selected ✓";
-
-        document.getElementById("analyzeBtn")
-          .disabled = false;
-
-      }catch(error){
-
-        console.error(error);
-
-        alert(
-          "Unable to process this image. Please try another photo."
-        );
-
-      }
-
-    };
-
-    reader.readAsDataURL(file);
-
-  });
+}
 
 
-/* -------------------------
-   START SCANNING
-------------------------- */
+/* CATEGORY */
+
+function selectGender(gender,element){
+
+selectedGender=gender;
+
+document.querySelectorAll("#screen2 .card")
+.forEach(card=>{
+card.classList.remove("selected");
+});
+
+element.classList.add("selected");
+
+document.getElementById("genderNext")
+.disabled=false;
+
+}
+
+
+/* PHOTO */
+
+document.getElementById("photoInput")
+.addEventListener("change",function(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+selectedImageData=e.target.result;
+
+const preview=document.getElementById("preview");
+
+preview.src=selectedImageData;
+preview.style.display="block";
+
+document.getElementById("uploadTitle")
+.textContent="Photo selected ✓";
+
+document.getElementById("analyzeBtn")
+.disabled=false;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+
+/* SCAN */
 
 function startScanning(){
 
-  if(!selectedImageData){
-    alert("Please upload a photo first.");
-    return;
-  }
+if(!selectedImageData){
+alert("Please upload a photo first.");
+return;
+}
 
-  goTo(4);
+goTo(4);
 
-  const fill =
-    document.getElementById("loadingFill");
+const fill=document.getElementById("loadingFill");
+const text=document.getElementById("scanText");
 
-  const text =
-    document.getElementById("scanText");
+let progress=0;
 
-  let progress = 0;
+const messages=[
+"Reading your selected style...",
+"Checking outfit combination...",
+"Analyzing colour coordination...",
+"Checking styling details...",
+"Preparing your style score...",
+"Generating suggestions..."
+];
 
-  fill.style.width = "0%";
+let index=0;
 
-  const messages = [
-    "Preparing your image...",
-    "Detecting outfit details...",
-    "Analyzing colours...",
-    "Checking styling elements...",
-    "Comparing with selected style...",
-    "Generating personalized suggestions..."
-  ];
+const interval=setInterval(()=>{
 
-  let messageIndex = 0;
+progress+=5;
 
-  const interval =
-    setInterval(() => {
+if(progress>100)
+progress=100;
 
-      progress += Math.floor(Math.random() * 8) + 4;
+fill.style.width=progress+"%";
 
-      if(progress >= 92){
-        progress = 92;
-      }
+if(index<messages.length){
 
-      fill.style.width = progress + "%";
+text.textContent=messages[index];
+index++;
 
-      if(messageIndex < messages.length){
+}
 
-        text.textContent =
-          messages[messageIndex];
+if(progress>=100){
 
-        messageIndex++;
+clearInterval(interval);
 
-      }
+setTimeout(()=>{
+showDemoResult();
+},500);
 
-    },700);
+}
 
-  analyzeWithAI()
-    .then(() => {
-
-      clearInterval(interval);
-
-      fill.style.width = "100%";
-
-    })
-    .catch(error => {
-
-      clearInterval(interval);
-
-      console.error(error);
-
-      alert(
-        error.message ||
-        "AI analysis failed. Please try again."
-      );
-
-      goTo(3);
-
-    });
+},180);
 
 }
 
 
-/* -------------------------
-   AI API CALL
-------------------------- */
+/* FREE DEMO RESULT */
 
-async function analyzeWithAI(){
+function showDemoResult(){
 
-  const response =
-    await fetch("/api/analyze",{
+document.getElementById("resultPhoto")
+.src=selectedImageData;
 
-      method:"POST",
+const data=getStyleData(selectedStyle);
 
-      headers:{
-        "Content-Type":"application/json"
-      },
+document.getElementById("resultStyle")
+.textContent=selectedStyle;
 
-      body:JSON.stringify({
+document.getElementById("resultOutfit")
+.textContent=data.outfit;
 
-        image:selectedImageData,
+document.getElementById("resultColours")
+.textContent=data.colours;
 
-        style:selectedStyle,
+document.getElementById("resultHair")
+.textContent=data.hair;
 
-        gender:selectedGender
+document.getElementById("resultAccessories")
+.textContent=data.accessories;
 
-      })
-
-    });
-
-
-  let data;
-
-  try{
-
-    data = await response.json();
-
-  }catch(error){
-
-    throw new Error(
-      "The AI server returned an invalid response."
-    );
-
-  }
+document.getElementById("resultPresentation")
+.textContent=data.presentation;
 
 
-  if(!response.ok){
+/* TAGS */
 
-    throw new Error(
-      data.error ||
-      "AI analysis failed."
-    );
+const tags=document.getElementById("resultTags");
 
-  }
+tags.innerHTML="";
+
+data.tags.forEach(tag=>{
+
+const span=document.createElement("span");
+
+span.className="tag";
+span.textContent=tag;
+
+tags.appendChild(span);
+
+});
 
 
-  showAIResult(data);
+/* TIPS */
+
+const tips=document.getElementById("tipsContainer");
+
+tips.innerHTML="";
+
+data.tips.forEach(tip=>{
+
+const div=document.createElement("div");
+
+div.className="tip";
+div.textContent=tip;
+
+tips.appendChild(div);
+
+});
+
+
+goTo(5);
+
+animateScore(data.score);
 
 }
 
 
-/* -------------------------
-   SHOW AI RESULT
-------------------------- */
+/* STYLE DATA */
 
-function showAIResult(data){
+function getStyleData(style){
 
-  goTo(5);
+const data={
 
-  document.getElementById("resultPhoto")
-    .src = selectedImageData;
+"Traditional":{
+score:88,
+outfit:"Traditional outfit styling with a classic ethnic feel.",
+colours:"Balanced earthy and traditional colour combination.",
+hair:"A neat hairstyle works well with this style.",
+accessories:"Traditional accessories can complement the outfit.",
+presentation:"Clean, classic and culturally inspired presentation.",
+tags:["Classic","Ethnic","Elegant","Traditional"],
+tips:[
+"Keep the outfit well-fitted and neatly arranged.",
+"Choose accessories that complement rather than overpower the outfit.",
+"Neutral or earthy colours can create a balanced traditional look."
+]
+},
 
+"Aesthetic":{
+score:91,
+outfit:"Clean, coordinated outfit with a modern aesthetic direction.",
+colours:"Soft and coordinated colours create a minimal appearance.",
+hair:"A clean, natural hairstyle suits the aesthetic direction.",
+accessories:"Minimal accessories help maintain the clean look.",
+presentation:"Simple, modern and visually coordinated.",
+tags:["Minimal","Clean","Modern","Aesthetic"],
+tips:[
+"Keep the colour palette simple and coordinated.",
+"Minimal accessories can strengthen the aesthetic feel.",
+"Pay attention to small details such as footwear and layering."
+]
+},
 
-  const score =
-    Math.max(
-      0,
-      Math.min(
-        100,
-        Number(data.score) || 0
-      )
-    );
+"South Indian":{
+score:89,
+outfit:"Regional-inspired styling with a relaxed South Indian fashion direction.",
+colours:"Warm and natural colour combinations work well.",
+hair:"A natural and well-groomed hairstyle complements the look.",
+accessories:"Simple accessories can enhance the regional character.",
+presentation:"Relaxed, traditional and culturally inspired.",
+tags:["South Indian","Classic","Regional","Elegant"],
+tips:[
+"Use textures and fabrics that complement the traditional direction.",
+"Keep accessories balanced with the outfit.",
+"Footwear should match the overall traditional mood."
+]
+},
 
-  currentScore = score;
+"Streetwear":{
+score:92,
+outfit:"Urban casual styling with a streetwear-inspired direction.",
+colours:"Strong contrast or monochrome combinations suit streetwear.",
+hair:"A modern, well-maintained hairstyle complements the look.",
+accessories:"Sneakers, watches or subtle street accessories can work well.",
+presentation:"Confident, casual and urban-inspired.",
+tags:["Urban","Street","Modern","Casual"],
+tips:[
+"Experiment with layering for more visual depth.",
+"Statement footwear can become a strong part of the look.",
+"Keep proportions balanced when combining oversized pieces."
+]
+},
 
+"Casual":{
+score:86,
+outfit:"Relaxed everyday outfit with an easy casual direction.",
+colours:"Simple colour combinations create an effortless appearance.",
+hair:"A natural and tidy hairstyle works well for casual styling.",
+accessories:"A simple watch or subtle accessory can complete the outfit.",
+presentation:"Relaxed, comfortable and everyday-friendly.",
+tags:["Casual","Relaxed","Everyday","Simple"],
+tips:[
+"Choose comfortable pieces that still have a clean fit.",
+"Coordinate footwear with the main outfit colours.",
+"A simple accessory can add a finished touch."
+]
+},
 
-  document.getElementById("resultStyle")
-    .textContent =
-      data.style || selectedStyle;
+"Formal":{
+score:90,
+outfit:"Structured outfit with a polished formal direction.",
+colours:"Classic neutral colours create a professional appearance.",
+hair:"A neat hairstyle complements formal styling.",
+accessories:"A watch or minimal accessories can enhance the polished look.",
+presentation:"Clean, structured and professional.",
+tags:["Formal","Classic","Polished","Professional"],
+tips:[
+"Make sure the clothing is clean and wrinkle-free.",
+"Keep accessories minimal for a polished appearance.",
+"Match footwear with the formality of the outfit."
+]
+}
 
+};
 
-  document.getElementById("resultOutfit")
-    .textContent =
-      data.outfit || "Not available";
-
-
-  document.getElementById("resultColours")
-    .textContent =
-      data.colours || "Not available";
-
-
-  document.getElementById("resultHair")
-    .textContent =
-      data.hair || "Not available";
-
-
-  document.getElementById("resultAccessories")
-    .textContent =
-      data.accessories || "Not available";
-
-
-  document.getElementById("resultPresentation")
-    .textContent =
-      data.presentation || "Not available";
-
-
-  /* TAGS */
-
-  const tagsContainer =
-    document.getElementById("resultTags");
-
-  tagsContainer.innerHTML = "";
-
-  const tags =
-    Array.isArray(data.tags)
-      ? data.tags
-      : [];
-
-  tags.slice(0,8).forEach(tag => {
-
-    const element =
-      document.createElement("span");
-
-    element.className = "tag";
-
-    element.textContent = tag;
-
-    tagsContainer.appendChild(element);
-
-  });
-
-
-  /* TIPS */
-
-  const tipsContainer =
-    document.getElementById("tipsContainer");
-
-  tipsContainer.innerHTML = "";
-
-  const tips =
-    Array.isArray(data.tips)
-      ? data.tips
-      : [];
-
-  tips.slice(0,6).forEach(tip => {
-
-    const element =
-      document.createElement("div");
-
-    element.className = "tip";
-
-    element.textContent = tip;
-
-    tipsContainer.appendChild(element);
-
-  });
-
-
-  animateScoreCircle(score);
+return data[style] || data["Casual"];
 
 }
 
 
-/* -------------------------
-   SCORE ANIMATION
-------------------------- */
+/* SCORE */
 
-function animateScoreCircle(score){
+function animateScore(score){
 
-  const number =
-    document.getElementById("scoreNumber");
+currentScore=score;
 
-  const circle =
-    document.getElementById("scoreCircle");
+const number=document.getElementById("scoreNumber");
+const circle=document.getElementById("scoreCircle");
 
-  let current = 0;
+let current=0;
 
-  const duration = 1200;
+const start=performance.now();
+const duration=1200;
 
-  const start =
-    performance.now();
+function update(time){
 
-  function update(time){
+const progress=Math.min(
+(time-start)/duration,
+1
+);
 
-    const progress =
-      Math.min(
-        (time - start) / duration,
-        1
-      );
+current=Math.round(score*progress);
 
-    current =
-      Math.round(score * progress);
+number.textContent=current;
 
-    number.textContent =
-      current;
+const degrees=current*3.6;
 
-    const degrees =
-      current * 3.6;
+circle.style.background=
+`conic-gradient(
+#9c62ff 0deg,
+#42d6ff ${degrees}deg,
+#272738 ${degrees}deg,
+#272738 360deg
+)`;
 
-    circle.style.background =
-      `conic-gradient(
-        #9c62ff 0deg,
-        #42d6ff ${degrees}deg,
-        #272738 ${degrees}deg,
-        #272738 360deg
-      )`;
+if(progress<1){
+requestAnimationFrame(update);
+}
 
-    if(progress < 1){
+}
 
-      requestAnimationFrame(update);
-
-    }
-
-  }
-
-  requestAnimationFrame(update);
+requestAnimationFrame(update);
 
 }
 
 
-/* -------------------------
-   SHARE
-------------------------- */
+/* SHARE */
 
 async function shareResult(){
 
-  const text =
-    `My StyleAI result: ${currentScore}/100`;
+const text=
+`My StyleAI result: ${currentScore}/100 — ${selectedStyle}`;
 
-  if(
-    navigator.share
-  ){
+if(navigator.share){
 
-    try{
+try{
 
-      await navigator.share({
-        title:"My StyleAI Result",
-        text:text
-      });
+await navigator.share({
+title:"My StyleAI Result",
+text:text
+});
 
-    }catch(error){
+}catch(error){}
 
-      console.log(error);
+}else{
 
-    }
+try{
 
-  }else{
+await navigator.clipboard.writeText(text);
 
-    try{
+alert("Result copied!");
 
-      await navigator.clipboard.writeText(text);
+}catch(error){
 
-      alert(
-        "Result copied to clipboard!"
-      );
+alert(text);
 
-    }catch(error){
+}
 
-      alert(text);
-
-    }
-
-  }
+}
 
 }
 
 
-/* -------------------------
-   ANALYZE AGAIN
-------------------------- */
+/* RESET */
 
 function analyzeAnother(){
 
-  selectedFile = null;
-  selectedImageData = "";
+selectedImageData="";
 
-  document.getElementById("photoInput")
-    .value = "";
+document.getElementById("photoInput")
+.value="";
 
-  document.getElementById("preview")
-    .src = "";
+document.getElementById("preview")
+.style.display="none";
 
-  document.getElementById("preview")
-    .style.display = "none";
+document.getElementById("preview")
+.src="";
 
-  document.getElementById("uploadTitle")
-    .textContent = "Choose a photo";
+document.getElementById("uploadTitle")
+.textContent="Choose a photo";
 
-  document.getElementById("analyzeBtn")
-    .disabled = true;
+document.getElementById("analyzeBtn")
+.disabled=true;
 
-  goTo(3);
+goTo(3);
 
 }
 
