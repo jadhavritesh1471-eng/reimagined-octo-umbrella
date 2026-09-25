@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
 <title>StyleAI — AI Look Analyzer</title>
 
 <style>
@@ -21,13 +22,12 @@ body{
   min-height:100vh;
   color:#fff;
   background:
-    radial-gradient(circle at top left,#24243a 0%,transparent 35%),
-    radial-gradient(circle at bottom right,#161625 0%,transparent 40%),
+    radial-gradient(circle at top left,#292940 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#17172a 0%,transparent 40%),
     #08080d;
 }
 
-button,
-input{
+button,input{
   font:inherit;
 }
 
@@ -46,31 +46,32 @@ button{
 /* HEADER */
 
 .header{
-  padding:22px 20px 10px;
+  padding:22px 20px 12px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
 .logo{
-  font-size:24px;
+  font-size:25px;
   font-weight:800;
-  letter-spacing:-1px;
+  letter-spacing:-1.2px;
 }
 
 .logo span{
-  background:linear-gradient(90deg,#fff,#a9a9ff);
+  background:linear-gradient(90deg,#fff,#9999ff);
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
 }
 
 .demo-badge{
-  font-size:10px;
-  padding:6px 9px;
-  border:1px solid #343446;
-  border-radius:20px;
-  color:#aaaabd;
+  font-size:9px;
   letter-spacing:1px;
+  color:#aaaabd;
+  border:1px solid #343446;
+  padding:6px 9px;
+  border-radius:20px;
 }
 
 /* PAGES */
@@ -87,26 +88,27 @@ button{
 /* HOME */
 
 .hero{
-  padding:34px 4px 24px;
+  padding:38px 4px 25px;
 }
 
 .hero h1{
-  font-size:42px;
-  line-height:1.02;
-  letter-spacing:-2px;
-  margin-bottom:15px;
+  font-size:44px;
+  line-height:1;
+  letter-spacing:-2.5px;
+  margin-bottom:17px;
 }
 
 .hero h1 span{
-  background:linear-gradient(90deg,#fff,#9999ff);
+  background:linear-gradient(90deg,#fff,#9292ff);
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
 }
 
 .hero p{
-  color:#aaaaba;
-  line-height:1.6;
-  font-size:15px;
+  color:#a0a0b0;
+  font-size:14px;
+  line-height:1.7;
 }
 
 .primary-btn{
@@ -115,18 +117,16 @@ button{
   padding:16px;
   margin-top:24px;
   border-radius:16px;
-  color:#08080d;
   background:#fff;
+  color:#08080d;
+  font-size:14px;
   font-weight:800;
-  font-size:15px;
   transition:.2s;
 }
 
 .primary-btn:active{
   transform:scale(.98);
 }
-
-/* CARDS */
 
 .feature-grid{
   display:grid;
@@ -137,7 +137,7 @@ button{
 
 .feature-card{
   background:#111119;
-  border:1px solid #242432;
+  border:1px solid #252532;
   border-radius:18px;
   padding:18px 15px;
 }
@@ -154,30 +154,93 @@ button{
 
 .feature-card p{
   color:#858596;
-  font-size:12px;
-  line-height:1.5;
+  font-size:11px;
+  line-height:1.55;
 }
 
-/* ANALYZER */
+/* TITLES */
 
 .section-title{
-  font-size:25px;
-  margin:15px 0 8px;
+  font-size:26px;
+  margin:16px 0 7px;
 }
 
 .section-subtitle{
   color:#858596;
   font-size:13px;
-  line-height:1.5;
+  line-height:1.6;
   margin-bottom:20px;
 }
 
-.label{
+/* STEP INDICATOR */
+
+.step-wrap{
+  margin:10px 0 25px;
+}
+
+.step-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.step-count{
+  color:#9999aa;
+  font-size:11px;
+}
+
+.step-title{
   font-size:12px;
-  color:#9b9bab;
-  margin:20px 0 10px;
+  font-weight:700;
+}
+
+.progress{
+  width:100%;
+  height:4px;
+  background:#20202b;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:25%;
+  height:100%;
+  background:#fff;
+  border-radius:20px;
+  transition:.3s;
+}
+
+/* ANALYZER STEPS */
+
+.analyzer-step{
+  display:none;
+}
+
+.analyzer-step.active{
+  display:block;
+}
+
+.step-heading{
+  font-size:23px;
+  margin-bottom:7px;
+}
+
+.step-description{
+  color:#858596;
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+/* OPTIONS */
+
+.label{
+  color:#9999aa;
+  font-size:10px;
   text-transform:uppercase;
-  letter-spacing:1px;
+  letter-spacing:1.2px;
+  margin-bottom:10px;
 }
 
 .options{
@@ -187,12 +250,13 @@ button{
 }
 
 .option{
-  padding:15px 12px;
-  border-radius:15px;
+  width:100%;
+  padding:17px 13px;
+  text-align:left;
+  border-radius:16px;
   border:1px solid #292936;
   background:#111119;
-  color:#ddd;
-  text-align:left;
+  color:#fff;
   transition:.2s;
 }
 
@@ -203,50 +267,86 @@ button{
 }
 
 .option small{
+  display:block;
   color:#777788;
-  font-size:11px;
+  font-size:10px;
+  line-height:1.4;
 }
 
 .option.selected{
   border-color:#fff;
-  background:#1b1b27;
+  background:#1c1c28;
+  box-shadow:0 0 0 1px rgba(255,255,255,.1);
+}
+
+/* NEXT BACK */
+
+.step-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:24px;
+}
+
+.back-btn,
+.next-btn{
+  border-radius:15px;
+  padding:15px;
+  font-weight:700;
+  font-size:13px;
+}
+
+.back-btn{
+  background:#111119;
+  color:#fff;
+  border:1px solid #30303c;
+}
+
+.next-btn{
+  background:#fff;
+  color:#08080d;
+  border:0;
+}
+
+.next-btn.full{
+  grid-column:1 / -1;
 }
 
 /* UPLOAD */
 
 .upload-box{
-  border:1px dashed #414150;
+  border:1px dashed #464653;
   background:#101018;
-  border-radius:20px;
-  padding:25px 15px;
+  border-radius:21px;
+  padding:28px 16px;
   text-align:center;
-  margin-top:10px;
 }
 
 .upload-icon{
-  font-size:34px;
-  margin-bottom:10px;
+  font-size:38px;
+  margin-bottom:11px;
 }
 
 .upload-box h3{
   font-size:15px;
-  margin-bottom:6px;
+  margin-bottom:7px;
 }
 
 .upload-box p{
-  font-size:12px;
   color:#777788;
-  margin-bottom:15px;
+  font-size:11px;
+  line-height:1.5;
+  margin-bottom:16px;
 }
 
 .upload-btn{
   display:inline-block;
-  padding:11px 18px;
+  padding:12px 20px;
   border-radius:12px;
   background:#fff;
-  color:#09090d;
+  color:#08080d;
   font-size:12px;
-  font-weight:700;
+  font-weight:800;
 }
 
 #photoInput{
@@ -256,10 +356,50 @@ button{
 .preview{
   display:none;
   width:100%;
-  max-height:300px;
+  max-height:330px;
   object-fit:cover;
   border-radius:17px;
-  margin-top:15px;
+  margin-top:16px;
+}
+
+.photo-name{
+  display:none;
+  color:#aaaabb;
+  font-size:10px;
+  margin-top:10px;
+}
+
+/* REVIEW */
+
+.review-card{
+  background:#111119;
+  border:1px solid #282837;
+  border-radius:19px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.review-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:10px 0;
+  border-bottom:1px solid #23232e;
+}
+
+.review-row:last-child{
+  border-bottom:0;
+}
+
+.review-label{
+  color:#777788;
+  font-size:11px;
+}
+
+.review-value{
+  font-size:12px;
+  font-weight:700;
+  text-align:right;
 }
 
 /* SCAN */
@@ -271,33 +411,35 @@ button{
 }
 
 .scan-circle{
-  width:115px;
-  height:115px;
+  width:120px;
+  height:120px;
   border-radius:50%;
-  border:2px solid #55556a;
-  margin:0 auto 25px;
+  border:2px solid #505061;
+  margin:0 auto 26px;
   display:flex;
   align-items:center;
   justify-content:center;
   position:relative;
+  font-size:28px;
 }
 
 .scan-circle::after{
   content:"";
   position:absolute;
+  left:15%;
   width:70%;
   height:2px;
   background:#fff;
-  animation:scan 1.4s infinite;
+  animation:scan 1.5s infinite;
 }
 
 @keyframes scan{
   0%,100%{
-    transform:translateY(-35px);
-    opacity:.2;
+    transform:translateY(-38px);
+    opacity:.15;
   }
   50%{
-    transform:translateY(35px);
+    transform:translateY(38px);
     opacity:1;
   }
 }
@@ -309,7 +451,7 @@ button{
 
 .scan-screen p{
   color:#777788;
-  font-size:13px;
+  font-size:12px;
 }
 
 /* RESULT */
@@ -319,7 +461,7 @@ button{
 }
 
 .result-head{
-  margin:15px 0 20px;
+  margin:16px 0 20px;
 }
 
 .result-head h2{
@@ -329,28 +471,29 @@ button{
 
 .result-head p{
   color:#858596;
-  font-size:13px;
+  font-size:12px;
+  line-height:1.5;
 }
 
 .score-card{
   background:#111119;
-  border:1px solid #282837;
+  border:1px solid #292936;
   border-radius:22px;
   padding:22px;
   display:flex;
   align-items:center;
-  gap:20px;
+  gap:19px;
 }
 
 .score{
   width:92px;
   height:92px;
+  min-width:92px;
   border-radius:50%;
   border:5px solid #fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  flex-shrink:0;
 }
 
 .score strong{
@@ -364,14 +507,14 @@ button{
 
 .score-info p{
   color:#858596;
-  font-size:12px;
+  font-size:11px;
   line-height:1.5;
 }
 
 .result-grid{
-  margin-top:13px;
   display:grid;
   gap:10px;
+  margin-top:13px;
 }
 
 .result-card{
@@ -381,7 +524,7 @@ button{
   padding:17px;
 }
 
-.result-card .result-icon{
+.result-icon{
   font-size:20px;
   margin-bottom:9px;
 }
@@ -446,6 +589,7 @@ button{
   padding:14px;
   border-radius:14px;
   font-weight:700;
+  font-size:12px;
 }
 
 /* ABOUT */
@@ -476,8 +620,8 @@ button{
 }
 
 .info-icon{
-  width:38px;
-  height:38px;
+  width:39px;
+  height:39px;
   border-radius:12px;
   background:#1c1c27;
   display:flex;
@@ -494,7 +638,7 @@ button{
 .info-row p{
   color:#858596;
   font-size:12px;
-  line-height:1.5;
+  line-height:1.6;
 }
 
 /* FOOTER */
@@ -503,7 +647,7 @@ button{
   text-align:center;
   color:#555563;
   font-size:10px;
-  padding:22px 10px;
+  padding:25px 10px;
 }
 
 /* BOTTOM NAV */
@@ -515,7 +659,7 @@ button{
   transform:translateX(-50%);
   width:min(520px,100%);
   padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-  background:rgba(8,8,13,.94);
+  background:rgba(8,8,13,.95);
   backdrop-filter:blur(15px);
   border-top:1px solid #20202b;
   display:grid;
@@ -531,7 +675,7 @@ button{
   font-size:10px;
 }
 
-.nav-btn .nav-icon{
+.nav-icon{
   display:block;
   font-size:19px;
   margin-bottom:4px;
@@ -541,14 +685,18 @@ button{
   color:#fff;
 }
 
-/* RESPONSIVE */
+/* SMALL SCREEN */
 
 @media(max-width:380px){
+
   .hero h1{
-    font-size:36px;
+    font-size:37px;
   }
 
-  .options,
+  .options{
+    grid-template-columns:1fr;
+  }
+
   .feature-grid{
     grid-template-columns:1fr;
   }
@@ -560,361 +708,773 @@ button{
 
 <div class="app">
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">Style<span>AI</span></div>
-    <div class="demo-badge">FREE DEMO</div>
-  </header>
+<!-- HEADER -->
 
-  <!-- HOME -->
-  <section class="page active" id="homePage">
+<header class="header">
 
-    <div class="hero">
-      <h1>Discover<br><span>Your Style.</span></h1>
+  <div class="logo">
+    Style<span>AI</span>
+  </div>
 
-      <p>
-        Explore your personal style direction with StyleAI.
-        Upload a photo, choose your style and get a quick
-        style analysis.
-      </p>
+  <div class="demo-badge">
+    FREE DEMO
+  </div>
 
-      <button class="primary-btn" onclick="showPage('analyzerPage')">
-        Start Style Analysis →
-      </button>
-    </div>
+</header>
 
-    <div class="feature-grid">
 
-      <div class="feature-card">
-        <div class="feature-icon">✨</div>
-        <h3>Style Direction</h3>
-        <p>Discover outfit ideas based on your selected style.</p>
-      </div>
+<!-- ================= HOME ================= -->
 
-      <div class="feature-card">
-        <div class="feature-icon">📸</div>
-        <h3>Photo Preview</h3>
-        <p>Upload your photo and preview it before analysis.</p>
-      </div>
+<section class="page active" id="homePage">
 
-      <div class="feature-card">
-        <div class="feature-icon">🎨</div>
-        <h3>Colour Ideas</h3>
-        <p>Get colour combinations that match your style direction.</p>
-      </div>
+  <div class="hero">
 
-      <div class="feature-card">
-        <div class="feature-icon">💡</div>
-        <h3>Style Tips</h3>
-        <p>Simple tips for improving your overall presentation.</p>
-      </div>
+    <h1>
+      Discover<br>
+      <span>Your Style.</span>
+    </h1>
 
-    </div>
-
-    <div class="footer">
-      © 2026 StyleAI • Crafted by Ritesh ✦
-    </div>
-
-  </section>
-
-
-  <!-- ANALYZER -->
-  <section class="page" id="analyzerPage">
-
-    <div id="analyzerContent">
-
-      <h2 class="section-title">Style Analyzer</h2>
-
-      <p class="section-subtitle">
-        Choose your style direction and category, then upload
-        a photo to see your demo result.
-      </p>
-
-      <div class="label">Choose Style</div>
-
-      <div class="options" id="styleOptions">
-
-        <button class="option selected" data-style="Traditional">
-          <strong>Traditional</strong>
-          <small>Classic & timeless</small>
-        </button>
-
-        <button class="option" data-style="Aesthetic">
-          <strong>Aesthetic</strong>
-          <small>Clean & artistic</small>
-        </button>
-
-        <button class="option" data-style="South Indian">
-          <strong>South Indian</strong>
-          <small>Elegant & cultural</small>
-        </button>
-
-        <button class="option" data-style="Streetwear">
-          <strong>Streetwear</strong>
-          <small>Bold & urban</small>
-        </button>
-
-        <button class="option" data-style="Casual">
-          <strong>Casual</strong>
-          <small>Easy & relaxed</small>
-        </button>
-
-        <button class="option" data-style="Formal">
-          <strong>Formal</strong>
-          <small>Sharp & polished</small>
-        </button>
-
-      </div>
-
-      <div class="label">Category</div>
-
-      <div class="options" id="categoryOptions">
-
-        <button class="option selected" data-category="Men">
-          <strong>Men</strong>
-          <small>Menswear</small>
-        </button>
-
-        <button class="option" data-category="Women">
-          <strong>Women</strong>
-          <small>Womenswear</small>
-        </button>
-
-        <button class="option" data-category="Unisex">
-          <strong>Unisex</strong>
-          <small>Universal styles</small>
-        </button>
-
-      </div>
-
-      <div class="label">Your Photo</div>
-
-      <div class="upload-box">
-
-        <div class="upload-icon">📷</div>
-
-        <h3>Upload a photo</h3>
-
-        <p>
-          Your image stays in this demo and is only used
-          for local preview.
-        </p>
-
-        <label class="upload-btn" for="photoInput">
-          Choose Photo
-        </label>
-
-        <input
-          type="file"
-          id="photoInput"
-          accept="image/*"
-        >
-
-        <img
-          id="preview"
-          class="preview"
-          alt="Photo preview"
-        >
-
-      </div>
-
-      <button
-        class="primary-btn"
-        onclick="startAnalysis()"
-      >
-        Analyze My Style →
-      </button>
-
-    </div>
-
-
-    <!-- SCAN SCREEN -->
-    <div class="scan-screen" id="scanScreen">
-
-      <div class="scan-circle">
-        ✦
-      </div>
-
-      <h2>Analyzing your style...</h2>
-
-      <p>
-        Creating your StyleAI demo result
-      </p>
-
-    </div>
-
-
-    <!-- RESULT SCREEN -->
-    <div class="result-screen" id="resultScreen">
-
-      <div class="result-head">
-        <h2>Your Style Result</h2>
-
-        <p>
-          Demo style score based on your selected style direction.
-        </p>
-      </div>
-
-      <div class="score-card">
-
-        <div class="score">
-          <strong id="scoreValue">88</strong>
-        </div>
-
-        <div class="score-info">
-          <h3 id="resultStyle">Traditional</h3>
-
-          <p>
-            Your selected style direction has a strong
-            and distinctive visual identity.
-          </p>
-        </div>
-
-      </div>
-
-      <div class="result-grid">
-
-        <div class="result-card">
-          <div class="result-icon">👕</div>
-          <h3>Outfit</h3>
-          <p id="outfitResult"></p>
-        </div>
-
-        <div class="result-card">
-          <div class="result-icon">🎨</div>
-          <h3>Colours</h3>
-          <p id="colourResult"></p>
-        </div>
-
-        <div class="result-card">
-          <div class="result-icon">💇</div>
-          <h3>Hair</h3>
-          <p id="hairResult"></p>
-        </div>
-
-        <div class="result-card">
-          <div class="result-icon">⌚</div>
-          <h3>Accessories</h3>
-          <p id="accessoryResult"></p>
-        </div>
-
-        <div class="result-card">
-          <div class="result-icon">✨</div>
-          <h3>Presentation</h3>
-          <p id="presentationResult"></p>
-
-          <div class="tags" id="resultTags"></div>
-        </div>
-
-      </div>
-
-      <div class="tip-box">
-
-        <h3>💡 Style Tip</h3>
-
-        <p id="tipResult"></p>
-
-      </div>
-
-      <div class="action-row">
-
-        <button
-          class="secondary-btn"
-          onclick="shareResult()"
-        >
-          Share Result
-        </button>
-
-        <button
-          class="secondary-btn"
-          onclick="tryAgain()"
-        >
-          Try Again
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ABOUT -->
-  <section class="page" id="aboutPage">
-
-    <h2 class="section-title">About StyleAI</h2>
-
-    <p class="section-subtitle">
-      A simple independent project focused on making
-      personal style easier to explore.
+    <p>
+      Explore your personal style direction with StyleAI.
+      Choose your style, select your category and upload a
+      photo to get a quick style analysis.
     </p>
 
-    <div class="about-card">
+    <button
+      class="primary-btn"
+      onclick="showPage('analyzerPage'); resetAnalyzer();"
+    >
+      Start Style Analysis →
+    </button>
+
+  </div>
+
+
+  <div class="feature-grid">
+
+    <div class="feature-card">
+      <div class="feature-icon">✨</div>
+      <h3>Style Direction</h3>
+      <p>
+        Explore different personal style directions.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📸</div>
+      <h3>Photo Preview</h3>
+      <p>
+        Upload and preview your photo before analysis.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🎨</div>
+      <h3>Colour Ideas</h3>
+      <p>
+        Discover colours that match your selected style.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">💡</div>
+      <h3>Style Tips</h3>
+      <p>
+        Get simple ideas to improve your presentation.
+      </p>
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    © 2026 StyleAI • Crafted by Ritesh ✦
+  </div>
+
+</section>
+
+
+<!-- ================= ANALYZER ================= -->
+
+<section class="page" id="analyzerPage">
+
+  <!-- STEP HEADER -->
+
+  <div class="step-wrap">
+
+    <div class="step-top">
+
+      <span class="step-title" id="stepTitle">
+        Choose Your Style
+      </span>
+
+      <span class="step-count" id="stepCount">
+        Step 1 of 4
+      </span>
+
+    </div>
+
+    <div class="progress">
+      <div
+        class="progress-bar"
+        id="progressBar"
+      ></div>
+    </div>
+
+  </div>
+
+
+  <!-- ========== STEP 1 STYLE ========== -->
+
+  <div
+    class="analyzer-step active"
+    id="step1"
+  >
+
+    <h2 class="step-heading">
+      What's your style?
+    </h2>
+
+    <p class="step-description">
+      Select the style direction you want to explore.
+    </p>
+
+
+    <div class="options" id="styleOptions">
+
+      <button
+        class="option selected"
+        data-style="Traditional"
+      >
+        <strong>Traditional</strong>
+        <small>Classic & timeless</small>
+      </button>
+
+      <button
+        class="option"
+        data-style="Aesthetic"
+      >
+        <strong>Aesthetic</strong>
+        <small>Clean & artistic</small>
+      </button>
+
+      <button
+        class="option"
+        data-style="South Indian"
+      >
+        <strong>South Indian</strong>
+        <small>Elegant & cultural</small>
+      </button>
+
+      <button
+        class="option"
+        data-style="Streetwear"
+      >
+        <strong>Streetwear</strong>
+        <small>Bold & urban</small>
+      </button>
+
+      <button
+        class="option"
+        data-style="Casual"
+      >
+        <strong>Casual</strong>
+        <small>Easy & relaxed</small>
+      </button>
+
+      <button
+        class="option"
+        data-style="Formal"
+      >
+        <strong>Formal</strong>
+        <small>Sharp & polished</small>
+      </button>
+
+    </div>
+
+
+    <div class="step-actions">
+
+      <button
+        class="next-btn full"
+        onclick="nextStep()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========== STEP 2 GENDER ========== -->
+
+  <div
+    class="analyzer-step"
+    id="step2"
+  >
+
+    <h2 class="step-heading">
+      Choose your category
+    </h2>
+
+    <p class="step-description">
+      Select the category you want StyleAI to use for
+      your style direction.
+    </p>
+
+
+    <div class="options" id="categoryOptions">
+
+      <button
+        class="option selected"
+        data-category="Men"
+      >
+        <strong>Men</strong>
+        <small>Menswear styles</small>
+      </button>
+
+      <button
+        class="option"
+        data-category="Women"
+      >
+        <strong>Women</strong>
+        <small>Womenswear styles</small>
+      </button>
+
+      <button
+        class="option"
+        data-category="Unisex"
+      >
+        <strong>Unisex</strong>
+        <small>Universal styles</small>
+      </button>
+
+    </div>
+
+
+    <div class="step-actions">
+
+      <button
+        class="back-btn"
+        onclick="previousStep()"
+      >
+        ← Back
+      </button>
+
+      <button
+        class="next-btn"
+        onclick="nextStep()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========== STEP 3 PHOTO ========== -->
+
+  <div
+    class="analyzer-step"
+    id="step3"
+  >
+
+    <h2 class="step-heading">
+      Upload your photo
+    </h2>
+
+    <p class="step-description">
+      Add a photo to preview your look before getting
+      your StyleAI demo result.
+    </p>
+
+
+    <div class="upload-box">
+
+      <div class="upload-icon">
+        📸
+      </div>
+
+      <h3>
+        Choose your photo
+      </h3>
 
       <p>
-        StyleAI is a lightweight style discovery experience
-        designed to give users quick outfit inspiration,
-        colour ideas and presentation tips.
+        Your image stays in this demo and is used only
+        for local preview.
       </p>
 
-      <div class="info-row">
+      <label
+        class="upload-btn"
+        for="photoInput"
+      >
+        Choose Photo
+      </label>
 
-        <div class="info-icon">👨‍💻</div>
+      <input
+        type="file"
+        id="photoInput"
+        accept="image/*"
+      >
 
-        <div>
-          <h3>Created by Ritesh</h3>
+      <img
+        id="preview"
+        class="preview"
+        alt="Uploaded photo preview"
+      >
 
-          <p>
-            Inspired by SB, who sparked the idea behind StyleAI.
-            An independent project built to make personal style
-            simple, modern and accessible.
-          </p>
-        </div>
+      <div
+        class="photo-name"
+        id="photoName"
+      ></div>
+
+    </div>
+
+
+    <div class="step-actions">
+
+      <button
+        class="back-btn"
+        onclick="previousStep()"
+      >
+        ← Back
+      </button>
+
+      <button
+        class="next-btn"
+        onclick="nextStep()"
+      >
+        Review →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========== STEP 4 REVIEW ========== -->
+
+  <div
+    class="analyzer-step"
+    id="step4"
+  >
+
+    <h2 class="step-heading">
+      Ready to analyze?
+    </h2>
+
+    <p class="step-description">
+      Check your selections and start your StyleAI demo analysis.
+    </p>
+
+
+    <div class="review-card">
+
+      <div class="review-row">
+
+        <span class="review-label">
+          Style
+        </span>
+
+        <span
+          class="review-value"
+          id="reviewStyle"
+        >
+          Traditional
+        </span>
 
       </div>
 
-      <div class="info-row">
 
-        <div class="info-icon">✨</div>
+      <div class="review-row">
 
-        <div>
-          <h3>FREE DEMO</h3>
+        <span class="review-label">
+          Category
+        </span>
 
-          <p>
-            This version uses predefined style directions
-            and demo results. No paid AI API is required.
-          </p>
-        </div>
+        <span
+          class="review-value"
+          id="reviewCategory"
+        >
+          Men
+        </span>
 
       </div>
 
-      <div class="info-row">
 
-        <div class="info-icon">📱</div>
+      <div class="review-row">
 
-        <div>
-          <h3>Mobile First</h3>
+        <span class="review-label">
+          Photo
+        </span>
 
-          <p>
-            Designed to work smoothly on mobile screens
-            as well as desktop browsers.
-          </p>
-        </div>
+        <span
+          class="review-value"
+          id="reviewPhoto"
+        >
+          Selected
+        </span>
 
       </div>
 
     </div>
 
-    <div class="footer">
-      © 2026 StyleAI • Crafted by Ritesh ✦
+
+    <button
+      class="primary-btn"
+      onclick="startAnalysis()"
+    >
+      ✦ Analyze My Style
+    </button>
+
+
+    <div class="step-actions">
+
+      <button
+        class="back-btn"
+        onclick="previousStep()"
+      >
+        ← Back
+      </button>
+
     </div>
 
-  </section>
+  </div>
+
+
+  <!-- ========== SCANNING ========== -->
+
+  <div
+    class="scan-screen"
+    id="scanScreen"
+  >
+
+    <div class="scan-circle">
+      ✦
+    </div>
+
+    <h2>
+      Analyzing your style...
+    </h2>
+
+    <p>
+      Creating your StyleAI demo result
+    </p>
+
+  </div>
+
+
+  <!-- ========== RESULT ========== -->
+
+  <div
+    class="result-screen"
+    id="resultScreen"
+  >
+
+    <div class="result-head">
+
+      <h2>
+        Your Style Result
+      </h2>
+
+      <p>
+        Demo style score based on your selected style direction.
+      </p>
+
+    </div>
+
+
+    <div class="score-card">
+
+      <div class="score">
+        <strong id="scoreValue">
+          88
+        </strong>
+      </div>
+
+      <div class="score-info">
+
+        <h3 id="resultStyle">
+          Traditional
+        </h3>
+
+        <p>
+          Your selected style direction has a strong
+          and distinctive visual identity.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="result-grid">
+
+      <!-- OUTFIT -->
+
+      <div class="result-card">
+
+        <div class="result-icon">
+          👕
+        </div>
+
+        <h3>
+          Outfit
+        </h3>
+
+        <p id="outfitResult"></p>
+
+      </div>
+
+
+      <!-- COLOURS -->
+
+      <div class="result-card">
+
+        <div class="result-icon">
+          🎨
+        </div>
+
+        <h3>
+          Colours
+        </h3>
+
+        <p id="colourResult"></p>
+
+      </div>
+
+
+      <!-- HAIR -->
+
+      <div class="result-card">
+
+        <div class="result-icon">
+          💇
+        </div>
+
+        <h3>
+          Hair
+        </h3>
+
+        <p id="hairResult"></p>
+
+      </div>
+
+
+      <!-- ACCESSORIES -->
+
+      <div class="result-card">
+
+        <div class="result-icon">
+          ⌚
+        </div>
+
+        <h3>
+          Accessories
+        </h3>
+
+        <p id="accessoryResult"></p>
+
+      </div>
+
+
+      <!-- PRESENTATION -->
+
+      <div class="result-card">
+
+        <div class="result-icon">
+          ✨
+        </div>
+
+        <h3>
+          Presentation
+        </h3>
+
+        <p id="presentationResult"></p>
+
+        <div
+          class="tags"
+          id="resultTags"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- TIP -->
+
+    <div class="tip-box">
+
+      <h3>
+        💡 Style Tip
+      </h3>
+
+      <p id="tipResult"></p>
+
+    </div>
+
+
+    <div class="action-row">
+
+      <button
+        class="secondary-btn"
+        onclick="shareResult()"
+      >
+        Share Result
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="tryAgain()"
+      >
+        Try Again
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section
+  class="page"
+  id="aboutPage"
+>
+
+  <h2 class="section-title">
+    About StyleAI
+  </h2>
+
+  <p class="section-subtitle">
+    A simple independent project focused on making
+    personal style easier to explore.
+  </p>
+
+
+  <div class="about-card">
+
+    <p>
+      StyleAI is a lightweight style discovery experience
+      designed to give users quick outfit inspiration,
+      colour ideas and presentation tips.
+    </p>
+
+
+    <!-- CREATOR -->
+
+    <div class="info-row">
+
+      <div class="info-icon">
+        👨‍💻
+      </div>
+
+      <div>
+
+        <h3>
+          Created by Ritesh
+        </h3>
+
+        <p>
+          Inspired by SB, who sparked the idea behind StyleAI.
+          An independent project built to make personal style
+          simple, modern and accessible.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- FREE DEMO -->
+
+    <div class="info-row">
+
+      <div class="info-icon">
+        ✨
+      </div>
+
+      <div>
+
+        <h3>
+          FREE DEMO
+        </h3>
+
+        <p>
+          This version uses predefined style directions
+          and demo results. No paid AI API is required.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- MOBILE -->
+
+    <div class="info-row">
+
+      <div class="info-icon">
+        📱
+      </div>
+
+      <div>
+
+        <h3>
+          Mobile First
+        </h3>
+
+        <p>
+          Designed to work smoothly on mobile screens
+          as well as desktop browsers.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- SIMPLE -->
+
+    <div class="info-row">
+
+      <div class="info-icon">
+        🚀
+      </div>
+
+      <div>
+
+        <h3>
+          Simple Experience
+        </h3>
+
+        <p>
+          Choose your style, select your category,
+          upload your photo and explore your result.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    © 2026 StyleAI • Crafted by Ritesh ✦
+  </div>
+
+</section>
 
 </div>
 
 
-<!-- BOTTOM NAV -->
+<!-- ================= BOTTOM NAV ================= -->
 
 <nav class="bottom-nav">
 
@@ -923,26 +1483,43 @@ button{
     data-page="homePage"
     onclick="showPage('homePage')"
   >
-    <span class="nav-icon">⌂</span>
+
+    <span class="nav-icon">
+      ⌂
+    </span>
+
     Home
+
   </button>
+
 
   <button
     class="nav-btn"
     data-page="analyzerPage"
     onclick="showPage('analyzerPage')"
   >
-    <span class="nav-icon">✦</span>
+
+    <span class="nav-icon">
+      ✦
+    </span>
+
     Analyze
+
   </button>
+
 
   <button
     class="nav-btn"
     data-page="aboutPage"
     onclick="showPage('aboutPage')"
   >
-    <span class="nav-icon">ⓘ</span>
+
+    <span class="nav-icon">
+      ⓘ
+    </span>
+
     About
+
   </button>
 
 </nav>
@@ -950,44 +1527,71 @@ button{
 
 <script>
 
-/* PAGE NAVIGATION */
+/* ==========================================
+   GLOBAL VARIABLES
+========================================== */
+
+let currentStep = 1;
+
+let selectedStyle = "Traditional";
+
+let selectedCategory = "Men";
+
+
+/* ==========================================
+   PAGE NAVIGATION
+========================================== */
 
 function showPage(pageId){
 
-  document.querySelectorAll('.page').forEach(page=>{
-    page.classList.remove('active');
+  document.querySelectorAll(".page").forEach(page=>{
+    page.classList.remove("active");
   });
 
-  document.getElementById(pageId).classList.add('active');
+  const page = document.getElementById(pageId);
 
-  document.querySelectorAll('.nav-btn').forEach(btn=>{
-    btn.classList.remove('active');
+  if(page){
+    page.classList.add("active");
+  }
+
+
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+
+    btn.classList.remove("active");
 
     if(btn.dataset.page === pageId){
-      btn.classList.add('active');
+      btn.classList.add("active");
     }
+
   });
+
 
   window.scrollTo({
     top:0,
-    behavior:'smooth'
+    behavior:"smooth"
   });
+
 }
 
 
-/* STYLE SELECTION */
+/* ==========================================
+   STYLE SELECTION
+========================================== */
 
-let selectedStyle = "Traditional";
-let selectedCategory = "Men";
+document.querySelectorAll(
+  "#styleOptions .option"
+).forEach(button=>{
 
-document.querySelectorAll('#styleOptions .option').forEach(button=>{
+  button.addEventListener("click",()=>{
 
-  button.addEventListener('click',()=>{
+    document.querySelectorAll(
+      "#styleOptions .option"
+    ).forEach(item=>{
+      item.classList.remove("selected");
+    });
 
-    document.querySelectorAll('#styleOptions .option')
-      .forEach(item=>item.classList.remove('selected'));
 
-    button.classList.add('selected');
+    button.classList.add("selected");
 
     selectedStyle = button.dataset.style;
 
@@ -996,16 +1600,24 @@ document.querySelectorAll('#styleOptions .option').forEach(button=>{
 });
 
 
-/* CATEGORY SELECTION */
+/* ==========================================
+   CATEGORY SELECTION
+========================================== */
 
-document.querySelectorAll('#categoryOptions .option').forEach(button=>{
+document.querySelectorAll(
+  "#categoryOptions .option"
+).forEach(button=>{
 
-  button.addEventListener('click',()=>{
+  button.addEventListener("click",()=>{
 
-    document.querySelectorAll('#categoryOptions .option')
-      .forEach(item=>item.classList.remove('selected'));
+    document.querySelectorAll(
+      "#categoryOptions .option"
+    ).forEach(item=>{
+      item.classList.remove("selected");
+    });
 
-    button.classList.add('selected');
+
+    button.classList.add("selected");
 
     selectedCategory = button.dataset.category;
 
@@ -1014,203 +1626,623 @@ document.querySelectorAll('#categoryOptions .option').forEach(button=>{
 });
 
 
-/* PHOTO UPLOAD */
+/* ==========================================
+   STEP CONTROL
+========================================== */
 
-const photoInput = document.getElementById("photoInput");
-const preview = document.getElementById("preview");
+function updateStep(){
 
-photoInput.addEventListener("change",function(){
+  document.querySelectorAll(
+    ".analyzer-step"
+  ).forEach(step=>{
+    step.classList.remove("active");
+  });
 
-  const file = this.files[0];
 
-  if(!file) return;
+  const current =
+    document.getElementById("step"+currentStep);
 
-  const reader = new FileReader();
+  if(current){
+    current.classList.add("active");
+  }
 
-  reader.onload = function(e){
 
-    preview.src = e.target.result;
-    preview.style.display = "block";
+  const progress =
+    document.getElementById("progressBar");
+
+  const stepTitle =
+    document.getElementById("stepTitle");
+
+  const stepCount =
+    document.getElementById("stepCount");
+
+
+  const titles = {
+
+    1:"Choose Your Style",
+
+    2:"Choose Category",
+
+    3:"Upload Your Photo",
+
+    4:"Ready to Analyze"
 
   };
 
-  reader.readAsDataURL(file);
 
-});
+  stepTitle.textContent =
+    titles[currentStep];
+
+  stepCount.textContent =
+    "Step " + currentStep + " of 4";
 
 
-/* STYLE DATA */
+  progress.style.width =
+    (currentStep * 25) + "%";
+
+
+  if(currentStep === 4){
+    updateReview();
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function nextStep(){
+
+  if(currentStep < 4){
+
+    currentStep++;
+
+    updateStep();
+
+  }
+
+}
+
+
+function previousStep(){
+
+  if(currentStep > 1){
+
+    currentStep--;
+
+    updateStep();
+
+  }
+
+}
+
+
+/* ==========================================
+   PHOTO UPLOAD
+========================================== */
+
+const photoInput =
+  document.getElementById("photoInput");
+
+const preview =
+  document.getElementById("preview");
+
+const photoName =
+  document.getElementById("photoName");
+
+
+photoInput.addEventListener(
+  "change",
+  function(){
+
+    const file = this.files[0];
+
+    if(!file){
+      return;
+    }
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload = function(e){
+
+      preview.src =
+        e.target.result;
+
+      preview.style.display =
+        "block";
+
+
+      photoName.style.display =
+        "block";
+
+      photoName.textContent =
+        file.name;
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+  }
+);
+
+
+/* ==========================================
+   REVIEW
+========================================== */
+
+function updateReview(){
+
+  document.getElementById(
+    "reviewStyle"
+  ).textContent = selectedStyle;
+
+
+  document.getElementById(
+    "reviewCategory"
+  ).textContent = selectedCategory;
+
+
+  if(photoInput.files.length > 0){
+
+    document.getElementById(
+      "reviewPhoto"
+    ).textContent = "Photo selected";
+
+  }else{
+
+    document.getElementById(
+      "reviewPhoto"
+    ).textContent = "No photo";
+
+  }
+
+}
+
+
+/* ==========================================
+   STYLE DATA
+========================================== */
 
 function getStyleData(style){
 
   const data = {
 
     "Traditional":{
+
       score:88,
-      outfit:"Classic ethnic combinations with a clean kurta, textured fabrics and well-fitted traditional layers.",
-      colours:"Cream, ivory, beige, maroon and deep earthy tones.",
-      hair:"Clean natural styling with a neat and balanced finish.",
-      accessories:"Minimal watch, simple bracelet or subtle traditional accessories.",
-      presentation:"Keep the overall look balanced, polished and timeless.",
-      tags:["Classic","Elegant","Cultural","Timeless"],
-      tip:"Keep your traditional outfit simple and well-fitted. One strong statement piece is usually enough."
+
+      outfit:
+      "Classic ethnic combinations with a clean kurta, textured fabrics and well-fitted traditional layers.",
+
+      colours:
+      "Cream, ivory, beige, maroon and deep earthy tones.",
+
+      hair:
+      "Clean natural styling with a neat and balanced finish.",
+
+      accessories:
+      "Minimal watch, simple bracelet or subtle traditional accessories.",
+
+      presentation:
+      "Keep the overall look balanced, polished and timeless.",
+
+      tags:[
+        "Classic",
+        "Elegant",
+        "Cultural",
+        "Timeless"
+      ],
+
+      tip:
+      "Keep your traditional outfit simple and well-fitted. One strong statement piece is usually enough."
+
     },
+
 
     "Aesthetic":{
+
       score:91,
-      outfit:"Relaxed silhouettes, clean layers, neutral basics and carefully balanced proportions.",
-      colours:"White, black, beige, grey, olive and muted tones.",
-      hair:"Soft textured styling with a natural finish.",
-      accessories:"Minimal jewellery, clean watch and subtle details.",
-      presentation:"Focus on clean composition, calm colours and intentional details.",
-      tags:["Minimal","Clean","Modern","Soft"],
-      tip:"Use a simple colour palette and focus on texture rather than adding too many elements."
+
+      outfit:
+      "Relaxed silhouettes, clean layers, neutral basics and carefully balanced proportions.",
+
+      colours:
+      "White, black, beige, grey, olive and muted tones.",
+
+      hair:
+      "Soft textured styling with a natural finish.",
+
+      accessories:
+      "Minimal jewellery, clean watch and subtle details.",
+
+      presentation:
+      "Focus on clean composition, calm colours and intentional details.",
+
+      tags:[
+        "Minimal",
+        "Clean",
+        "Modern",
+        "Soft"
+      ],
+
+      tip:
+      "Use a simple colour palette and focus on texture rather than adding too many elements."
+
     },
+
 
     "South Indian":{
+
       score:89,
-      outfit:"Elegant regional-inspired pieces with comfortable fabrics and refined traditional details.",
-      colours:"White, cream, gold, earthy brown and rich festive tones.",
-      hair:"Neat natural styling that complements the traditional look.",
-      accessories:"Classic watch, subtle jewellery and traditional accents.",
-      presentation:"Keep the look graceful, comfortable and culturally inspired.",
-      tags:["Elegant","Heritage","Classic","Graceful"],
-      tip:"Let the fabric and traditional details be the main focus of the outfit."
+
+      outfit:
+      "Elegant regional-inspired pieces with comfortable fabrics and refined traditional details.",
+
+      colours:
+      "White, cream, gold, earthy brown and rich festive tones.",
+
+      hair:
+      "Neat natural styling that complements the traditional look.",
+
+      accessories:
+      "Classic watch, subtle jewellery and traditional accents.",
+
+      presentation:
+      "Keep the look graceful, comfortable and culturally inspired.",
+
+      tags:[
+        "Elegant",
+        "Heritage",
+        "Classic",
+        "Graceful"
+      ],
+
+      tip:
+      "Let the fabric and traditional details be the main focus of the outfit."
+
     },
+
 
     "Streetwear":{
+
       score:92,
-      outfit:"Oversized layers, relaxed trousers, statement sneakers and bold casual pieces.",
-      colours:"Black, charcoal, white, grey with one strong accent colour.",
-      hair:"Textured modern styling with a confident finish.",
-      accessories:"Cap, chain, watch, rings or compact crossbody details.",
-      presentation:"Confidence and proportion are key to a strong streetwear look.",
-      tags:["Urban","Bold","Modern","Edgy"],
-      tip:"Balance oversized pieces with one cleaner fitted element so the outfit stays structured."
+
+      outfit:
+      "Oversized layers, relaxed trousers, statement sneakers and bold casual pieces.",
+
+      colours:
+      "Black, charcoal, white, grey with one strong accent colour.",
+
+      hair:
+      "Textured modern styling with a confident finish.",
+
+      accessories:
+      "Cap, chain, watch, rings or compact crossbody details.",
+
+      presentation:
+      "Confidence and proportion are key to a strong streetwear look.",
+
+      tags:[
+        "Urban",
+        "Bold",
+        "Modern",
+        "Edgy"
+      ],
+
+      tip:
+      "Balance oversized pieces with one cleaner fitted element so the outfit stays structured."
+
     },
+
 
     "Casual":{
+
       score:86,
-      outfit:"Comfortable everyday combinations such as relaxed shirts, T-shirts, jeans and clean sneakers.",
-      colours:"White, navy, grey, beige, denim and soft earth tones.",
-      hair:"Natural, easy-to-maintain styling.",
-      accessories:"Simple watch, bracelet or minimal everyday accessories.",
-      presentation:"Aim for effortless, clean and comfortable styling.",
-      tags:["Easy","Relaxed","Everyday","Clean"],
-      tip:"A good fit and clean shoes can instantly make a simple casual outfit look more polished."
+
+      outfit:
+      "Comfortable everyday combinations such as relaxed shirts, T-shirts, jeans and clean sneakers.",
+
+      colours:
+      "White, navy, grey, beige, denim and soft earth tones.",
+
+      hair:
+      "Natural, easy-to-maintain styling.",
+
+      accessories:
+      "Simple watch, bracelet or minimal everyday accessories.",
+
+      presentation:
+      "Aim for effortless, clean and comfortable styling.",
+
+      tags:[
+        "Easy",
+        "Relaxed",
+        "Everyday",
+        "Clean"
+      ],
+
+      tip:
+      "A good fit and clean shoes can instantly make a simple casual outfit look more polished."
+
     },
 
+
     "Formal":{
+
       score:90,
-      outfit:"Structured shirts, trousers, blazers and refined footwear with clean proportions.",
-      colours:"Black, navy, charcoal, white and subtle neutral shades.",
-      hair:"Neat, structured styling with a professional finish.",
-      accessories:"Classic watch, simple belt and minimal accessories.",
-      presentation:"Sharp fitting and clean details create a polished formal appearance.",
-      tags:["Sharp","Professional","Classic","Polished"],
-      tip:"Prioritize fit, clean footwear and simple accessories for a strong formal appearance."
+
+      outfit:
+      "Structured shirts, trousers, blazers and refined footwear with clean proportions.",
+
+      colours:
+      "Black, navy, charcoal, white and subtle neutral shades.",
+
+      hair:
+      "Neat, structured styling with a professional finish.",
+
+      accessories:
+      "Classic watch, simple belt and minimal accessories.",
+
+      presentation:
+      "Sharp fitting and clean details create a polished formal appearance.",
+
+      tags:[
+        "Sharp",
+        "Professional",
+        "Classic",
+        "Polished"
+      ],
+
+      tip:
+      "Prioritize fit, clean footwear and simple accessories for a strong formal appearance."
+
     }
 
   };
 
-  return data[style] || data["Traditional"];
+
+  return data[style] ||
+    data["Traditional"];
 
 }
 
 
-/* START ANALYSIS */
+/* ==========================================
+   START ANALYSIS
+========================================== */
 
 function startAnalysis(){
 
-  document.getElementById("analyzerContent").style.display="none";
+  const analyzer =
+    document.getElementById("analyzerPage");
 
-  const scan = document.getElementById("scanScreen");
+  document.querySelectorAll(
+    ".analyzer-step"
+  ).forEach(step=>{
+    step.classList.remove("active");
+  });
 
-  scan.style.display="block";
+
+  document.getElementById(
+    "scanScreen"
+  ).style.display = "block";
+
+
+  document.getElementById(
+    "resultScreen"
+  ).style.display = "none";
+
 
   window.scrollTo({
     top:0,
-    behavior:'smooth'
+    behavior:"smooth"
   });
+
 
   setTimeout(()=>{
 
-    scan.style.display="none";
+    document.getElementById(
+      "scanScreen"
+    ).style.display = "none";
+
 
     showResult();
 
-  },1800);
+  },2000);
 
 }
 
 
-/* SHOW RESULT */
+/* ==========================================
+   SHOW RESULT
+========================================== */
 
 function showResult(){
 
-  const result = getStyleData(selectedStyle);
+  const result =
+    getStyleData(selectedStyle);
 
-  document.getElementById("resultScreen").style.display="block";
 
-  document.getElementById("scoreValue").textContent=result.score;
+  document.getElementById(
+    "resultScreen"
+  ).style.display = "block";
 
-  document.getElementById("resultStyle").textContent=selectedStyle;
 
-  document.getElementById("outfitResult").textContent=result.outfit;
+  document.getElementById(
+    "scoreValue"
+  ).textContent = result.score;
 
-  document.getElementById("colourResult").textContent=result.colours;
 
-  document.getElementById("hairResult").textContent=result.hair;
+  document.getElementById(
+    "resultStyle"
+  ).textContent = selectedStyle;
 
-  document.getElementById("accessoryResult").textContent=result.accessories;
 
-  document.getElementById("presentationResult").textContent=result.presentation;
+  document.getElementById(
+    "outfitResult"
+  ).textContent = result.outfit;
 
-  document.getElementById("tipResult").textContent=result.tip;
 
-  const tags = document.getElementById("resultTags");
+  document.getElementById(
+    "colourResult"
+  ).textContent = result.colours;
 
-  tags.innerHTML="";
+
+  document.getElementById(
+    "hairResult"
+  ).textContent = result.hair;
+
+
+  document.getElementById(
+    "accessoryResult"
+  ).textContent = result.accessories;
+
+
+  document.getElementById(
+    "presentationResult"
+  ).textContent = result.presentation;
+
+
+  document.getElementById(
+    "tipResult"
+  ).textContent = result.tip;
+
+
+  const tags =
+    document.getElementById("resultTags");
+
+
+  tags.innerHTML = "";
+
 
   result.tags.forEach(tag=>{
 
-    const element=document.createElement("span");
+    const element =
+      document.createElement("span");
 
-    element.className="tag";
+    element.className =
+      "tag";
 
-    element.textContent=tag;
+    element.textContent =
+      tag;
 
     tags.appendChild(element);
 
   });
 
+
   window.scrollTo({
     top:0,
-    behavior:'smooth'
+    behavior:"smooth"
   });
 
 }
 
 
-/* TRY AGAIN */
+/* ==========================================
+   TRY AGAIN
+========================================== */
 
 function tryAgain(){
 
-  document.getElementById("resultScreen").style.display="none";
+  document.getElementById(
+    "resultScreen"
+  ).style.display = "none";
 
-  document.getElementById("scanScreen").style.display="none";
 
-  document.getElementById("analyzerContent").style.display="block";
+  document.getElementById(
+    "scanScreen"
+  ).style.display = "none";
+
+
+  resetAnalyzer();
+
 
   window.scrollTo({
     top:0,
-    behavior:'smooth'
+    behavior:"smooth"
   });
 
 }
 
 
-/* SHARE */
+/* ==========================================
+   RESET ANALYZER
+========================================== */
+
+function resetAnalyzer(){
+
+  currentStep = 1;
+
+  selectedStyle = "Traditional";
+
+  selectedCategory = "Men";
+
+
+  document.querySelectorAll(
+    "#styleOptions .option"
+  ).forEach(button=>{
+
+    button.classList.remove("selected");
+
+    if(button.dataset.style === "Traditional"){
+      button.classList.add("selected");
+    }
+
+  });
+
+
+  document.querySelectorAll(
+    "#categoryOptions .option"
+  ).forEach(button=>{
+
+    button.classList.remove("selected");
+
+    if(button.dataset.category === "Men"){
+      button.classList.add("selected");
+    }
+
+  });
+
+
+  document.getElementById(
+    "resultScreen"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "scanScreen"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "preview"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "photoName"
+  ).style.display = "none";
+
+
+  photoInput.value = "";
+
+
+  updateStep();
+
+}
+
+
+/* ==========================================
+   SHARE RESULT
+========================================== */
 
 function shareResult(){
 
@@ -1218,30 +2250,51 @@ function shareResult(){
     "My StyleAI result: " +
     selectedStyle +
     " — " +
-    document.getElementById("scoreValue").textContent +
+    document.getElementById(
+      "scoreValue"
+    ).textContent +
     "/100 ✦";
+
 
   if(navigator.share){
 
     navigator.share({
+
       title:"My StyleAI Result",
+
       text:text
+
     }).catch(()=>{});
 
   }else{
 
-    navigator.clipboard
-      .writeText(text)
-      .then(()=>{
-        alert("Result copied!");
-      })
-      .catch(()=>{
-        alert(text);
-      });
+    if(navigator.clipboard){
+
+      navigator.clipboard
+        .writeText(text)
+        .then(()=>{
+          alert("Result copied!");
+        })
+        .catch(()=>{
+          alert(text);
+        });
+
+    }else{
+
+      alert(text);
+
+    }
 
   }
 
 }
+
+
+/* ==========================================
+   INITIALIZE
+========================================== */
+
+updateStep();
 
 </script>
 
