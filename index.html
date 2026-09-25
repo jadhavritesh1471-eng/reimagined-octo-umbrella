@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#07070c">
-
-<title>StyleAI — Discover Your Style</title>
+<title>StyleAI — AI Look Analyzer</title>
 
 <style>
 *{
@@ -14,35 +12,27 @@
   padding:0;
 }
 
-:root{
-  --bg:#07070c;
-  --card:rgba(255,255,255,.055);
-  --border:rgba(255,255,255,.10);
-  --text:#fff;
-  --muted:#9b9baa;
-  --accent:#8b5cf6;
-  --accent2:#ec4899;
-  --green:#22c55e;
-}
-
 html{
   scroll-behavior:smooth;
 }
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 15% 5%,rgba(139,92,246,.18),transparent 28%),
-    radial-gradient(circle at 90% 20%,rgba(236,72,153,.12),transparent 25%),
-    var(--bg);
   min-height:100vh;
-  overflow-x:hidden;
+  color:#fff;
+  background:
+    radial-gradient(circle at top left,#24243a 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#161625 0%,transparent 40%),
+    #08080d;
+}
+
+button,
+input{
+  font:inherit;
 }
 
 button{
-  font:inherit;
-  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;
 }
 
 .app{
@@ -50,123 +40,85 @@ button{
   max-width:520px;
   margin:auto;
   min-height:100vh;
-  padding:
-    max(12px,env(safe-area-inset-top))
-    15px
-    90px;
+  padding-bottom:90px;
 }
 
 /* HEADER */
 
 .header{
-  height:62px;
+  padding:22px 20px 10px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:rgba(7,7,12,.72);
-  backdrop-filter:blur(18px);
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-size:20px;
-  font-weight:900;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-1px;
 }
 
-.logo-icon{
-  width:38px;
-  height:38px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 10px 30px rgba(139,92,246,.25);
+.logo span{
+  background:linear-gradient(90deg,#fff,#a9a9ff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-.demo{
-  font-size:9px;
-  padding:7px 10px;
-  border:1px solid var(--border);
+.demo-badge{
+  font-size:10px;
+  padding:6px 9px;
+  border:1px solid #343446;
   border-radius:20px;
-  color:#c7c7d3;
-  background:rgba(255,255,255,.035);
+  color:#aaaabd;
+  letter-spacing:1px;
 }
 
-/* SECTIONS */
+/* PAGES */
 
 .page{
   display:none;
-  animation:fadeUp .45s ease;
+  padding:10px 18px 25px;
 }
 
 .page.active{
   display:block;
 }
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
 /* HOME */
 
 .hero{
-  text-align:center;
-  padding:65px 8px 35px;
-}
-
-.hero-badge{
-  display:inline-flex;
-  padding:8px 13px;
-  border-radius:30px;
-  background:rgba(139,92,246,.10);
-  border:1px solid rgba(139,92,246,.20);
-  color:#cfc4ff;
-  font-size:10px;
-  margin-bottom:20px;
+  padding:34px 4px 24px;
 }
 
 .hero h1{
-  font-size:clamp(40px,11vw,54px);
-  line-height:1;
-  letter-spacing:-2.8px;
+  font-size:42px;
+  line-height:1.02;
+  letter-spacing:-2px;
+  margin-bottom:15px;
 }
 
-.gradient{
-  background:linear-gradient(90deg,#fff,#c4b5fd,#f9a8d4);
+.hero h1 span{
+  background:linear-gradient(90deg,#fff,#9999ff);
   -webkit-background-clip:text;
   color:transparent;
 }
 
 .hero p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.65;
-  margin:18px auto 25px;
-  max-width:390px;
+  color:#aaaaba;
+  line-height:1.6;
+  font-size:15px;
 }
 
 .primary-btn{
   width:100%;
-  min-height:55px;
   border:0;
-  border-radius:18px;
-  color:#fff;
+  padding:16px;
+  margin-top:24px;
+  border-radius:16px;
+  color:#08080d;
+  background:#fff;
   font-weight:800;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 15px 35px rgba(139,92,246,.25);
-  cursor:pointer;
+  font-size:15px;
   transition:.2s;
 }
 
@@ -174,154 +126,58 @@ button{
   transform:scale(.98);
 }
 
+/* CARDS */
+
 .feature-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:12px;
   margin-top:18px;
 }
 
-.feature{
-  padding:19px;
-  border-radius:21px;
-  background:var(--card);
-  border:1px solid var(--border);
+.feature-card{
+  background:#111119;
+  border:1px solid #242432;
+  border-radius:18px;
+  padding:18px 15px;
 }
 
 .feature-icon{
-  font-size:24px;
+  font-size:23px;
   margin-bottom:12px;
 }
 
-.feature h3{
-  font-size:13px;
-  margin-bottom:6px;
+.feature-card h3{
+  font-size:14px;
+  margin-bottom:7px;
 }
 
-.feature p{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.5;
-}
-
-/* ABOUT */
-
-.section{
-  padding:35px 4px;
-}
-
-.section-label{
-  color:#b8a9ff;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-.section h2{
-  font-size:30px;
-  letter-spacing:-1px;
-  margin-bottom:13px;
-}
-
-.section > p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7;
-}
-
-.info-card{
-  margin-top:18px;
-  padding:20px;
-  border-radius:23px;
-  border:1px solid var(--border);
-  background:linear-gradient(
-    135deg,
-    rgba(139,92,246,.10),
-    rgba(255,255,255,.035)
-  );
-}
-
-.info-row{
-  display:flex;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.info-row:last-child{
-  margin-bottom:0;
-}
-
-.info-icon{
-  width:38px;
-  height:38px;
-  flex:0 0 38px;
-  display:grid;
-  place-items:center;
-  border-radius:13px;
-  background:rgba(255,255,255,.06);
-}
-
-.info-row h3{
-  font-size:13px;
-  margin-bottom:5px;
-}
-
-.info-row p{
-  color:var(--muted);
-  font-size:11px;
+.feature-card p{
+  color:#858596;
+  font-size:12px;
   line-height:1.5;
 }
 
 /* ANALYZER */
 
-.analyzer-head{
-  text-align:center;
-  padding:38px 5px 24px;
+.section-title{
+  font-size:25px;
+  margin:15px 0 8px;
 }
 
-.analyzer-head h1{
-  font-size:34px;
-  letter-spacing:-1.5px;
-}
-
-.analyzer-head p{
-  color:var(--muted);
+.section-subtitle{
+  color:#858596;
   font-size:13px;
-  line-height:1.6;
-  margin-top:9px;
+  line-height:1.5;
+  margin-bottom:20px;
 }
 
-.progress{
-  display:flex;
-  gap:5px;
-  margin-bottom:15px;
-}
-
-.progress span{
-  height:3px;
-  flex:1;
-  border-radius:10px;
-  background:rgba(255,255,255,.08);
-}
-
-.progress span.active{
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-}
-
-.back{
-  background:none;
-  border:0;
-  color:#a7a7b8;
-  padding:8px 0 15px;
-  cursor:pointer;
-}
-
-.title{
-  font-size:14px;
-  font-weight:800;
-  margin-bottom:12px;
+.label{
+  font-size:12px;
+  color:#9b9bab;
+  margin:20px 0 10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
 .options{
@@ -331,112 +187,66 @@ button{
 }
 
 .option{
-  min-height:88px;
-  border:1px solid var(--border);
-  border-radius:20px;
-  background:var(--card);
-  color:#fff;
-  padding:14px;
+  padding:15px 12px;
+  border-radius:15px;
+  border:1px solid #292936;
+  background:#111119;
+  color:#ddd;
   text-align:left;
-  cursor:pointer;
-  transition:.22s;
+  transition:.2s;
 }
 
-.option:active{
-  transform:scale(.97);
+.option strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.option small{
+  color:#777788;
+  font-size:11px;
 }
 
 .option.selected{
-  border-color:rgba(167,139,250,.8);
-  background:rgba(139,92,246,.14);
-  box-shadow:0 10px 30px rgba(139,92,246,.12);
-}
-
-.option-icon{
-  font-size:22px;
-  margin-bottom:8px;
-}
-
-.option-name{
-  font-size:13px;
-  font-weight:800;
-}
-
-.option-sub{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
-}
-
-.continue{
-  width:100%;
-  min-height:53px;
-  margin-top:18px;
-  border:0;
-  border-radius:17px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:white;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.continue:disabled{
-  opacity:.35;
+  border-color:#fff;
+  background:#1b1b27;
 }
 
 /* UPLOAD */
 
-.upload{
-  min-height:310px;
-  border:1px dashed rgba(255,255,255,.18);
-  border-radius:25px;
-  background:rgba(255,255,255,.035);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
+.upload-box{
+  border:1px dashed #414150;
+  background:#101018;
+  border-radius:20px;
+  padding:25px 15px;
   text-align:center;
-}
-
-.upload-content{
-  padding:30px;
+  margin-top:10px;
 }
 
 .upload-icon{
-  width:68px;
-  height:68px;
-  margin:auto auto 17px;
-  border-radius:21px;
-  display:grid;
-  place-items:center;
-  background:rgba(139,92,246,.13);
-  font-size:29px;
+  font-size:34px;
+  margin-bottom:10px;
 }
 
-.upload h3{
-  font-size:17px;
-  margin-bottom:8px;
+.upload-box h3{
+  font-size:15px;
+  margin-bottom:6px;
 }
 
-.upload p{
-  color:var(--muted);
+.upload-box p{
   font-size:12px;
-  line-height:1.5;
+  color:#777788;
+  margin-bottom:15px;
 }
 
-.file-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:48px;
-  margin-top:17px;
-  padding:0 19px;
-  border-radius:15px;
+.upload-btn{
+  display:inline-block;
+  padding:11px 18px;
+  border-radius:12px;
   background:#fff;
-  color:#08080c;
+  color:#09090d;
   font-size:12px;
-  font-weight:800;
-  cursor:pointer;
+  font-weight:700;
 }
 
 #photoInput{
@@ -446,218 +256,254 @@ button{
 .preview{
   display:none;
   width:100%;
-  height:310px;
+  max-height:300px;
   object-fit:cover;
+  border-radius:17px;
+  margin-top:15px;
 }
 
 /* SCAN */
 
-.scan{
+.scan-screen{
+  display:none;
   text-align:center;
-  padding:80px 20px;
+  padding:65px 15px;
 }
 
 .scan-circle{
-  width:125px;
-  height:125px;
-  margin:auto auto 28px;
+  width:115px;
+  height:115px;
   border-radius:50%;
-  background:conic-gradient(
-    var(--accent) 0deg,
-    rgba(255,255,255,.08) 0deg
-  );
-  display:grid;
-  place-items:center;
+  border:2px solid #55556a;
+  margin:0 auto 25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   position:relative;
 }
 
-.scan-circle:before{
+.scan-circle::after{
   content:"";
   position:absolute;
-  width:103px;
-  height:103px;
-  border-radius:50%;
-  background:#101017;
+  width:70%;
+  height:2px;
+  background:#fff;
+  animation:scan 1.4s infinite;
 }
 
-.scan-number{
-  position:relative;
-  font-size:24px;
-  font-weight:900;
+@keyframes scan{
+  0%,100%{
+    transform:translateY(-35px);
+    opacity:.2;
+  }
+  50%{
+    transform:translateY(35px);
+    opacity:1;
+  }
 }
 
-.scan h2{
-  font-size:22px;
-  margin-bottom:9px;
+.scan-screen h2{
+  font-size:21px;
+  margin-bottom:8px;
 }
 
-.scan p{
-  color:var(--muted);
-  font-size:12px;
+.scan-screen p{
+  color:#777788;
+  font-size:13px;
 }
 
 /* RESULT */
 
-.result-title{
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:-1px;
-  padding:25px 0 15px;
+.result-screen{
+  display:none;
 }
 
-.result-image{
-  width:100%;
-  height:310px;
-  object-fit:cover;
-  border-radius:24px;
-  border:1px solid var(--border);
+.result-head{
+  margin:15px 0 20px;
+}
+
+.result-head h2{
+  font-size:28px;
+  margin-bottom:7px;
+}
+
+.result-head p{
+  color:#858596;
+  font-size:13px;
+}
+
+.score-card{
+  background:#111119;
+  border:1px solid #282837;
+  border-radius:22px;
+  padding:22px;
+  display:flex;
+  align-items:center;
+  gap:20px;
 }
 
 .score{
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  border:5px solid #fff;
   display:flex;
   align-items:center;
-  gap:18px;
-  margin-top:12px;
-  padding:19px;
-  border-radius:23px;
-  background:linear-gradient(
-    135deg,
-    rgba(139,92,246,.13),
-    rgba(255,255,255,.035)
-  );
-  border:1px solid var(--border);
+  justify-content:center;
+  flex-shrink:0;
 }
 
-.ring{
-  width:82px;
-  height:82px;
-  flex:0 0 82px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  position:relative;
-  background:conic-gradient(
-    var(--accent) 0deg,
-    rgba(255,255,255,.08) 0deg
-  );
+.score strong{
+  font-size:25px;
 }
 
-.ring:before{
-  content:"";
-  position:absolute;
-  width:66px;
-  height:66px;
-  border-radius:50%;
-  background:#101017;
+.score-info h3{
+  font-size:18px;
+  margin-bottom:6px;
 }
 
-.ring-value{
-  position:relative;
-  font-size:19px;
-  font-weight:900;
-}
-
-.score h3{
-  font-size:16px;
-  margin-bottom:5px;
-}
-
-.score p{
-  color:var(--muted);
-  font-size:11px;
+.score-info p{
+  color:#858596;
+  font-size:12px;
   line-height:1.5;
+}
+
+.result-grid{
+  margin-top:13px;
+  display:grid;
+  gap:10px;
+}
+
+.result-card{
+  background:#111119;
+  border:1px solid #242432;
+  border-radius:17px;
+  padding:17px;
+}
+
+.result-card .result-icon{
+  font-size:20px;
+  margin-bottom:9px;
+}
+
+.result-card h3{
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+.result-card p{
+  color:#9999a8;
+  font-size:12px;
+  line-height:1.6;
 }
 
 .tags{
   display:flex;
   flex-wrap:wrap;
   gap:7px;
-  margin:12px 0;
+  margin-top:12px;
 }
 
 .tag{
-  padding:7px 10px;
+  background:#1c1c27;
+  border:1px solid #30303d;
   border-radius:20px;
-  background:rgba(139,92,246,.10);
-  border:1px solid rgba(139,92,246,.18);
-  color:#d6ceff;
+  padding:6px 9px;
+  color:#aaaabb;
   font-size:10px;
 }
 
-.details{
+.tip-box{
+  margin-top:14px;
+  padding:17px;
+  border-radius:17px;
+  background:#171720;
+  border:1px solid #2b2b38;
+}
+
+.tip-box h3{
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.tip-box p{
+  color:#9999a8;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.action-row{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
+  margin-top:15px;
 }
 
-.detail{
-  padding:16px;
-  border-radius:19px;
-  background:rgba(255,255,255,.045);
-  border:1px solid var(--border);
-}
-
-.detail-label{
-  color:#858594;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-  margin-bottom:7px;
-}
-
-.detail-value{
-  font-size:12px;
-  line-height:1.5;
+.secondary-btn{
+  border:1px solid #30303c;
+  background:#111119;
+  color:#fff;
+  padding:14px;
+  border-radius:14px;
   font-weight:700;
 }
 
-.tips{
-  margin-top:12px;
-  padding:18px;
+/* ABOUT */
+
+.about-card{
+  background:#111119;
+  border:1px solid #252531;
   border-radius:22px;
-  background:rgba(34,197,94,.055);
-  border:1px solid rgba(34,197,94,.13);
+  padding:20px;
+  margin-top:18px;
 }
 
-.tips h3{
-  font-size:14px;
-  margin-bottom:10px;
+.about-card > p{
+  color:#9999a8;
+  font-size:13px;
+  line-height:1.7;
 }
 
-.tip{
+.info-row{
   display:flex;
-  gap:8px;
-  color:#c5c5d0;
-  font-size:11px;
-  line-height:1.5;
-  margin-top:8px;
+  gap:13px;
+  padding:17px 0;
+  border-bottom:1px solid #24242f;
 }
 
-.tip b{
-  color:#4ade80;
+.info-row:last-child{
+  border-bottom:0;
 }
 
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:13px;
+.info-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:#1c1c27;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
 }
 
-.action{
-  min-height:50px;
-  border-radius:16px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.05);
-  color:white;
+.info-row h3{
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.info-row p{
+  color:#858596;
   font-size:12px;
-  font-weight:800;
-  cursor:pointer;
+  line-height:1.5;
 }
 
-.action.primary{
-  border:0;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
+/* FOOTER */
+
+.footer{
+  text-align:center;
+  color:#555563;
+  font-size:10px;
+  padding:22px 10px;
 }
 
 /* BOTTOM NAV */
@@ -665,65 +511,47 @@ button{
 .bottom-nav{
   position:fixed;
   left:50%;
-  bottom:max(10px,env(safe-area-inset-bottom));
+  bottom:0;
   transform:translateX(-50%);
-  width:min(490px,calc(100% - 24px));
-  height:64px;
-  padding:6px;
+  width:min(520px,100%);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(8,8,13,.94);
+  backdrop-filter:blur(15px);
+  border-top:1px solid #20202b;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:5px;
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:22px;
-  background:rgba(15,15,23,.86);
-  backdrop-filter:blur(20px);
   z-index:100;
-  box-shadow:0 15px 50px rgba(0,0,0,.35);
 }
 
 .nav-btn{
   border:0;
   background:transparent;
-  color:#777788;
-  border-radius:17px;
+  color:#696977;
+  padding:8px 5px;
   font-size:10px;
-  font-weight:700;
-  cursor:pointer;
 }
 
-.nav-icon{
+.nav-btn .nav-icon{
   display:block;
-  font-size:18px;
-  margin-bottom:3px;
+  font-size:19px;
+  margin-bottom:4px;
 }
 
 .nav-btn.active{
   color:#fff;
-  background:rgba(139,92,246,.14);
 }
 
-.footer{
-  text-align:center;
-  color:#626271;
-  font-size:9px;
-  padding:25px 0 5px;
-}
+/* RESPONSIVE */
 
 @media(max-width:380px){
-
   .hero h1{
-    font-size:37px;
+    font-size:36px;
   }
 
-  .result-image,
-  .preview{
-    height:270px;
+  .options,
+  .feature-grid{
+    grid-template-columns:1fr;
   }
-
-  .detail{
-    padding:14px;
-  }
-
 }
 </style>
 </head>
@@ -733,430 +561,274 @@ button{
 <div class="app">
 
   <!-- HEADER -->
-
   <header class="header">
-
-    <div class="logo">
-      <div class="logo-icon">✦</div>
-      <span>StyleAI</span>
-    </div>
-
-    <div class="demo">
-      FREE DEMO
-    </div>
-
+    <div class="logo">Style<span>AI</span></div>
+    <div class="demo-badge">FREE DEMO</div>
   </header>
 
-
   <!-- HOME -->
-
-  <section class="page active" id="home">
+  <section class="page active" id="homePage">
 
     <div class="hero">
-
-      <div class="hero-badge">
-        ✦ PERSONAL STYLE EXPERIENCE
-      </div>
-
-      <h1>
-        Discover Your<br>
-        <span class="gradient">Signature Style.</span>
-      </h1>
+      <h1>Discover<br><span>Your Style.</span></h1>
 
       <p>
-        Explore different style directions, upload your look
-        and get a personalized style breakdown.
+        Explore your personal style direction with StyleAI.
+        Upload a photo, choose your style and get a quick
+        style analysis.
       </p>
 
-      <button class="primary-btn" onclick="openAnalyzer()">
-        Analyze Your Look ✦
+      <button class="primary-btn" onclick="showPage('analyzerPage')">
+        Start Style Analysis →
       </button>
-
     </div>
-
 
     <div class="feature-grid">
 
-      <div class="feature">
-        <div class="feature-icon">🎯</div>
-        <h3>Style Focus</h3>
-        <p>Choose from multiple fashion directions.</p>
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <h3>Style Direction</h3>
+        <p>Discover outfit ideas based on your selected style.</p>
       </div>
 
-      <div class="feature">
+      <div class="feature-card">
         <div class="feature-icon">📸</div>
         <h3>Photo Preview</h3>
-        <p>Upload your look and see your result.</p>
+        <p>Upload your photo and preview it before analysis.</p>
       </div>
 
-      <div class="feature">
-        <div class="feature-icon">✨</div>
-        <h3>Style Score</h3>
-        <p>Get a simple style score and breakdown.</p>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Colour Ideas</h3>
+        <p>Get colour combinations that match your style direction.</p>
       </div>
 
-      <div class="feature">
+      <div class="feature-card">
         <div class="feature-icon">💡</div>
         <h3>Style Tips</h3>
-        <p>Get practical ideas for your selected style.</p>
+        <p>Simple tips for improving your overall presentation.</p>
       </div>
 
     </div>
 
-
-    <div class="section">
-
-      <div class="section-label">
-        ABOUT STYLEAI
-      </div>
-
-      <h2>
-        Your style.<br>
-        Your expression.
-      </h2>
-
-      <p>
-        StyleAI is a simple fashion exploration experience
-        designed to help you discover different looks,
-        combinations and styling ideas.
-      </p>
-
-
-      <div class="info-card">
-
-        <div class="info-row">
-
-          <div class="info-icon">✦</div>
-
-          <div>
-            <h3>Explore</h3>
-            <p>
-              Try Traditional, Aesthetic, Streetwear,
-              Casual, Formal and other style directions.
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="info-row">
-
-          <div class="info-icon">📷</div>
-
-          <div>
-            <h3>Visualize</h3>
-            <p>
-              Upload a photo and view your selected
-              style experience.
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="info-row">
-
-          <div class="info-icon">💡</div>
-
-          <div>
-            <h3>Improve</h3>
-            <p>
-              Use the styling suggestions as inspiration
-              for your next outfit.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
+    <div class="footer">
+      © 2026 StyleAI • Crafted by Ritesh ✦
     </div>
 
   </section>
 
 
-  <!-- ANALYZER STYLE -->
+  <!-- ANALYZER -->
+  <section class="page" id="analyzerPage">
 
-  <section class="page" id="analyzer">
+    <div id="analyzerContent">
 
-    <div class="analyzer-head">
+      <h2 class="section-title">Style Analyzer</h2>
 
-      <h1>Style Analyzer</h1>
-
-      <p>
-        Select your preferences and upload a photo.
+      <p class="section-subtitle">
+        Choose your style direction and category, then upload
+        a photo to see your demo result.
       </p>
 
-    </div>
+      <div class="label">Choose Style</div>
 
-    <div class="progress">
-      <span id="p1" class="active"></span>
-      <span id="p2"></span>
-      <span id="p3"></span>
-      <span id="p4"></span>
-      <span id="p5"></span>
-    </div>
+      <div class="options" id="styleOptions">
 
-
-    <!-- STEP 1 -->
-
-    <div id="step1">
-
-      <div class="title">
-        Choose your style
-      </div>
-
-      <div class="options">
-
-        <button class="option" onclick="selectStyle('Traditional',this)">
-          <div class="option-icon">🪔</div>
-          <div class="option-name">Traditional</div>
-          <div class="option-sub">Classic & cultural</div>
+        <button class="option selected" data-style="Traditional">
+          <strong>Traditional</strong>
+          <small>Classic & timeless</small>
         </button>
 
-        <button class="option" onclick="selectStyle('Aesthetic',this)">
-          <div class="option-icon">✨</div>
-          <div class="option-name">Aesthetic</div>
-          <div class="option-sub">Clean & trendy</div>
+        <button class="option" data-style="Aesthetic">
+          <strong>Aesthetic</strong>
+          <small>Clean & artistic</small>
         </button>
 
-        <button class="option" onclick="selectStyle('South Indian',this)">
-          <div class="option-icon">🌴</div>
-          <div class="option-name">South Indian</div>
-          <div class="option-sub">Elegant & timeless</div>
+        <button class="option" data-style="South Indian">
+          <strong>South Indian</strong>
+          <small>Elegant & cultural</small>
         </button>
 
-        <button class="option" onclick="selectStyle('Streetwear',this)">
-          <div class="option-icon">🔥</div>
-          <div class="option-name">Streetwear</div>
-          <div class="option-sub">Bold & modern</div>
+        <button class="option" data-style="Streetwear">
+          <strong>Streetwear</strong>
+          <small>Bold & urban</small>
         </button>
 
-        <button class="option" onclick="selectStyle('Casual',this)">
-          <div class="option-icon">👕</div>
-          <div class="option-name">Casual</div>
-          <div class="option-sub">Relaxed & effortless</div>
+        <button class="option" data-style="Casual">
+          <strong>Casual</strong>
+          <small>Easy & relaxed</small>
         </button>
 
-        <button class="option" onclick="selectStyle('Formal',this)">
-          <div class="option-icon">🕴️</div>
-          <div class="option-name">Formal</div>
-          <div class="option-sub">Sharp & polished</div>
+        <button class="option" data-style="Formal">
+          <strong>Formal</strong>
+          <small>Sharp & polished</small>
         </button>
 
       </div>
 
-      <button class="continue" id="styleContinue" disabled onclick="nextStep(2)">
-        Continue →
-      </button>
+      <div class="label">Category</div>
 
-    </div>
+      <div class="options" id="categoryOptions">
 
-
-    <!-- STEP 2 -->
-
-    <div id="step2" style="display:none">
-
-      <button class="back" onclick="nextStep(1)">
-        ← Back
-      </button>
-
-      <div class="title">
-        Select category
-      </div>
-
-      <div class="options">
-
-        <button class="option" onclick="selectGender('Men',this)">
-          <div class="option-icon">👨</div>
-          <div class="option-name">Men</div>
-          <div class="option-sub">Men's styling</div>
+        <button class="option selected" data-category="Men">
+          <strong>Men</strong>
+          <small>Menswear</small>
         </button>
 
-        <button class="option" onclick="selectGender('Women',this)">
-          <div class="option-icon">👩</div>
-          <div class="option-name">Women</div>
-          <div class="option-sub">Women's styling</div>
+        <button class="option" data-category="Women">
+          <strong>Women</strong>
+          <small>Womenswear</small>
         </button>
 
-        <button class="option" onclick="selectGender('Unisex',this)">
-          <div class="option-icon">🧑</div>
-          <div class="option-name">Unisex</div>
-          <div class="option-sub">Universal styles</div>
+        <button class="option" data-category="Unisex">
+          <strong>Unisex</strong>
+          <small>Universal styles</small>
         </button>
 
       </div>
 
-      <button class="continue" id="genderContinue" disabled onclick="nextStep(3)">
-        Continue →
-      </button>
+      <div class="label">Your Photo</div>
 
-    </div>
+      <div class="upload-box">
 
+        <div class="upload-icon">📷</div>
 
-    <!-- STEP 3 -->
+        <h3>Upload a photo</h3>
 
-    <div id="step3" style="display:none">
+        <p>
+          Your image stays in this demo and is only used
+          for local preview.
+        </p>
 
-      <button class="back" onclick="nextStep(2)">
-        ← Back
-      </button>
+        <label class="upload-btn" for="photoInput">
+          Choose Photo
+        </label>
 
-      <div class="title">
-        Upload your look
-      </div>
+        <input
+          type="file"
+          id="photoInput"
+          accept="image/*"
+        >
 
-      <div class="upload">
-
-        <div class="upload-content" id="uploadContent">
-
-          <div class="upload-icon">📸</div>
-
-          <h3>Add your photo</h3>
-
-          <p>
-            JPG, PNG or WEBP<br>
-            Your image stays in this demo.
-          </p>
-
-          <label class="file-btn">
-            Choose Photo
-            <input type="file" id="photoInput" accept="image/*">
-          </label>
-
-        </div>
-
-        <img id="preview" class="preview">
+        <img
+          id="preview"
+          class="preview"
+          alt="Photo preview"
+        >
 
       </div>
 
       <button
-        class="continue"
-        id="analyzeButton"
-        disabled
-        onclick="startScanning()">
-        Analyze My Style ✦
+        class="primary-btn"
+        onclick="startAnalysis()"
+      >
+        Analyze My Style →
       </button>
 
     </div>
 
 
-    <!-- STEP 4 -->
+    <!-- SCAN SCREEN -->
+    <div class="scan-screen" id="scanScreen">
 
-    <div id="step4" style="display:none">
-
-      <div class="scan">
-
-        <div class="scan-circle" id="scanCircle">
-
-          <div class="scan-number" id="scanNumber">
-            0%
-          </div>
-
-        </div>
-
-        <h2>Preparing Your Result</h2>
-
-        <p id="scanMessage">
-          Reading your selected style...
-        </p>
-
+      <div class="scan-circle">
+        ✦
       </div>
+
+      <h2>Analyzing your style...</h2>
+
+      <p>
+        Creating your StyleAI demo result
+      </p>
 
     </div>
 
 
-    <!-- STEP 5 -->
+    <!-- RESULT SCREEN -->
+    <div class="result-screen" id="resultScreen">
 
-    <div id="step5" style="display:none">
+      <div class="result-head">
+        <h2>Your Style Result</h2>
 
-      <div class="result-title">
-        Your Style Result
+        <p>
+          Demo style score based on your selected style direction.
+        </p>
       </div>
 
-      <img id="resultImage" class="result-image">
+      <div class="score-card">
 
-
-      <div class="score">
-
-        <div class="ring" id="ring">
-
-          <div class="ring-value" id="scoreValue">
-            0
-          </div>
-
+        <div class="score">
+          <strong id="scoreValue">88</strong>
         </div>
 
-        <div>
-
-          <h3 id="resultStyle">
-            Your Style
-          </h3>
+        <div class="score-info">
+          <h3 id="resultStyle">Traditional</h3>
 
           <p>
-            Demo style score based on your selected
-            style direction.
+            Your selected style direction has a strong
+            and distinctive visual identity.
           </p>
-
         </div>
 
       </div>
 
+      <div class="result-grid">
 
-      <div class="tags" id="tags"></div>
-
-
-      <div class="details">
-
-        <div class="detail">
-          <div class="detail-label">Style</div>
-          <div class="detail-value" id="detailStyle"></div>
+        <div class="result-card">
+          <div class="result-icon">👕</div>
+          <h3>Outfit</h3>
+          <p id="outfitResult"></p>
         </div>
 
-        <div class="detail">
-          <div class="detail-label">Outfit</div>
-          <div class="detail-value" id="detailOutfit"></div>
+        <div class="result-card">
+          <div class="result-icon">🎨</div>
+          <h3>Colours</h3>
+          <p id="colourResult"></p>
         </div>
 
-        <div class="detail">
-          <div class="detail-label">Colours</div>
-          <div class="detail-value" id="detailColours"></div>
+        <div class="result-card">
+          <div class="result-icon">💇</div>
+          <h3>Hair</h3>
+          <p id="hairResult"></p>
         </div>
 
-        <div class="detail">
-          <div class="detail-label">Hair</div>
-          <div class="detail-value" id="detailHair"></div>
+        <div class="result-card">
+          <div class="result-icon">⌚</div>
+          <h3>Accessories</h3>
+          <p id="accessoryResult"></p>
         </div>
 
-        <div class="detail">
-          <div class="detail-label">Accessories</div>
-          <div class="detail-value" id="detailAccessories"></div>
-        </div>
+        <div class="result-card">
+          <div class="result-icon">✨</div>
+          <h3>Presentation</h3>
+          <p id="presentationResult"></p>
 
-        <div class="detail">
-          <div class="detail-label">Presentation</div>
-          <div class="detail-value" id="detailPresentation"></div>
+          <div class="tags" id="resultTags"></div>
         </div>
 
       </div>
 
+      <div class="tip-box">
 
-      <div class="tips">
+        <h3>💡 Style Tip</h3>
 
-        <h3>✦ Style Tips</h3>
-
-        <div id="tips"></div>
+        <p id="tipResult"></p>
 
       </div>
 
+      <div class="action-row">
 
-      <div class="actions">
-
-        <button class="action primary" onclick="shareResult()">
+        <button
+          class="secondary-btn"
+          onclick="shareResult()"
+        >
           Share Result
         </button>
 
-        <button class="action" onclick="resetAnalyzer()">
+        <button
+          class="secondary-btn"
+          onclick="tryAgain()"
+        >
           Try Again
         </button>
 
@@ -1167,64 +839,74 @@ button{
   </section>
 
 
-  <!-- CONTACT -->
+  <!-- ABOUT -->
+  <section class="page" id="aboutPage">
 
-  <section class="page" id="contact">
+    <h2 class="section-title">About StyleAI</h2>
 
-    <div class="section" style="padding-top:55px">
+    <p class="section-subtitle">
+      A simple independent project focused on making
+      personal style easier to explore.
+    </p>
 
-      <div class="section-label">
-        GET IN TOUCH
-      </div>
-
-      <h2>
-        Let's build<br>
-        better style tools.
-      </h2>
+    <div class="about-card">
 
       <p>
-        StyleAI is an evolving project. More styling
-        features and smarter analysis can be added over time.
+        StyleAI is a lightweight style discovery experience
+        designed to give users quick outfit inspiration,
+        colour ideas and presentation tips.
       </p>
 
+      <div class="info-row">
 
-      <div class="info-card">
+        <div class="info-icon">👨‍💻</div>
 
-        <div class="info-row">
+        <div>
+          <h3>Created by Ritesh</h3>
 
-          <div class="info-icon">✦</div>
-
-          <div>
-            <h3>StyleAI Demo</h3>
-            <p>
-              Explore the current free styling experience.
-            </p>
-          </div>
-
+          <p>
+            Inspired by SB, who sparked the idea behind StyleAI.
+            An independent project built to make personal style
+            simple, modern and accessible.
+          </p>
         </div>
 
+      </div>
 
-        <div class="info-row">
+      <div class="info-row">
 
-          <div class="info-icon">🚀</div>
+        <div class="info-icon">✨</div>
 
-          <div>
-            <h3>Coming Next</h3>
-            <p>
-              More personalization, richer style insights
-              and additional fashion tools.
-            </p>
-          </div>
+        <div>
+          <h3>FREE DEMO</h3>
 
+          <p>
+            This version uses predefined style directions
+            and demo results. No paid AI API is required.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="info-row">
+
+        <div class="info-icon">📱</div>
+
+        <div>
+          <h3>Mobile First</h3>
+
+          <p>
+            Designed to work smoothly on mobile screens
+            as well as desktop browsers.
+          </p>
         </div>
 
       </div>
 
     </div>
 
-
     <div class="footer">
-      © 2026 StyleAI • Free Demo
+      © 2026 StyleAI • Crafted by Ritesh ✦
     </div>
 
   </section>
@@ -1236,27 +918,31 @@ button{
 
 <nav class="bottom-nav">
 
-  <button class="nav-btn active" id="navHome" onclick="showPage('home')">
-
+  <button
+    class="nav-btn active"
+    data-page="homePage"
+    onclick="showPage('homePage')"
+  >
     <span class="nav-icon">⌂</span>
     Home
-
   </button>
 
-
-  <button class="nav-btn" id="navAnalyzer" onclick="openAnalyzer()">
-
+  <button
+    class="nav-btn"
+    data-page="analyzerPage"
+    onclick="showPage('analyzerPage')"
+  >
     <span class="nav-icon">✦</span>
     Analyze
-
   </button>
 
-
-  <button class="nav-btn" id="navContact" onclick="showPage('contact')">
-
-    <span class="nav-icon">◎</span>
+  <button
+    class="nav-btn"
+    data-page="aboutPage"
+    onclick="showPage('aboutPage')"
+  >
+    <span class="nav-icon">ⓘ</span>
     About
-
   </button>
 
 </nav>
@@ -1264,153 +950,74 @@ button{
 
 <script>
 
-let selectedStyle = "";
-let selectedGender = "";
-let selectedImageData = "";
-
-const photoInput =
-  document.getElementById("photoInput");
-
-const preview =
-  document.getElementById("preview");
-
-const uploadContent =
-  document.getElementById("uploadContent");
-
-const analyzeButton =
-  document.getElementById("analyzeButton");
-
-
 /* PAGE NAVIGATION */
 
-function showPage(page){
+function showPage(pageId){
 
-  document.querySelectorAll(".page")
-    .forEach(p => p.classList.remove("active"));
+  document.querySelectorAll('.page').forEach(page=>{
+    page.classList.remove('active');
+  });
 
-  document.getElementById(page)
-    .classList.add("active");
+  document.getElementById(pageId).classList.add('active');
 
+  document.querySelectorAll('.nav-btn').forEach(btn=>{
+    btn.classList.remove('active');
 
-  document.querySelectorAll(".nav-btn")
-    .forEach(btn => btn.classList.remove("active"));
-
-
-  if(page === "home"){
-    document.getElementById("navHome")
-      .classList.add("active");
-  }
-
-  if(page === "analyzer"){
-    document.getElementById("navAnalyzer")
-      .classList.add("active");
-  }
-
-  if(page === "contact"){
-    document.getElementById("navContact")
-      .classList.add("active");
-  }
-
+    if(btn.dataset.page === pageId){
+      btn.classList.add('active');
+    }
+  });
 
   window.scrollTo({
     top:0,
-    behavior:"smooth"
+    behavior:'smooth'
+  });
+}
+
+
+/* STYLE SELECTION */
+
+let selectedStyle = "Traditional";
+let selectedCategory = "Men";
+
+document.querySelectorAll('#styleOptions .option').forEach(button=>{
+
+  button.addEventListener('click',()=>{
+
+    document.querySelectorAll('#styleOptions .option')
+      .forEach(item=>item.classList.remove('selected'));
+
+    button.classList.add('selected');
+
+    selectedStyle = button.dataset.style;
+
   });
 
-}
+});
 
 
-function openAnalyzer(){
+/* CATEGORY SELECTION */
 
-  showPage("analyzer");
+document.querySelectorAll('#categoryOptions .option').forEach(button=>{
 
-  nextStep(1);
+  button.addEventListener('click',()=>{
 
-}
+    document.querySelectorAll('#categoryOptions .option')
+      .forEach(item=>item.classList.remove('selected'));
 
+    button.classList.add('selected');
 
-/* ANALYZER STEPS */
+    selectedCategory = button.dataset.category;
 
-function nextStep(step){
-
-  for(let i=1;i<=5;i++){
-
-    const element =
-      document.getElementById("step"+i);
-
-    if(element){
-      element.style.display =
-        i === step ? "block" : "none";
-    }
-
-  }
-
-
-  for(let i=1;i<=5;i++){
-
-    const p =
-      document.getElementById("p"+i);
-
-    if(p){
-
-      if(i <= step){
-        p.classList.add("active");
-      }else{
-        p.classList.remove("active");
-      }
-
-    }
-
-  }
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
   });
 
-}
+});
 
 
-/* STYLE */
+/* PHOTO UPLOAD */
 
-function selectStyle(style,element){
-
-  selectedStyle = style;
-
-  document.querySelectorAll("#step1 .option")
-    .forEach(item =>
-      item.classList.remove("selected")
-    );
-
-  element.classList.add("selected");
-
-  document.getElementById("styleContinue")
-    .disabled = false;
-
-}
-
-
-/* CATEGORY */
-
-function selectGender(gender,element){
-
-  selectedGender = gender;
-
-  document.querySelectorAll("#step2 .option")
-    .forEach(item =>
-      item.classList.remove("selected")
-    );
-
-  element.classList.add("selected");
-
-  document.getElementById("genderContinue")
-    .disabled = false;
-
-}
-
-
-/* PHOTO */
+const photoInput = document.getElementById("photoInput");
+const preview = document.getElementById("preview");
 
 photoInput.addEventListener("change",function(){
 
@@ -1418,292 +1025,18 @@ photoInput.addEventListener("change",function(){
 
   if(!file) return;
 
-
   const reader = new FileReader();
-
 
   reader.onload = function(e){
 
-    selectedImageData = e.target.result;
-
-    preview.src = selectedImageData;
-
+    preview.src = e.target.result;
     preview.style.display = "block";
 
-    uploadContent.style.display = "none";
-
-    analyzeButton.disabled = false;
-
   };
-
 
   reader.readAsDataURL(file);
 
 });
-
-
-/* SCANNING */
-
-function startScanning(){
-
-  nextStep(4);
-
-  let progress = 0;
-
-  const circle =
-    document.getElementById("scanCircle");
-
-  const number =
-    document.getElementById("scanNumber");
-
-  const message =
-    document.getElementById("scanMessage");
-
-
-  const messages = [
-
-    "Reading your selected style...",
-    "Checking outfit combination...",
-    "Analyzing colour coordination...",
-    "Checking styling details...",
-    "Preparing your style score...",
-    "Generating suggestions..."
-
-  ];
-
-
-  let messageIndex = 0;
-
-
-  const interval = setInterval(()=>{
-
-    progress += 5;
-
-    number.innerText =
-      progress + "%";
-
-
-    circle.style.background =
-      `conic-gradient(
-        var(--accent) ${progress * 3.6}deg,
-        rgba(255,255,255,.08) 0deg
-      )`;
-
-
-    if(
-      progress % 15 === 0 &&
-      messageIndex < messages.length
-    ){
-
-      message.innerText =
-        messages[messageIndex];
-
-      messageIndex++;
-
-    }
-
-
-    if(progress >= 100){
-
-      clearInterval(interval);
-
-      setTimeout(()=>{
-        showResult();
-      },500);
-
-    }
-
-  },90);
-
-}
-
-
-/* RESULT */
-
-function showResult(){
-
-  const data =
-    getStyleData(selectedStyle);
-
-
-  document.getElementById("resultImage")
-    .src = selectedImageData;
-
-
-  document.getElementById("resultStyle")
-    .innerText = data.title;
-
-
-  document.getElementById("detailStyle")
-    .innerText = data.style;
-
-
-  document.getElementById("detailOutfit")
-    .innerText = data.outfit;
-
-
-  document.getElementById("detailColours")
-    .innerText = data.colours;
-
-
-  document.getElementById("detailHair")
-    .innerText = data.hair;
-
-
-  document.getElementById("detailAccessories")
-    .innerText = data.accessories;
-
-
-  document.getElementById("detailPresentation")
-    .innerText = data.presentation;
-
-
-  const tags =
-    document.getElementById("tags");
-
-  tags.innerHTML = "";
-
-
-  data.tags.forEach(tag=>{
-
-    const div =
-      document.createElement("div");
-
-    div.className = "tag";
-
-    div.innerText = tag;
-
-    tags.appendChild(div);
-
-  });
-
-
-  const tips =
-    document.getElementById("tips");
-
-  tips.innerHTML = "";
-
-
-  data.tips.forEach(tip=>{
-
-    const div =
-      document.createElement("div");
-
-    div.className = "tip";
-
-    div.innerHTML =
-      `<b>✓</b><div>${tip}</div>`;
-
-    tips.appendChild(div);
-
-  });
-
-
-  nextStep(5);
-
-  animateScore(data.score);
-
-}
-
-
-function animateScore(score){
-
-  let current = 0;
-
-  const value =
-    document.getElementById("scoreValue");
-
-  const ring =
-    document.getElementById("ring");
-
-
-  const interval = setInterval(()=>{
-
-    current++;
-
-    value.innerText = current;
-
-
-    ring.style.background =
-      `conic-gradient(
-        var(--accent) ${current * 3.6}deg,
-        rgba(255,255,255,.08) 0deg
-      )`;
-
-
-    if(current >= score){
-      clearInterval(interval);
-    }
-
-  },15);
-
-}
-
-
-/* SHARE */
-
-function shareResult(){
-
-  const text =
-    `My StyleAI result: ${selectedStyle} — Style Score ${document.getElementById("scoreValue").innerText}/100`;
-
-
-  if(navigator.share){
-
-    navigator.share({
-      title:"My StyleAI Result",
-      text:text
-    }).catch(()=>{});
-
-  }else{
-
-    navigator.clipboard.writeText(text)
-      .then(()=>{
-        alert("Result copied!");
-      })
-      .catch(()=>{
-        alert(text);
-      });
-
-  }
-
-}
-
-
-/* RESET */
-
-function resetAnalyzer(){
-
-  selectedStyle = "";
-  selectedGender = "";
-  selectedImageData = "";
-
-  photoInput.value = "";
-
-  preview.src = "";
-
-  preview.style.display = "none";
-
-  uploadContent.style.display = "block";
-
-  analyzeButton.disabled = true;
-
-  document.getElementById("styleContinue")
-    .disabled = true;
-
-  document.getElementById("genderContinue")
-    .disabled = true;
-
-
-  document.querySelectorAll(".option")
-    .forEach(item =>
-      item.classList.remove("selected")
-    );
-
-
-  nextStep(1);
-
-}
 
 
 /* STYLE DATA */
@@ -1714,115 +1047,199 @@ function getStyleData(style){
 
     "Traditional":{
       score:88,
-      title:"Traditional Style",
-      style:"Classic Indian aesthetic",
-      outfit:"Kurta, ethnic layers and refined traditional pieces.",
-      colours:"Cream, beige, maroon and earthy tones.",
-      hair:"Neat and naturally styled.",
-      accessories:"Minimal watch, bracelet or traditional details.",
-      presentation:"Elegant, composed and culturally inspired.",
-      tags:["Classic","Indian","Elegant","Timeless"],
-      tips:[
-        "Keep the outfit balanced with simple accessories.",
-        "Earthy tones work well with traditional styling.",
-        "Clean footwear can complete the overall look."
-      ]
+      outfit:"Classic ethnic combinations with a clean kurta, textured fabrics and well-fitted traditional layers.",
+      colours:"Cream, ivory, beige, maroon and deep earthy tones.",
+      hair:"Clean natural styling with a neat and balanced finish.",
+      accessories:"Minimal watch, simple bracelet or subtle traditional accessories.",
+      presentation:"Keep the overall look balanced, polished and timeless.",
+      tags:["Classic","Elegant","Cultural","Timeless"],
+      tip:"Keep your traditional outfit simple and well-fitted. One strong statement piece is usually enough."
     },
-
 
     "Aesthetic":{
       score:91,
-      title:"Aesthetic Style",
-      style:"Clean modern aesthetic",
-      outfit:"Relaxed silhouettes with minimal layering.",
-      colours:"Neutral, pastel and muted shades.",
-      hair:"Natural texture with a clean finish.",
-      accessories:"Minimal jewellery and modern watch.",
-      presentation:"Calm, clean and visually balanced.",
-      tags:["Minimal","Clean","Modern","Trendy"],
-      tips:[
-        "Keep colours within a simple palette.",
-        "Avoid adding too many accessories.",
-        "Clean textures and simple silhouettes enhance the look."
-      ]
+      outfit:"Relaxed silhouettes, clean layers, neutral basics and carefully balanced proportions.",
+      colours:"White, black, beige, grey, olive and muted tones.",
+      hair:"Soft textured styling with a natural finish.",
+      accessories:"Minimal jewellery, clean watch and subtle details.",
+      presentation:"Focus on clean composition, calm colours and intentional details.",
+      tags:["Minimal","Clean","Modern","Soft"],
+      tip:"Use a simple colour palette and focus on texture rather than adding too many elements."
     },
-
 
     "South Indian":{
       score:89,
-      title:"South Indian Style",
-      style:"Elegant South Indian inspired look",
-      outfit:"Traditional fabrics with modern styling.",
-      colours:"White, cream, gold and earthy shades.",
-      hair:"Neat and natural styling.",
-      accessories:"Simple traditional or metallic accents.",
-      presentation:"Elegant, warm and timeless.",
-      tags:["Elegant","Traditional","South","Timeless"],
-      tips:[
-        "Neutral shades pair naturally with traditional fabrics.",
-        "Choose one standout accessory rather than many.",
-        "Keep the overall styling comfortable and balanced."
-      ]
+      outfit:"Elegant regional-inspired pieces with comfortable fabrics and refined traditional details.",
+      colours:"White, cream, gold, earthy brown and rich festive tones.",
+      hair:"Neat natural styling that complements the traditional look.",
+      accessories:"Classic watch, subtle jewellery and traditional accents.",
+      presentation:"Keep the look graceful, comfortable and culturally inspired.",
+      tags:["Elegant","Heritage","Classic","Graceful"],
+      tip:"Let the fabric and traditional details be the main focus of the outfit."
     },
-
 
     "Streetwear":{
       score:92,
-      title:"Streetwear Style",
-      style:"Bold contemporary street style",
-      outfit:"Oversized layers, relaxed trousers and sneakers.",
-      colours:"Black, grey, white with bold accents.",
-      hair:"Textured and contemporary.",
-      accessories:"Cap, watch, chain or compact crossbody.",
-      presentation:"Confident, relaxed and expressive.",
-      tags:["Bold","Urban","Modern","Edgy"],
-      tips:[
-        "Balance oversized pieces with cleaner basics.",
-        "Use one statement element as the focal point.",
-        "Sneakers can tie the complete outfit together."
-      ]
+      outfit:"Oversized layers, relaxed trousers, statement sneakers and bold casual pieces.",
+      colours:"Black, charcoal, white, grey with one strong accent colour.",
+      hair:"Textured modern styling with a confident finish.",
+      accessories:"Cap, chain, watch, rings or compact crossbody details.",
+      presentation:"Confidence and proportion are key to a strong streetwear look.",
+      tags:["Urban","Bold","Modern","Edgy"],
+      tip:"Balance oversized pieces with one cleaner fitted element so the outfit stays structured."
     },
-
 
     "Casual":{
       score:86,
-      title:"Casual Style",
-      style:"Relaxed everyday fashion",
-      outfit:"T-shirt, jeans, overshirt and casual footwear.",
-      colours:"White, blue, grey and neutral shades.",
-      hair:"Simple everyday styling.",
-      accessories:"Watch and minimal everyday accessories.",
-      presentation:"Comfortable, relaxed and effortless.",
-      tags:["Relaxed","Everyday","Comfort","Simple"],
-      tips:[
-        "Well-fitting basics make casual outfits look polished.",
-        "Keep footwear clean and coordinated.",
-        "A simple watch can add structure to the look."
-      ]
+      outfit:"Comfortable everyday combinations such as relaxed shirts, T-shirts, jeans and clean sneakers.",
+      colours:"White, navy, grey, beige, denim and soft earth tones.",
+      hair:"Natural, easy-to-maintain styling.",
+      accessories:"Simple watch, bracelet or minimal everyday accessories.",
+      presentation:"Aim for effortless, clean and comfortable styling.",
+      tags:["Easy","Relaxed","Everyday","Clean"],
+      tip:"A good fit and clean shoes can instantly make a simple casual outfit look more polished."
     },
-
 
     "Formal":{
       score:90,
-      title:"Formal Style",
-      style:"Sharp polished appearance",
-      outfit:"Structured shirt, trousers, blazer or formal layers.",
-      colours:"Black, navy, white and charcoal.",
-      hair:"Neat and professionally styled.",
-      accessories:"Classic watch and minimal accessories.",
-      presentation:"Sharp, organized and polished.",
+      outfit:"Structured shirts, trousers, blazers and refined footwear with clean proportions.",
+      colours:"Black, navy, charcoal, white and subtle neutral shades.",
+      hair:"Neat, structured styling with a professional finish.",
+      accessories:"Classic watch, simple belt and minimal accessories.",
+      presentation:"Sharp fitting and clean details create a polished formal appearance.",
       tags:["Sharp","Professional","Classic","Polished"],
-      tips:[
-        "Keep colours coordinated and understated.",
-        "Clean footwear adds to a polished presentation.",
-        "Minimal accessories usually work best with formal outfits."
-      ]
+      tip:"Prioritize fit, clean footwear and simple accessories for a strong formal appearance."
     }
 
   };
 
+  return data[style] || data["Traditional"];
 
-  return data[style] || data["Casual"];
+}
+
+
+/* START ANALYSIS */
+
+function startAnalysis(){
+
+  document.getElementById("analyzerContent").style.display="none";
+
+  const scan = document.getElementById("scanScreen");
+
+  scan.style.display="block";
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+  setTimeout(()=>{
+
+    scan.style.display="none";
+
+    showResult();
+
+  },1800);
+
+}
+
+
+/* SHOW RESULT */
+
+function showResult(){
+
+  const result = getStyleData(selectedStyle);
+
+  document.getElementById("resultScreen").style.display="block";
+
+  document.getElementById("scoreValue").textContent=result.score;
+
+  document.getElementById("resultStyle").textContent=selectedStyle;
+
+  document.getElementById("outfitResult").textContent=result.outfit;
+
+  document.getElementById("colourResult").textContent=result.colours;
+
+  document.getElementById("hairResult").textContent=result.hair;
+
+  document.getElementById("accessoryResult").textContent=result.accessories;
+
+  document.getElementById("presentationResult").textContent=result.presentation;
+
+  document.getElementById("tipResult").textContent=result.tip;
+
+  const tags = document.getElementById("resultTags");
+
+  tags.innerHTML="";
+
+  result.tags.forEach(tag=>{
+
+    const element=document.createElement("span");
+
+    element.className="tag";
+
+    element.textContent=tag;
+
+    tags.appendChild(element);
+
+  });
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+}
+
+
+/* TRY AGAIN */
+
+function tryAgain(){
+
+  document.getElementById("resultScreen").style.display="none";
+
+  document.getElementById("scanScreen").style.display="none";
+
+  document.getElementById("analyzerContent").style.display="block";
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+}
+
+
+/* SHARE */
+
+function shareResult(){
+
+  const text =
+    "My StyleAI result: " +
+    selectedStyle +
+    " — " +
+    document.getElementById("scoreValue").textContent +
+    "/100 ✦";
+
+  if(navigator.share){
+
+    navigator.share({
+      title:"My StyleAI Result",
+      text:text
+    }).catch(()=>{});
+
+  }else{
+
+    navigator.clipboard
+      .writeText(text)
+      .then(()=>{
+        alert("Result copied!");
+      })
+      .catch(()=>{
+        alert(text);
+      });
+
+  }
 
 }
 
