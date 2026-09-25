@@ -4,7 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Look Analyzer - Beauty Meter</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #ff477e;
+            --bg: #0f0c1b;
+            --card: #1d1833;
+            --text: #ffffff;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c1b, #201335);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: var(--card);
+            max-width: 500px;
+            width: 100%;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 { color: var(--primary); margin-bottom: 5px; font-size: 28px; }
+        .subtitle { color: #aaa; font-size: 14px; margin-bottom: 25px; }
+        .step-page { transition: all 0.3s ease-in-out; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #ddd; }
+        .gender-options { display: flex; gap: 10px; margin-bottom: 25px; }
+        .btn-gender {
+            flex: 1; padding: 15px; border: 2px solid #443e5c; background: none;
+            color: white; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s;
+        }
+        .btn-gender.active {
+            background: var(--primary); border-color: var(--primary); box-shadow: 0 0 15px rgba(255, 71, 126, 0.4);
+        }
+        select {
+            width: 100%; padding: 15px; background: #2a2447; border: 2px solid #443e5c;
+            color: white; border-radius: 12px; font-size: 16px; box-sizing: border-box;
+        }
+        .upload-section { margin: 25px 0; }
+        .upload-btn {
+            display: inline-block; background: #3b3363; padding: 15px 25px;
+            border-radius: 30px; cursor: pointer; font-weight: bold; border: 1px dashed var(--primary); transition: 0.3s;
+        }
+        .upload-btn:hover { background: #4a417a; }
+        input[type="file"] { display: none; }
+        #previewContainer {
+            position: relative; margin-top: 20px; display: inline-block;
+            max-width: 100%; border-radius: 15px; overflow: hidden; border: 3px solid #ff477e;
+        }
+        #imagePreview { max-width: 100%; max-height: 300px; display: block; }
+        #scanLine {
+            position: absolute; top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(to bottom, transparent, #00ffcc);
+            box-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc; animation: scanAnimation 2s linear infinite;
+        }
+        @keyframes scanAnimation { 0% { top: 0%; } 50% { top: 98%; } 100% { top: 0%; } }
+        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+        .next-btn, .main-btn, .reset-btn {
+            flex: 1; padding: 15px; background: linear-gradient(90deg, #ff477e, #ff6b6b);
+            border: none; color: white; font-size: 16px; font-weight: bold; border-radius: 12px;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4); transition: 0.2s;
+        }
+        .next-btn:hover, .main-btn:hover { transform: translateY(-2px); }
+        .back-btn {
+            padding: 15px 25px; background: #2a2447; border: 2px solid #443e5c;
+            color: white; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.2s;
+        }
+        .main-btn:disabled { background: #443e5c; box-shadow: none; cursor: not-allowed; transform: none; }
+        .meter-container { background: #141124; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; }
+        .meter-title { font-weight: bold; display: block; margin-bottom: 8px; }
+        .meter-bar { width: 100%; height: 20px; background: #2a2447; border-radius: 10px; overflow: hidden; position: relative; }
+        .meter-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #00ffcc, #ff477e); transition: width 2s ease-in-out; }
+        .score-text { display: block; text-align: right; font-size: 20px; font-weight: bold; color: #00ffcc; margin-top: 5px; }
+        .review-box { text-align: left; background: #241e3f; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .verdict-tag { display: inline-block; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; margin-bottom: 10px; color: white; }
+        .main-comment { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #fff; line-height: 1.4; }
+        .details-box, .advice-box { background: #1a1530; padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 14px; line-height: 1.6; }
+        .details-box h3 { margin: 0 0 8px 0; color: #00ffcc; font-size: 15px; }
+        .advice-box h3 { margin: 0 0 8px 0; color: #ffeb3b; font-size: 15px; }
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -32,8 +119,8 @@
         <div class="step-page hidden" id="step2">
             <p class="subtitle">Step 2 of 3: Select your gender</p>
             <div class="gender-options">
-                <button class="btn-gender active" data-gender="girl">🙋‍♀️ Girl</button>
-                <button class="btn-gender" data-gender="boy">🙋‍♂️ Boy</button>
+                <button class="btn-gender active" data-gender="girl" onclick="setGender('girl')">🙋‍♀️ Girl</button>
+                <button class="btn-gender" data-gender="boy" onclick="setGender('boy')">🙋‍♂️ Boy</button>
             </div>
             <div class="btn-group">
                 <button class="back-btn" onclick="goToStep(1)">⬅️ Back</button>
@@ -61,8 +148,6 @@
         <!-- STEP 4: FINAL RESULT SECTION -->
         <div id="resultSection" class="step-page hidden">
             <h2>📊 Your Scan Result</h2>
-            
-            <!-- Locked Beauty Meter -->
             <div class="meter-container">
                 <span class="meter-title">Beauty Match Score:</span>
                 <div class="meter-bar">
@@ -70,27 +155,38 @@
                 </div>
                 <span id="scoreText" class="score-text">0%</span>
             </div>
-
-            <!-- Fashion Review & Comments -->
             <div class="review-box">
                 <div class="verdict-tag" id="verdictTag"></div>
                 <p id="mainComment" class="main-comment"></p>
-                
                 <div class="details-box">
                     <h3>🔍 In-Depth Style Breakdown:</h3>
                     <p id="detailsText"></p>
                 </div>
-
                 <div class="advice-box" id="adviceBox">
                     <h3>💡 Personalized Fashion Advice:</h3>
                     <p id="adviceText"></p>
                 </div>
             </div>
-
-            <button id="resetBtn" class="reset-btn">🔄 Scan Another Photo</button>
+            <button id="resetBtn" class="reset-btn" onclick="location.reload()">🔄 Scan Another Photo</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        let selectedGender = 'girl';
+        function goToStep(stepNumber) {
+            document.querySelectorAll('.step-page').forEach(page => page.classList.add('hidden'));
+            document.getElementById('step' + stepNumber).classList.remove('hidden');
+        }
+        function setGender(gender) {
+            selectedGender = gender;
+            document.querySelectorAll('.btn-gender').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-gender="${gender}"]`).classList.add('active');
+        }
+        const imageUpload = document.getElementById('imageUpload');
+        const previewContainer = document.getElementById('previewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+
+        imageUpload.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
