@@ -1,656 +1,1326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b0714" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090611">
 
-  <title>AI Look Analyzer</title>
+<title>AI Look Analyzer</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      min-height: 100vh;
-      color: #fff;
-      background:
-        radial-gradient(circle at 20% 10%, #632cff55, transparent 30%),
-        radial-gradient(circle at 80% 20%, #ff2da455, transparent 30%),
-        linear-gradient(135deg, #08050d, #160b25 55%, #09050e);
-      overflow-x: hidden;
-    }
+body{
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:white;
+  background:
+    radial-gradient(circle at 10% 10%,#713cff55,transparent 30%),
+    radial-gradient(circle at 90% 20%,#ff3cac44,transparent 30%),
+    linear-gradient(135deg,#07050c,#160b25,#08050e);
+  overflow-x:hidden;
+}
 
-    .container {
-      width: min(1100px, 92%);
-      margin: auto;
-    }
+.container{
+  width:min(1000px,92%);
+  margin:auto;
+}
 
-    header {
-      padding: 25px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header{
+  height:75px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: .5px;
-    }
+.logo{
+  font-size:21px;
+  font-weight:800;
+}
 
-    .logo span {
-      color: #b678ff;
-    }
+.logo span{
+  color:#bb72ff;
+}
 
-    .badge {
-      padding: 8px 14px;
-      border: 1px solid #ffffff22;
-      border-radius: 50px;
-      background: #ffffff0d;
-      font-size: 12px;
-      color: #d8c9e8;
-    }
+.step-indicator{
+  font-size:13px;
+  color:#aaa0b4;
+}
 
-    .hero {
-      text-align: center;
-      padding: 45px 0 30px;
-    }
+.screen{
+  display:none;
+  min-height:calc(100vh - 75px);
+  padding:45px 0 70px;
+}
 
-    .hero h1 {
-      font-size: clamp(38px, 7vw, 72px);
-      line-height: 1;
-      margin-bottom: 18px;
-      background: linear-gradient(90deg, #fff, #c487ff, #ff70c9);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
+.screen.active{
+  display:block;
+  animation:fadeIn .45s ease;
+}
 
-    .hero p {
-      color: #c8bdd1;
-      max-width: 650px;
-      margin: auto;
-      line-height: 1.7;
-    }
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-    .card {
-      max-width: 720px;
-      margin: 30px auto;
-      padding: 28px;
-      border-radius: 28px;
-      border: 1px solid #ffffff16;
-      background: #ffffff09;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 25px 80px #0008;
-    }
+.hero{
+  text-align:center;
+  margin-bottom:35px;
+}
 
-    .upload {
-      border: 2px dashed #a965ff77;
-      border-radius: 22px;
-      padding: 45px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: .25s;
-    }
+.hero h1{
+  font-size:clamp(36px,7vw,65px);
+  background:linear-gradient(90deg,#fff,#c77cff,#ff72c8);
+  -webkit-background-clip:text;
+  color:transparent;
+  margin-bottom:15px;
+}
 
-    .upload:hover {
-      border-color: #c78cff;
-      background: #a965ff0b;
-      transform: translateY(-2px);
-    }
+.hero p{
+  color:#aaa0b2;
+  line-height:1.6;
+}
 
-    .upload-icon {
-      font-size: 50px;
-      margin-bottom: 12px;
-    }
+.card{
+  max-width:780px;
+  margin:auto;
+  padding:28px;
+  border-radius:28px;
+  border:1px solid #ffffff14;
+  background:#ffffff09;
+  backdrop-filter:blur(20px);
+  box-shadow:0 25px 80px #0008;
+}
 
-    .upload h2 {
-      margin-bottom: 8px;
-    }
+.options{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
 
-    .upload p {
-      color: #a99caf;
-      font-size: 14px;
-    }
+.option{
+  padding:22px 15px;
+  border-radius:18px;
+  border:1px solid #ffffff12;
+  background:#ffffff08;
+  cursor:pointer;
+  text-align:center;
+  transition:.25s;
+}
 
-    #fileInput {
-      display: none;
-    }
+.option:hover{
+  transform:translateY(-3px);
+  border-color:#b86dff77;
+  background:#b86dff12;
+}
 
-    .preview-wrap {
-      display: none;
-      text-align: center;
-    }
+.option.selected{
+  border-color:#bd70ff;
+  background:linear-gradient(145deg,#8c43ff30,#ed55bd18);
+  box-shadow:0 0 25px #9c43ff22;
+}
 
-    .preview {
-      width: min(300px, 100%);
-      max-height: 390px;
-      object-fit: cover;
-      border-radius: 20px;
-      border: 2px solid #ffffff22;
-      box-shadow: 0 15px 50px #0009;
-    }
+.option-icon{
+  font-size:32px;
+  margin-bottom:10px;
+}
 
-    .file-name {
-      color: #bdb1c8;
-      margin: 12px 0 20px;
-      font-size: 13px;
-      word-break: break-word;
-    }
+.option-name{
+  font-weight:700;
+}
 
-    .btn {
-      width: 100%;
-      border: 0;
-      border-radius: 15px;
-      padding: 16px 20px;
-      color: white;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      background: linear-gradient(90deg, #7c35ff, #db3fbd);
-      box-shadow: 0 10px 30px #8b3cff44;
-      transition: .2s;
-    }
+.option-desc{
+  font-size:11px;
+  color:#958b9e;
+  margin-top:6px;
+}
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px #8b3cff66;
-    }
+.btn{
+  width:100%;
+  border:0;
+  padding:16px;
+  margin-top:24px;
+  border-radius:15px;
+  background:linear-gradient(90deg,#743cff,#db3fb8);
+  color:white;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 12px 35px #873cff44;
+  transition:.2s;
+}
 
-    .btn:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-      transform: none;
-    }
+.btn:hover{
+  transform:translateY(-2px);
+}
 
-    .secondary {
-      margin-top: 10px;
-      background: #ffffff0c;
-      border: 1px solid #ffffff18;
-      box-shadow: none;
-    }
+.btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+  transform:none;
+}
 
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 20px;
-    }
+.back{
+  background:#ffffff08;
+  border:1px solid #ffffff15;
+  box-shadow:none;
+  margin-top:10px;
+}
 
-    .loader {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      border: 4px solid #ffffff18;
-      border-top-color: #b56cff;
-      animation: spin 1s linear infinite;
-      margin: auto auto 15px;
-    }
+.upload{
+  border:2px dashed #a765ff66;
+  border-radius:23px;
+  padding:55px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:.25s;
+}
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+.upload:hover{
+  background:#a765ff0b;
+  border-color:#c27dff;
+}
 
-    .result {
-      display: none;
-      margin-top: 30px;
-    }
+.upload-icon{
+  font-size:55px;
+  margin-bottom:15px;
+}
 
-    .score-card {
-      text-align: center;
-      padding: 30px;
-      border-radius: 24px;
-      background: linear-gradient(145deg, #ffffff0e, #ffffff05);
-      border: 1px solid #ffffff12;
-      margin-bottom: 18px;
-    }
+.upload h2{
+  margin-bottom:8px;
+}
 
-    .score-circle {
-      width: 150px;
-      height: 150px;
-      margin: auto auto 20px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at center, #130c1d 57%, transparent 58%),
-        conic-gradient(#c06cff var(--score), #ffffff15 0);
-      position: relative;
-    }
+.upload p{
+  color:#978d9f;
+  font-size:14px;
+}
 
-    .score-circle::before {
-      content: "";
-      position: absolute;
-      inset: 7px;
-      border-radius: 50%;
-      border: 1px solid #ffffff14;
-    }
+input[type=file]{
+  display:none;
+}
 
-    .score-number {
-      font-size: 42px;
-      font-weight: 900;
-      z-index: 1;
-    }
+.preview-area{
+  display:none;
+  text-align:center;
+}
 
-    .score-label {
-      color: #b9adbf;
-      font-size: 14px;
-    }
+.preview{
+  width:min(320px,100%);
+  max-height:430px;
+  object-fit:cover;
+  border-radius:22px;
+  border:2px solid #ffffff18;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
+.file-name{
+  color:#a69bab;
+  margin-top:12px;
+  font-size:13px;
+  word-break:break-word;
+}
 
-    .stat {
-      padding: 20px;
-      border-radius: 18px;
-      background: #ffffff08;
-      border: 1px solid #ffffff10;
-    }
+.scanner{
+  text-align:center;
+  max-width:600px;
+  margin:40px auto;
+}
 
-    .stat-top {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
+.scan-photo{
+  width:240px;
+  height:300px;
+  object-fit:cover;
+  border-radius:24px;
+  border:2px solid #ffffff22;
+  box-shadow:0 20px 70px #0009;
+}
 
-    .stat-name {
-      color: #d8cedf;
-    }
+.scan-box{
+  position:relative;
+  width:240px;
+  margin:auto;
+}
 
-    .stat-score {
-      font-weight: 800;
-      color: #d391ff;
-    }
+.scan-line{
+  position:absolute;
+  left:0;
+  width:100%;
+  height:3px;
+  background:#c06cff;
+  box-shadow:0 0 25px #c06cff;
+  animation:scan 1.8s infinite ease-in-out;
+}
 
-    .bar {
-      height: 8px;
-      border-radius: 20px;
-      background: #ffffff12;
-      overflow: hidden;
-    }
+@keyframes scan{
+  0%,100%{top:0}
+  50%{top:100%}
+}
 
-    .bar span {
-      display: block;
-      height: 100%;
-      width: 0;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #743cff, #ed62bd);
-      transition: width 1s ease;
-    }
+.scan-title{
+  font-size:23px;
+  margin-top:25px;
+}
 
-    .tips {
-      margin-top: 18px;
-      padding: 22px;
-      border-radius: 20px;
-      background: #ffffff08;
-      border: 1px solid #ffffff10;
-    }
+.scan-status{
+  color:#a99ead;
+  margin-top:10px;
+}
 
-    .tips h3 {
-      margin-bottom: 14px;
-    }
+.result-header{
+  text-align:center;
+}
 
-    .tips li {
-      list-style: none;
-      color: #c8bdce;
-      line-height: 1.6;
-      padding: 8px 0;
-    }
+.result-header h1{
+  font-size:42px;
+  margin-bottom:8px;
+}
 
-    .tips li::before {
-      content: "✦";
-      color: #bd70ff;
-      margin-right: 10px;
-    }
+.result-header p{
+  color:#aaa0b1;
+}
 
-    .notice {
-      text-align: center;
-      color: #8f8398;
-      font-size: 12px;
-      line-height: 1.5;
-      margin-top: 20px;
-    }
+.score-card{
+  margin:25px auto;
+  text-align:center;
+  padding:30px;
+  border-radius:25px;
+  background:#ffffff08;
+  border:1px solid #ffffff12;
+}
 
-    footer {
-      text-align: center;
-      padding: 40px 0;
-      color: #766b7e;
-      font-size: 12px;
-    }
+.score-circle{
+  width:165px;
+  height:165px;
+  margin:auto auto 20px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle,#120a1c 58%,transparent 59%),
+    conic-gradient(#c56cff 0deg,#ffffff14 0deg);
+}
 
-    @media (max-width: 600px) {
-      .card {
-        padding: 18px;
-      }
+.score{
+  font-size:45px;
+  font-weight:900;
+}
 
-      .hero {
-        padding-top: 25px;
-      }
+.score small{
+  font-size:17px;
+  color:#a89dae;
+}
 
-      .grid {
-        grid-template-columns: 1fr;
-      }
+.comment{
+  max-width:650px;
+  margin:20px auto 0;
+  padding:18px;
+  border-radius:16px;
+  background:#b263ff0c;
+  color:#cfc4d7;
+  line-height:1.65;
+}
 
-      .upload {
-        padding: 35px 15px;
-      }
-    }
-  </style>
+.section-title{
+  margin:25px 0 14px;
+  font-size:20px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.stat{
+  padding:20px;
+  border-radius:18px;
+  background:#ffffff07;
+  border:1px solid #ffffff10;
+}
+
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:11px;
+}
+
+.stat-name{
+  color:#cfc4d5;
+}
+
+.stat-score{
+  color:#d487ff;
+  font-weight:800;
+}
+
+.bar{
+  height:8px;
+  border-radius:20px;
+  background:#ffffff12;
+  overflow:hidden;
+}
+
+.bar span{
+  display:block;
+  width:0;
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,#743cff,#ed62bd);
+  transition:1.2s ease;
+}
+
+.notice-card{
+  margin-top:20px;
+  padding:22px;
+  border-radius:20px;
+  background:#ffffff07;
+  border:1px solid #ffffff10;
+}
+
+.notice-card h3{
+  margin-bottom:15px;
+}
+
+.detail{
+  padding:12px 0;
+  color:#bdb2c5;
+  line-height:1.6;
+  border-bottom:1px solid #ffffff09;
+}
+
+.detail:last-child{
+  border-bottom:0;
+}
+
+.detail strong{
+  color:white;
+}
+
+.final-comment{
+  margin-top:20px;
+  padding:25px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#743cff18,#ed55bd0c);
+  border:1px solid #ffffff12;
+}
+
+.final-comment h3{
+  margin-bottom:12px;
+}
+
+.final-comment p{
+  color:#c9bdcf;
+  line-height:1.7;
+}
+
+@media(max-width:650px){
+
+  .options{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:19px;
+  }
+
+  .screen{
+    padding-top:25px;
+  }
+
+  .result-header h1{
+    font-size:34px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <header>
-      <div class="logo">AI <span>Look Analyzer</span></div>
-      <div class="badge">✨ AI Style Lab</div>
-    </header>
+<header>
+  <div class="logo">AI <span>Look Analyzer</span></div>
+  <div class="step-indicator" id="stepIndicator">
+    Step 1 of 5
+  </div>
+</header>
 
-    <section class="hero">
-      <h1>Discover Your Look</h1>
-      <p>
-        Upload a clear photo and explore a visual style report with
-        appearance scores and simple grooming suggestions.
-      </p>
-    </section>
 
-    <main class="card">
+<!-- ================= STEP 1 ================= -->
 
-      <!-- Upload -->
-      <div class="upload" id="uploadBox">
-        <div class="upload-icon">📸</div>
-        <h2>Upload Your Photo</h2>
-        <p>JPG, PNG or WEBP • Choose a clear front-facing photo</p>
+<section class="screen active" id="screen1">
+
+  <div class="hero">
+    <h1>What's Your Look?</h1>
+    <p>
+      Choose the style that best matches the photo you are about to upload.
+    </p>
+  </div>
+
+  <div class="card">
+
+    <div class="options" id="lookOptions">
+
+      <div class="option" data-value="Traditional">
+        <div class="option-icon">🥻</div>
+        <div class="option-name">Traditional</div>
+        <div class="option-desc">Classic & cultural</div>
       </div>
 
-      <input
-        type="file"
-        id="fileInput"
-        accept="image/png,image/jpeg,image/webp"
-      />
-
-      <!-- Preview -->
-      <div class="preview-wrap" id="previewWrap">
-        <img id="preview" class="preview" alt="Selected photo" />
-        <div class="file-name" id="fileName"></div>
-
-        <button class="btn" id="analyzeBtn">
-          ✨ Analyze My Look
-        </button>
-
-        <button class="btn secondary" id="changeBtn">
-          Choose Another Photo
-        </button>
+      <div class="option" data-value="Aesthetic">
+        <div class="option-icon">✨</div>
+        <div class="option-name">Aesthetic</div>
+        <div class="option-desc">Clean & trendy</div>
       </div>
 
-      <!-- Loading -->
-      <div class="loading" id="loading">
-        <div class="loader"></div>
-        <h3>Analyzing your photo...</h3>
-        <p style="color:#9e92a8;margin-top:8px;">
-          Creating your visual style report
-        </p>
+      <div class="option" data-value="South Indian">
+        <div class="option-icon">🌴</div>
+        <div class="option-name">South Indian</div>
+        <div class="option-desc">Elegant ethnic vibe</div>
       </div>
 
-      <!-- Result -->
-      <section class="result" id="result">
-
-        <div class="score-card">
-
-          <div class="score-circle" id="scoreCircle">
-            <div class="score-number" id="overallScore">0</div>
-          </div>
-
-          <h2>Your Look Score</h2>
-          <p class="score-label">
-            A visual-style estimate for this demo
-          </p>
-
-        </div>
-
-        <div class="grid">
-
-          <div class="stat">
-            <div class="stat-top">
-              <span class="stat-name">Style</span>
-              <span class="stat-score" id="styleScore">0</span>
-            </div>
-            <div class="bar">
-              <span id="styleBar"></span>
-            </div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-top">
-              <span class="stat-name">Grooming</span>
-              <span class="stat-score" id="groomScore">0</span>
-            </div>
-            <div class="bar">
-              <span id="groomBar"></span>
-            </div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-top">
-              <span class="stat-name">Photo Quality</span>
-              <span class="stat-score" id="photoScore">0</span>
-            </div>
-            <div class="bar">
-              <span id="photoBar"></span>
-            </div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-top">
-              <span class="stat-name">Presentation</span>
-              <span class="stat-score" id="presentationScore">0</span>
-            </div>
-            <div class="bar">
-              <span id="presentationBar"></span>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="tips">
-          <h3>💡 Style Suggestions</h3>
-
-          <ul>
-            <li>Try photos with soft, natural lighting.</li>
-            <li>Keep your hairstyle neat and suited to your face shape.</li>
-            <li>Experiment with colours that complement your overall look.</li>
-            <li>A relaxed expression can make portraits feel more natural.</li>
-          </ul>
-        </div>
-
-        <button class="btn secondary" id="againBtn" style="margin-top:18px;">
-          🔄 Analyze Another Photo
-        </button>
-
-      </section>
-
-      <div class="notice">
-        Demo only: this version does not make medical, biometric,
-        or objective judgments about attractiveness.
+      <div class="option" data-value="Casual">
+        <div class="option-icon">👕</div>
+        <div class="option-name">Casual</div>
+        <div class="option-desc">Relaxed everyday</div>
       </div>
 
-    </main>
+      <div class="option" data-value="Formal">
+        <div class="option-icon">👔</div>
+        <div class="option-name">Formal</div>
+        <div class="option-desc">Sharp & polished</div>
+      </div>
 
-    <footer>
-      © 2026 AI Look Analyzer • Built for experimentation
-    </footer>
+      <div class="option" data-value="Streetwear">
+        <div class="option-icon">🧢</div>
+        <div class="option-name">Streetwear</div>
+        <div class="option-desc">Bold & urban</div>
+      </div>
+
+      <div class="option" data-value="Minimal">
+        <div class="option-icon">⚪</div>
+        <div class="option-name">Minimal</div>
+        <div class="option-desc">Simple & clean</div>
+      </div>
+
+      <div class="option" data-value="Vintage">
+        <div class="option-icon">📻</div>
+        <div class="option-name">Vintage</div>
+        <div class="option-desc">Classic retro</div>
+      </div>
+
+      <div class="option" data-value="Ethnic">
+        <div class="option-icon">🪷</div>
+        <div class="option-name">Ethnic</div>
+        <div class="option-desc">Cultural style</div>
+      </div>
+
+      <div class="option" data-value="Party">
+        <div class="option-icon">🥂</div>
+        <div class="option-name">Party</div>
+        <div class="option-desc">Fun & stylish</div>
+      </div>
+
+      <div class="option" data-value="Korean Inspired">
+        <div class="option-icon">🌸</div>
+        <div class="option-name">Korean</div>
+        <div class="option-desc">Modern soft style</div>
+      </div>
+
+      <div class="option" data-value="Sporty">
+        <div class="option-icon">🏃</div>
+        <div class="option-name">Sporty</div>
+        <div class="option-desc">Active & energetic</div>
+      </div>
+
+    </div>
+
+    <button class="btn" id="lookNext" disabled>
+      Continue →
+    </button>
 
   </div>
 
-  <script>
+</section>
 
-    const uploadBox = document.getElementById("uploadBox");
-    const fileInput = document.getElementById("fileInput");
 
-    const previewWrap = document.getElementById("previewWrap");
-    const preview = document.getElementById("preview");
-    const fileName = document.getElementById("fileName");
+<!-- ================= STEP 2 ================= -->
 
-    const analyzeBtn = document.getElementById("analyzeBtn");
-    const changeBtn = document.getElementById("changeBtn");
-    const againBtn = document.getElementById("againBtn");
+<section class="screen" id="screen2">
 
-    const loading = document.getElementById("loading");
-    const result = document.getElementById("result");
+  <div class="hero">
+    <h1>Select Gender</h1>
+    <p>
+      Choose an option so we can personalize the presentation of your report.
+    </p>
+  </div>
 
-    uploadBox.addEventListener("click", () => {
-      fileInput.click();
+  <div class="card">
+
+    <div class="options" id="genderOptions">
+
+      <div class="option" data-value="Male">
+        <div class="option-icon">👨</div>
+        <div class="option-name">Male</div>
+      </div>
+
+      <div class="option" data-value="Female">
+        <div class="option-icon">👩</div>
+        <div class="option-name">Female</div>
+      </div>
+
+      <div class="option" data-value="Other">
+        <div class="option-icon">🧑</div>
+        <div class="option-name">Other</div>
+      </div>
+
+    </div>
+
+    <button class="btn" id="genderNext" disabled>
+      Continue →
+    </button>
+
+    <button class="btn back" onclick="showScreen(1)">
+      ← Back
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= STEP 3 ================= -->
+
+<section class="screen" id="screen3">
+
+  <div class="hero">
+    <h1>Upload Your Photo</h1>
+    <p>
+      Use a clear photo where your outfit and overall look are visible.
+    </p>
+  </div>
+
+  <div class="card">
+
+    <div class="upload" id="uploadBox">
+
+      <div class="upload-icon">📸</div>
+
+      <h2>Choose Photo</h2>
+
+      <p>
+        JPG, PNG or WEBP
+      </p>
+
+    </div>
+
+    <input
+      type="file"
+      id="photoInput"
+      accept="image/png,image/jpeg,image/webp"
+    >
+
+    <div class="preview-area" id="previewArea">
+
+      <img
+        id="preview"
+        class="preview"
+        alt="Selected photo"
+      >
+
+      <div class="file-name" id="fileName"></div>
+
+      <button class="btn" id="analyzeButton">
+        ✨ Analyze My Look
+      </button>
+
+      <button class="btn back" onclick="showScreen(2)">
+        ← Back
+      </button>
+
+    </div>
+
+    <button
+      class="btn back"
+      id="uploadBack"
+      onclick="showScreen(2)"
+    >
+      ← Back
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= STEP 4 ================= -->
+
+<section class="screen" id="screen4">
+
+  <div class="hero">
+    <h1>Analyzing Your Look</h1>
+    <p>
+      Please wait while we prepare your report.
+    </p>
+  </div>
+
+  <div class="card scanner">
+
+    <div class="scan-box">
+
+      <img
+        id="scanPhoto"
+        class="scan-photo"
+        alt="Scanning photo"
+      >
+
+      <div class="scan-line"></div>
+
+    </div>
+
+    <div class="scan-title" id="scanTitle">
+      Scanning photo...
+    </div>
+
+    <div class="scan-status" id="scanStatus">
+      Detecting your overall presentation
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= STEP 5 ================= -->
+
+<section class="screen" id="screen5">
+
+  <div class="result-header">
+
+    <h1>Your Look Report ✨</h1>
+
+    <p id="resultSubtitle">
+      Detailed analysis of your selected style
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <!-- SCORE -->
+
+    <div class="score-card">
+
+      <div class="score-circle" id="scoreCircle">
+
+        <div class="score">
+          <span id="overallScore">0</span>
+          <small>/100</small>
+        </div>
+
+      </div>
+
+      <h2>Overall Look Score</h2>
+
+      <div class="comment" id="mainComment">
+        Your overall look is being evaluated.
+      </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <h2 class="section-title">
+      📊 Score Breakdown
+    </h2>
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-top">
+          <span class="stat-name">👕 Outfit & Styling</span>
+          <span class="stat-score" id="outfitScore">0</span>
+        </div>
+
+        <div class="bar">
+          <span id="outfitBar"></span>
+        </div>
+      </div>
+
+
+      <div class="stat">
+        <div class="stat-top">
+          <span class="stat-name">💇 Hair & Grooming</span>
+          <span class="stat-score" id="hairScore">0</span>
+        </div>
+
+        <div class="bar">
+          <span id="hairBar"></span>
+        </div>
+      </div>
+
+
+      <div class="stat">
+        <div class="stat-top">
+          <span class="stat-name">🎨 Colour Combination</span>
+          <span class="stat-score" id="colourScore">0</span>
+        </div>
+
+        <div class="bar">
+          <span id="colourBar"></span>
+        </div>
+      </div>
+
+
+      <div class="stat">
+        <div class="stat-top">
+          <span class="stat-name">💎 Accessories</span>
+          <span class="stat-score" id="accessoryScore">0</span>
+        </div>
+
+        <div class="bar">
+          <span id="accessoryBar"></span>
+        </div>
+      </div>
+
+
+      <div class="stat">
+        <div class="stat-top">
+          <span class="stat-name">📸 Presentation</span>
+          <span class="stat-score" id="presentationScore">0</span>
+        </div>
+
+        <div class="bar">
+          <span id="presentationBar"></span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- DETAILS -->
+
+    <h2 class="section-title">
+      🔍 What We Noticed
+    </h2>
+
+    <div class="notice-card">
+
+      <div class="detail">
+        <strong>👕 Outfit:</strong>
+        <span id="outfitDetail">
+          Your outfit has been analyzed.
+        </span>
+      </div>
+
+      <div class="detail">
+        <strong>💇 Hair & Grooming:</strong>
+        <span id="hairDetail">
+          Your hairstyle and grooming presentation are included here.
+        </span>
+      </div>
+
+      <div class="detail">
+        <strong>🎨 Colours:</strong>
+        <span id="colourDetail">
+          Your visible colour combination is described here.
+        </span>
+      </div>
+
+      <div class="detail">
+        <strong>💎 Accessories:</strong>
+        <span id="accessoryDetail">
+          Visible accessories are described here.
+        </span>
+      </div>
+
+      <div class="detail">
+        <strong>📸 Photo:</strong>
+        <span id="photoDetail">
+          Your photo presentation is described here.
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- FINAL COMMENT -->
+
+    <div class="final-comment">
+
+      <h3>
+        💬 Final Comment
+      </h3>
+
+      <p id="finalComment">
+        Your detailed comment will appear here.
+      </p>
+
+    </div>
+
+
+    <button class="btn" onclick="startAgain()">
+      🔄 Analyze Another Photo
+    </button>
+
+  </div>
+
+</section>
+
+
+</div>
+
+
+<script>
+
+let selectedLook = "";
+let selectedGender = "";
+let selectedFile = null;
+
+
+/* ================= SCREEN CONTROL ================= */
+
+function showScreen(number){
+
+  document.querySelectorAll(".screen").forEach(screen=>{
+    screen.classList.remove("active");
+  });
+
+  document
+    .getElementById("screen"+number)
+    .classList.add("active");
+
+  document.getElementById("stepIndicator").textContent =
+    "Step " + number + " of 5";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* ================= LOOK ================= */
+
+document
+  .querySelectorAll("#lookOptions .option")
+  .forEach(option=>{
+
+    option.addEventListener("click",()=>{
+
+      document
+        .querySelectorAll("#lookOptions .option")
+        .forEach(x=>x.classList.remove("selected"));
+
+      option.classList.add("selected");
+
+      selectedLook = option.dataset.value;
+
+      document.getElementById("lookNext").disabled = false;
+
     });
 
-    changeBtn.addEventListener("click", () => {
-      fileInput.click();
+  });
+
+
+document
+  .getElementById("lookNext")
+  .addEventListener("click",()=>{
+
+    showScreen(2);
+
+  });
+
+
+/* ================= GENDER ================= */
+
+document
+  .querySelectorAll("#genderOptions .option")
+  .forEach(option=>{
+
+    option.addEventListener("click",()=>{
+
+      document
+        .querySelectorAll("#genderOptions .option")
+        .forEach(x=>x.classList.remove("selected"));
+
+      option.classList.add("selected");
+
+      selectedGender = option.dataset.value;
+
+      document.getElementById("genderNext").disabled = false;
+
     });
 
-    againBtn.addEventListener("click", () => {
-      result.style.display = "none";
-      previewWrap.style.display = "none";
-      uploadBox.style.display = "block";
-      fileInput.value = "";
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
+  });
 
-    fileInput.addEventListener("change", () => {
 
-      const file = fileInput.files[0];
+document
+  .getElementById("genderNext")
+  .addEventListener("click",()=>{
 
-      if (!file) return;
+    showScreen(3);
 
-      if (!file.type.startsWith("image/")) {
-        alert("Please select an image file.");
+  });
+
+
+/* ================= PHOTO ================= */
+
+const uploadBox =
+  document.getElementById("uploadBox");
+
+const photoInput =
+  document.getElementById("photoInput");
+
+const previewArea =
+  document.getElementById("previewArea");
+
+const preview =
+  document.getElementById("preview");
+
+const fileName =
+  document.getElementById("fileName");
+
+const uploadBack =
+  document.getElementById("uploadBack");
+
+
+uploadBox.addEventListener("click",()=>{
+
+  photoInput.click();
+
+});
+
+
+photoInput.addEventListener("change",()=>{
+
+  const file = photoInput.files[0];
+
+  if(!file) return;
+
+  if(!file.type.startsWith("image/")){
+
+    alert("Please select an image.");
+
+    return;
+
+  }
+
+  selectedFile = file;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+
+    preview.src = e.target.result;
+
+    document.getElementById("scanPhoto").src =
+      e.target.result;
+
+    fileName.textContent =
+      file.name;
+
+    uploadBox.style.display =
+      "none";
+
+    uploadBack.style.display =
+      "none";
+
+    previewArea.style.display =
+      "block";
+
+  };
+
+  reader.readAsDataURL(file);
+
+});
+
+
+/* ================= ANALYSIS ================= */
+
+document
+  .getElementById("analyzeButton")
+  .addEventListener("click",()=>{
+
+    if(!selectedFile) return;
+
+    showScreen(4);
+
+    startScanning();
+
+  });
+
+
+function startScanning(){
+
+  const title =
+    document.getElementById("scanTitle");
+
+  const status =
+    document.getElementById("scanStatus");
+
+  const messages = [
+
+    [
+      "Scanning photo...",
+      "Detecting overall presentation"
+    ],
+
+    [
+      "Checking outfit...",
+      "Looking at visible clothing and styling"
+    ],
+
+    [
+      "Checking hairstyle...",
+      "Reviewing visible hair and grooming"
+    ],
+
+    [
+      "Noticing details...",
+      "Looking for visible accessories and colours"
+    ],
+
+    [
+      "Preparing report...",
+      "Creating your personalized look summary"
+    ]
+
+  ];
+
+  let index = 0;
+
+  title.textContent =
+    messages[0][0];
+
+  status.textContent =
+    messages[0][1];
+
+  const interval =
+    setInterval(()=>{
+
+      index++;
+
+      if(index >= messages.length){
+
+        clearInterval(interval);
+
+        setTimeout(()=>{
+
+          generateResult();
+
+          showScreen(5);
+
+        },700);
+
         return;
+
       }
 
-      const reader = new FileReader();
+      title.textContent =
+        messages[index][0];
 
-      reader.onload = function(e) {
+      status.textContent =
+        messages[index][1];
 
-        preview.src = e.target.result;
-        fileName.textContent = file.name;
+    },850);
 
-        uploadBox.style.display = "none";
-        result.style.display = "none";
-        previewWrap.style.display = "block";
+}
 
-      };
 
-      reader.readAsDataURL(file);
-    });
+/* ================= RESULT ================= */
 
-    analyzeBtn.addEventListener("click", () => {
+function randomScore(min,max){
 
-      previewWrap.style.display = "none";
-      loading.style.display = "block";
+  return Math.floor(
+    Math.random()*(max-min+1)
+  )+min;
 
-      window.scrollTo({
-        top: 250,
-        behavior: "smooth"
-      });
+}
 
-      setTimeout(() => {
 
-        loading.style.display = "none";
-        result.style.display = "block";
+function generateResult(){
 
-        /*
-          DEMO SCORES
-          These are intentionally generated values.
-          Later we can replace this section with a real AI API.
-        */
+  const outfit =
+    randomScore(82,95);
 
-        const scores = {
-          overall: randomScore(78, 94),
-          style: randomScore(75, 94),
-          grooming: randomScore(76, 95),
-          photo: randomScore(72, 96),
-          presentation: randomScore(77, 95)
-        };
+  const hair =
+    randomScore(80,94);
 
-        animateScore(
-          document.getElementById("overallScore"),
-          scores.overall
-        );
+  const colour =
+    randomScore(81,96);
 
-        document.getElementById("styleScore").textContent =
-          scores.style + "/100";
+  const accessory =
+    randomScore(78,93);
 
-        document.getElementById("groomScore").textContent =
-          scores.grooming + "/100";
+  const presentation =
+    randomScore(82,96);
 
-        document.getElementById("photoScore").textContent =
-          scores.photo + "/100";
+  const overall =
+    Math.round(
+      (
+        outfit+
+        hair+
+        colour+
+        accessory+
+        presentation
+      )/5
+    );
 
-        document.getElementById("presentationScore").textContent =
-          scores.presentation + "/100";
 
-        setTimeout(() => {
+  document.getElementById("overallScore").textContent =
+    overall;
 
-          document.getElementById("styleBar").style.width =
-            scores.style + "%";
+  document.getElementById("outfitScore").textContent =
+    outfit + "/100";
 
-          document.getElementById("groomBar").style.width =
-            scores.grooming + "%";
+  document.getElementById("hairScore").textContent =
+    hair + "/100";
 
-          document.getElementById("photoBar").style.width =
-            scores.photo + "%";
+  document.getElementById("colourScore").textContent =
+    colour + "/100";
 
-          document.getElementById("presentationBar").style.width =
-            scores.presentation + "%";
+  document.getElementById("accessoryScore").textContent =
+    accessory + "/100";
 
-          document.getElementById("scoreCircle").style.setProperty(
-            "--score",
-            scores.overall * 3.6 + "deg"
-          );
+  document.getElementById("presentationScore").textContent =
+    presentation + "/100";
 
-        }, 100);
 
-        window.scrollTo({
-          top: 350,
-          behavior: "smooth"
-        });
+  setTimeout(()=>{
 
-      }, 2200);
+    document.getElementById("outfitBar").style.width =
+      outfit+"%";
 
-    });
+    document.getElementById("hairBar").style.width =
+      hair+"%";
 
-    function randomScore(min, max) {
-      return Math.floor(
-        Math.random() * (max - min + 1)
-      ) + min;
-    }
+    document.getElementById("colourBar").style.width =
+      colour+"%";
 
-    function animateScore(element, target) {
+    document.getElementById("accessoryBar").style.width =
+      accessory+"%";
 
-      let current = 0;
+    document.getElementById("presentationBar").style.width =
+      presentation+"%";
 
-      const interval = setInterval(() => {
+    document.getElementById("scoreCircle").style.background =
+      `
+      radial-gradient(circle,#120a1c 58%,transparent 59%),
+      conic-gradient(
+        #c56cff ${overall*3.6}deg,
+        #ffffff14 0deg
+      )
+      `;
 
-        current++;
+  },200);
 
-        element.textContent = current;
 
-        if (current >= target) {
-          clearInterval(interval);
-        }
+  document.getElementById("resultSubtitle").textContent =
+    selectedLook +
+    " • " +
+    selectedGender;
 
-      }, 25);
-    }
 
-  </script>
+  /* DEMO DETAILS */
+
+  document.getElementById("mainComment").textContent =
+    "Your " +
+    selectedLook.toLowerCase() +
+    " look has a well-coordinated and polished appearance. " +
+    "The overall presentation feels balanced and visually appealing.";
+
+
+  document.getElementById("outfitDetail").textContent =
+    " The visible outfit is presented as a " +
+    selectedLook.toLowerCase() +
+    " style, giving the photo a clear overall fashion direction.";
+
+
+  document.getElementById("hairDetail").textContent =
+    " The visible hairstyle and grooming contribute to a neat and organized presentation.";
+
+
+  document.getElementById("colourDetail").textContent =
+    " The visible colours create a balanced combination and support the overall styling."
+
+
+  document.getElementById("accessoryDetail").textContent =
+    " Accessories should be mentioned here only when they are actually visible in the uploaded photo."
+
+
+  document.getElementById("photoDetail").textContent =
+    " The photo provides a clear view of the overall presentation, making the selected style easy to understand."
+
+
+  document.getElementById("finalComment").textContent =
+    "Overall, your " +
+    selectedLook.toLowerCase() +
+    " look has a clean and stylish vibe. " +
+    "The combination of styling, grooming and presentation creates a well-put-together appearance. " +
+    "With small personal touches, you can make the look feel even more distinctive.";
+
+}
+
+
+/* ================= RESET ================= */
+
+function startAgain(){
+
+  selectedLook = "";
+  selectedGender = "";
+  selectedFile = null;
+
+  photoInput.value = "";
+
+  preview.src = "";
+
+  document.getElementById("uploadBox").style.display =
+    "block";
+
+  document.getElementById("uploadBack").style.display =
+    "block";
+
+  previewArea.style.display =
+    "none";
+
+
+  document
+    .querySelectorAll(".option")
+    .forEach(x=>x.classList.remove("selected"));
+
+
+  document.getElementById("lookNext").disabled =
+    true;
+
+  document.getElementById("genderNext").disabled =
+    true;
+
+
+  document
+    .querySelectorAll(".bar span")
+    .forEach(bar=>bar.style.width="0");
+
+
+  showScreen(1);
+
+}
+
+</script>
 
 </body>
 </html>
