@@ -24,7 +24,7 @@ const imagePreview = document.getElementById('imagePreview');
 const analyzeBtn = document.getElementById('analyzeBtn');
 
 imageUpload.addEventListener('change', function() {
-    const file = this.files[0];
+    const file = this.files;
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -53,7 +53,7 @@ analyzeBtn.addEventListener('click', () => {
         document.getElementById('step3').classList.add('hidden');
         resultSection.classList.remove('hidden');
 
-        const isGoodLook = Math.random() > 0.4;
+        const isGoodLook = Math.random() > 0.3; // 70% chance high score
         const score = isGoodLook ? Math.floor(Math.random() * 16) + 85 : Math.floor(Math.random() * 21) + 55;
 
         meterFill.style.width = score + '%';
@@ -63,7 +63,7 @@ analyzeBtn.addEventListener('click', () => {
     }, 3000);
 });
 
-// Premium Hinglish Database
+// Premium Hinglish Database with New Themes
 function generateReview(gender, theme, isGood) {
     const verdictTag = document.getElementById('verdictTag');
     const mainComment = document.getElementById('mainComment');
@@ -73,33 +73,77 @@ function generateReview(gender, theme, isGood) {
 
     if (gender === 'girl') {
         if (isGood) {
-            verdictTag.style.backgroundColor = '#2e7d32'; verdictTag.innerText = '🔥 Drop-Dead Gorgeous!';
-            mainComment.innerText = 'You look absolutely stunning and beautiful! Ekdam laakhaat ek face... your vibe is completely unmatched! 😍';
-            detailsText.innerHTML = 'Your jewelry choices are extremely elegant and aesthetically pleasing. Te galyatla ani kantala is looking so delicate, perfectly matching your outfit color tone! The premium golden border of the saree is creating an elite contrast with those red bangles on your red blouse. Aur is poore flawless look ko completely next level par le gaya hai aapka <b>Gajra</b>!';
+            verdictTag.style.backgroundColor = '#2e7d32'; verdictTag.innerText = '🔥 Absolutely Gorgeous!';
             adviceBox.classList.add('hidden');
+
+            if (theme === 'bollywood') {
+                mainComment.innerText = 'Full Bollywood Actress Vibe! Direct cinema parda par entry honi chahiye aapki! 😍';
+                detailsText.innerHTML = 'Aapka pose aur dress selection ekदम dynamic hai, bilkul 90s ki superhit heroine jaisa! The outfit colors are popping out beautifully under the lights, and that dramatic facial expression is pure gold. Flawless beauty!';
+            } else if (theme === 'streetwear') {
+                mainComment.innerText = 'Super Chill & Trendy! You are completely killing this streetwear look! 🔥';
+                detailsText.innerHTML = 'Oversized top aur elements ka coordination builds a killer aesthetic. Loose hair and minimal rings look absolutely aesthetic. High-street fashion at its best!';
+            } else if (theme === 'corporate') {
+                mainComment.innerText = 'Elite Corporate Slay! Office boss lady energy all over! 💼';
+                detailsText.innerHTML = 'That sharp blazer/formal look is giving massive professional goals. Minimalist watch, sleek hair, and a confident smile... aapke is charm ke aage poori company flat ho jayegi!';
+            } else { // Default traditional/modern/hot
+                mainComment.innerText = 'You look absolutely stunning! Ekdam laakhaat ek face... your vibe is completely unmatched! 😍';
+                detailsText.innerHTML = 'Your jewelry choices are extremely elegant. Te galyatla ani kantala is looking so delicate, perfectly matching your outfit color tone! Saree border ka golden touch and red bangles look elite. Flawless look!';
+            }
         } else {
-            verdictTag.style.backgroundColor = '#c62828'; verdictTag.innerText = '💡 Quick Style Transformation Needed';
-            mainComment.innerText = 'The look is sweet, but it needs a little bit of glamour to stand out! 🤔';
-            detailsText.innerHTML = 'The overall color coordination feels a bit cluttered. Blouse ka color pattern saree ke border se properly match nahi ho raha hai, and heavy design ki wajah से neck area is looking too crowded instead of looking neat.';
+            verdictTag.style.backgroundColor = '#c62828'; verdictTag.innerText = '💡 Style Alert';
             adviceBox.classList.remove('hidden');
-            adviceText.innerText = 'Try using a premium nude or lighter lipstick shade for this theme. Instead of a heavy necklace, just wear a delicate chain and pair it with big statement earrings, look bilkul attractive aur khul ke dikhega!';
+
+            if (theme === 'bollywood') {
+                mainComment.innerText = 'Look to achha hai, but it lacks that typical Bollywood drama! 🤔';
+                detailsText.innerHTML = 'Outfit and background simple lag rahe hain, cinematic feel missing hai. Background colors and clothes match nahi ho rahe.';
+                adviceText.innerText = 'Try using brighter colors like red or yellow for Bollywood theme, aur pose thoda extra dramatic rakho! Bold shades ki lipstick add karo.';
+            } else if (theme === 'streetwear') {
+                mainComment.innerText = 'Street style me maza nahi aaya, it looks a bit plain! 🙄';
+                detailsText.innerHTML = 'Oversized outfit bina sneakers ke complete nahi lagta. Color pairing thodi dull lag rahi hai.';
+                adviceText.innerText = 'Streetwear ke liye chunky sneakers, ek cool cap ya metallic chain add karo. Loose baggy pants perfectly match karengi!';
+            } else if (theme === 'corporate') {
+                mainComment.innerText = 'Formal vibe is nice, but it looks a bit too casual! 💼';
+                detailsText.innerHTML = 'Clothing fitting could be sharper, formal look me lines aur fitting solid honi chahiye.';
+                adviceText.innerText = 'Apne blazers ki fitting check karo. Deep colors like Navy Blue ya Black select karo, hair properly tie karo for clean look.';
+            } else {
+                mainComment.innerText = 'The look is sweet, but it needs a little bit of glamour to stand out! 🤔';
+                detailsText.innerHTML = 'The overall color coordination feels a bit cluttered. Blouse pattern border se match nahi ho raha.';
+                adviceText.innerText = 'Try using premium nude or lighter lipstick. Heavy necklace ki jagah delicate chain aur statement earrings pehno!';
+            }
         }
     } else { // For Boys
         if (isGood) {
             verdictTag.style.backgroundColor = '#1565c0'; verdictTag.innerText = '😎 Incredibly Dashing & Dapper!';
-            mainComment.innerText = 'Ekdam kadak look, bhai! Full on main character energy... total sharp and handsome vibe! 👑';
-            detailsText.innerHTML = 'The premium collar structure and fitting of your shirt/kurta is absolutely on point. Well-groomed beard style and clean hair cut aapke face structure ko perfectly complement kar rahe hain. That classy premium watch in hand and your confident posture makes this look completely unbeatable!';
             adviceBox.classList.add('hidden');
+
+            if (theme === 'bollywood') {
+                mainComment.innerText = 'Ekdam Shah Rukh Khan vibe, bhai! Picture ka hero dikh raha hai tu! 👑';
+                detailsText.innerHTML = 'That charming style and open-button shirt code is giving elite 90s hero vibe. Well-set hair and the dramatic background lighting perfectly matches your star persona. Blockbuster look, brother!';
+            } else if (theme === 'streetwear') {
+                mainComment.innerText = 'Full Hip-Hop Vibe! Hard core streetwear style, bhau! 🧢';
+                detailsText.innerHTML = 'Oversized t-shirt and those premium sneakers ka game ekdam on-point hai. Wrist band, dynamic chains, aur dynamic pose pura hip-hop culture reflect kar rahe hain. Pure hypebeast look!';
+            } else if (theme === 'corporate') {
+                mainComment.innerText = 'Pure Corporate King! Executive and sharp look, bhai! 💼';
+                detailsText.innerHTML = 'The formal suit/blazer cutting is flawless. Well-groomed beard style, perfectly polished shoes vibe, and that luxury premium watch in hand is giving hardcore billionaire energy!';
+            } else {
+                mainComment.innerText = 'Ekdam kadak look, bhai! Full on main character energy... total sharp vibe! 👑';
+                detailsText.innerHTML = 'The premium collar structure and fitting of your outfit is absolutely on point. Well-groomed beard style and clean hair cut aapke face structure ko perfectly complement kar rahe hain. Complete unbeatable look!';
+            }
         } else {
             verdictTag.style.backgroundColor = '#c62828'; verdictTag.innerText = '💡 Fashion Alert!';
-            mainComment.innerText = 'Outfit combination could be slightly more polished, bhau! 🙄';
-            detailsText.innerHTML = 'Shirt aur pants ke color ka contrast properly balance nahi ho paa raha hai to look premium. Also, the messy, unstyled hair is taking away from the otherwise sharp structure of your overall personality.';
             adviceBox.classList.remove('hidden');
-            adviceText.innerText = 'Try unbuttoning the top shirt button and wear a sleek metal chain or premium sunglasses. Focus on darker shirts with lighter pants, settle your hair properly with some gel, and you will look absolutely stellar!';
-        }
-    }
-}
 
-document.getElementById('resetBtn').addEventListener('click', () => {
-    location.reload();
-});
+            if (theme === 'bollywood') {
+                mainComment.innerText = 'Hero waali baat nahi ban paayi, bhau! 🙄';
+                detailsText.innerHTML = 'Expression thoda blank lag raha hai aur pose bahut jyada simple ya stiff hai. Cinematic energy missing hai.';
+                adviceText.innerText = 'Agle photo me cool sunglasses lagao, face par thodi attitude waali smile rakho aur hair ko gel se piche stroke karo!';
+            } else if (theme === 'streetwear') {
+                mainComment.innerText = 'Streetwear loop chukla aahe thoda sa! 🧢';
+                detailsText.innerHTML = 'Normal tight jeans ke upar oversized top accha nahi lag raha. Hip-hop vibe nahi aa rahi.';
+                adviceText.innerText = 'Baggy cargos ya loose joggers pehno. Canvas shoes ke badle proper white sports sneakers aur neck chain add karo!';
+            } else if (theme === 'corporate') {
+                mainComment.innerText = 'Bhai, board meeting me aisi dressing nahi chalegi! ❌';
+                detailsText.innerHTML = 'Formal shirts properly ironed nahi lag rahi hain aur color combo thoda faded dikh raha hai.';
+                adviceText.innerText = 'Always tuck-in your shirt properly. Ek acchi premium leather belt pehno aur shoe color and belt color hamesha black/brown matching rakho!';
+            } else {
+                mainComment.innerText = 'Outfit combination could be slightly more polished, bhau! 🙄';
